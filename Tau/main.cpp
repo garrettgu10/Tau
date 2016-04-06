@@ -1,5 +1,8 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QThread>
+#include <QTimer>
+#include <QObject>
 
 int main(int argc, char *argv[])
 {
