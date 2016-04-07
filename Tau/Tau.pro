@@ -12,11 +12,8 @@ TARGET = Tau
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    ggraphicsscene.cpp
+SOURCES += main.cpp
 
-HEADERS  += mainwindow.h \
-    ggraphicsscene.h
+HEADERS  +=
 
-FORMS    += mainwindow.ui
+FORMS    +=

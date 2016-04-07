@@ -15,7 +15,7 @@ CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -mmacosx-version-min=10.7 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../Tau -I. -I../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt/5.6/clang_64/mkspecs/macx-clang -F/Users/garrettgu/Qt/5.6/clang_64/lib
+INCPATH       = -I../Tau -I. -I../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../../Qt/5.6/clang_64/mkspecs/macx-clang -F/Users/garrettgu/Qt/5.6/clang_64/lib
 QMAKE         = /Users/garrettgu/Qt/5.6/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -48,11 +48,8 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Tau/main.cpp \
-		../Tau/mainwindow.cpp moc_mainwindow.cpp
-OBJECTS       = main.o \
-		mainwindow.o \
-		moc_mainwindow.o
+SOURCES       = ../Tau/main.cpp 
+OBJECTS       = main.o
 DIST          = ../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.6/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.6/clang_64/mkspecs/features/device_config.prf \
@@ -194,8 +191,7 @@ DIST          = ../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.6/clang_64/mkspecs/features/exceptions.prf \
 		../../../Qt/5.6/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.6/clang_64/mkspecs/features/lex.prf \
-		../Tau/Tau.pro ../Tau/mainwindow.h ../Tau/main.cpp \
-		../Tau/mainwindow.cpp
+		../Tau/Tau.pro  ../Tau/main.cpp
 QMAKE_TARGET  = Tau
 DESTDIR       = 
 TARGET        = Tau.app/Contents/MacOS/Tau
@@ -204,7 +200,7 @@ TARGET        = Tau.app/Contents/MacOS/Tau
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h $(OBJECTS)  
+$(TARGET):  $(OBJECTS)  
 	@test -d Tau.app/Contents/MacOS/ || mkdir -p Tau.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -528,9 +524,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -554,24 +548,12 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all:
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
-moc_mainwindow.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../Tau/mainwindow.h
-	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/mainwindow.h -o moc_mainwindow.cpp
-
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all:
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../Tau/mainwindow.ui
-	/Users/garrettgu/Qt/5.6/clang_64/bin/uic ../Tau/mainwindow.ui -o ui_mainwindow.h
-
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
 compiler_yacc_decl_make_all:
@@ -580,37 +562,23 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: 
 
 ####### Compile
 
-main.o: ../Tau/main.cpp ../Tau/mainwindow.h \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QThread \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qobject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tau/main.cpp
-
-mainwindow.o: ../Tau/mainwindow.cpp ../Tau/mainwindow.h \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		ui_mainwindow.h \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QThread \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qthread.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Tau/mainwindow.cpp
-
-moc_mainwindow.o: moc_mainwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tau/main.cpp
 
 ####### Install
 
