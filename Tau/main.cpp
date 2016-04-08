@@ -4,16 +4,23 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
+#include <QPen>
+#include "ggraphicsscene.h"
+#include "ggraphicsview.h"
+#include <QPainter>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QGraphicsScene* scene = new QGraphicsScene();
-    QGraphicsView* view = new QGraphicsView();
+    GGraphicsScene* scene = new GGraphicsScene();
+    QGraphicsView* view = new GGraphicsView();
+    view->setRenderHint(QPainter::Antialiasing);
     view->setScene(scene);
-    QGraphicsRectItem* rect = new QGraphicsRectItem();
-    rect->setRect(0,0,100,100);
-    scene->addItem(rect);
+    view->setFixedSize(1425,750);
+    scene->setSceneRect(0,0,1425,750);
     view->setVisible(true);
+    scene->drawGradBackground();
+    scene->drawBoard();
+
     return a.exec();
 }

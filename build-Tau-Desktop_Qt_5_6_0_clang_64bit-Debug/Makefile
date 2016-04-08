@@ -48,8 +48,14 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Tau/main.cpp 
-OBJECTS       = main.o
+SOURCES       = ../Tau/main.cpp \
+		../Tau/ggraphicsscene.cpp \
+		../Tau/ggraphicsview.cpp \
+		../Tau/player.cpp 
+OBJECTS       = main.o \
+		ggraphicsscene.o \
+		ggraphicsview.o \
+		player.o
 DIST          = ../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.6/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.6/clang_64/mkspecs/features/device_config.prf \
@@ -191,7 +197,12 @@ DIST          = ../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.6/clang_64/mkspecs/features/exceptions.prf \
 		../../../Qt/5.6/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.6/clang_64/mkspecs/features/lex.prf \
-		../Tau/Tau.pro  ../Tau/main.cpp
+		../Tau/Tau.pro ../Tau/ggraphicsscene.h \
+		../Tau/ggraphicsview.h \
+		../Tau/player.h ../Tau/main.cpp \
+		../Tau/ggraphicsscene.cpp \
+		../Tau/ggraphicsview.cpp \
+		../Tau/player.cpp
 QMAKE_TARGET  = Tau
 DESTDIR       = 
 TARGET        = Tau.app/Contents/MacOS/Tau
@@ -524,7 +535,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/ggraphicsscene.h ../Tau/ggraphicsview.h ../Tau/player.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsscene.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -577,8 +589,39 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../Tau/ggraphicsscene.h \
+		../Tau/ggraphicsview.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tau/main.cpp
+
+ggraphicsscene.o: ../Tau/ggraphicsscene.cpp ../Tau/ggraphicsscene.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ggraphicsscene.o ../Tau/ggraphicsscene.cpp
+
+ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qevent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ggraphicsview.o ../Tau/ggraphicsview.cpp
+
+player.o: ../Tau/player.cpp ../Tau/player.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../Tau/player.cpp
 
 ####### Install
 
