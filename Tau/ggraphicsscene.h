@@ -6,14 +6,13 @@
 
 class GGraphicsScene : public QGraphicsScene
 {
+    Q_OBJECT
 public:
     GGraphicsScene();
     void drawGradBackground();
     void drawBoard();
 
 private:
-    double arenaRadius;
-
     Player* p1;
     Player* p2;
 };

@@ -20,6 +20,7 @@ SOURCES += main.cpp \
 HEADERS  += \
     ggraphicsscene.h \
     ggraphicsview.h \
-    player.h
+    player.h \
+    constants.h
 
 FORMS    +=

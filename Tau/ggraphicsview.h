@@ -4,6 +4,7 @@
 
 class GGraphicsView : public QGraphicsView
 {
+    Q_OBJECT
 public:
     GGraphicsView();
 protected:
