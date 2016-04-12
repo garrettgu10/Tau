@@ -7,7 +7,7 @@ class Player : public QObject,public QGraphicsItem
 {
     Q_OBJECT
 public:
-    Player(double pos, double size);
+    Player(double pos, double size,int playerNum);
     double pos; // angular position
     double size; // angular distance from center to edge
     int startAngle();
@@ -16,8 +16,10 @@ public:
     void setPen(QPen pen);
     void setBrush(QBrush brush);
     virtual QRectF boundingRect() const;
+    void move(int dtheta);
 
 protected:
+    int playerNum;
     QPen pen;
     QBrush brush;
     QRectF* rekt;

@@ -7,5 +7,6 @@ const int playerWidth = 15;
 const int arenaWidth = 5;
 const int arenaRadius = windowHeight/2*.8;
 const int playerRadius = arenaRadius-playerWidth/2-arenaWidth/2;
+const int ballInitRadius = 10;
 
 #endif // CONSTANTS_H

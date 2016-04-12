@@ -7,8 +7,8 @@
 #include <player.h>
 
 GGraphicsScene::GGraphicsScene(){
-    p1 = new Player(2880,180);
-    p2 = new Player(0,180);
+    p1 = new Player(2880,180,0);
+    p2 = new Player(0,180,1);
 }
 
 void GGraphicsScene::drawGradBackground(){
@@ -42,4 +42,8 @@ void GGraphicsScene::drawBoard()
     player1Pen.setWidth(playerWidth);
     p1->setPen(player1Pen);
     this->addItem(p1);
+    QPen player2Pen(player1Pen);
+    player2Pen.setColor(QColor::fromRgb(255,0,0));
+    p2->setPen(player2Pen);
+    this->addItem(p2);
 }

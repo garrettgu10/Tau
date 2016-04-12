@@ -11,8 +11,6 @@ public:
     GGraphicsScene();
     void drawGradBackground();
     void drawBoard();
-
-private:
     Player* p1;
     Player* p2;
 };

@@ -15,12 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp \
     ggraphicsscene.cpp \
     ggraphicsview.cpp \
-    player.cpp
+    player.cpp \
+    ball.cpp
 
 HEADERS  += \
     ggraphicsscene.h \
     ggraphicsview.h \
     player.h \
-    constants.h
+    constants.h \
+    ball.h
 
 FORMS    +=

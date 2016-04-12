@@ -5,8 +5,9 @@
 #include <constants.h>
 #include <QPen>
 
-Player::Player(double pos, double size)
+Player::Player(double pos, double size,int playerNum)
 {
+    this->playerNum = playerNum;
     this->pos = pos;
     this->size = size;
     this->rekt = new QRectF(QPointF(windowWidth/2-playerRadius,windowHeight/2-playerRadius),QSizeF((playerRadius)*2,(playerRadius)*2));
@@ -32,6 +33,15 @@ void Player::setBrush(QBrush brush)
 QRectF Player::boundingRect() const
 {
     return *rekt;
+}
+
+void Player::move(int dtheta)
+{
+    int newPos = this->pos+dtheta;
+    if(newPos+size <=4320-2880*playerNum && newPos-size >=1440-2880*playerNum){
+        this->pos+=dtheta;
+        this->scene()->update();
+    }
 }
 
 void Player::setPen(QPen pen){
