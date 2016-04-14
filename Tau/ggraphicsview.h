@@ -2,6 +2,7 @@
 #define GGRAPHICSVIEW_H
 #include <QGraphicsView>
 #include <ggraphicsscene.h>
+#include <QTimer>
 
 class GGraphicsView : public QGraphicsView
 {
@@ -13,6 +14,11 @@ protected:
     GGraphicsScene* GScene;
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
+private:
+    QTimer* movep1;
+    QTimer* movep2;
+    void setupTimer(QTimer* t, Player* p, bool cw);
 };
 
 #endif // GGRAPHICSVIEW_H

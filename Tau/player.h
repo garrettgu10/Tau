@@ -3,9 +3,10 @@
 #include <QGraphicsItem>
 #include <QPen>
 
-class Player : public QObject,public QGraphicsItem
+class Player : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     Player(double pos, double size,int playerNum);
     double pos; // angular position
@@ -17,6 +18,10 @@ public:
     void setBrush(QBrush brush);
     virtual QRectF boundingRect() const;
     void move(int dtheta);
+
+public slots:
+    void moveClockwise();
+    void moveCClockwise();
 
 protected:
     int playerNum;

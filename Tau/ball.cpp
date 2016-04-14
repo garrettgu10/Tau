@@ -1,5 +1,6 @@
 #include "ball.h"
 #include <constants.h>
+#include <qmath.h>
 
 Ball::Ball()
 {
@@ -13,7 +14,7 @@ int Ball::getRadius()
     return radius;
 }
 
-QRectF Ball::boundingRect()
+QRectF Ball::boundingRect() const
 {
     return *rekt;
 }
@@ -25,4 +26,10 @@ QRectF* Ball::rect(){
 void Ball::updateRect()
 {
     rekt = new QRectF(this->x()-radius,this->y()-radius,radius*2,radius*2);
+}
+
+void Ball::updatePos()
+{
+    pos->setX(pos->x()+speed*cos(angle));
+    pos->setY(pos->y()+speed*sin(angle));
 }

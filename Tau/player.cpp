@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <constants.h>
 #include <QPen>
+#include <QDebug>
 
 Player::Player(double pos, double size,int playerNum)
 {
@@ -42,6 +43,16 @@ void Player::move(int dtheta)
         this->pos+=dtheta;
         this->scene()->update();
     }
+}
+
+void Player::moveClockwise()
+{
+    move(-90);
+}
+
+void Player::moveCClockwise()
+{
+    move(90);
 }
 
 void Player::setPen(QPen pen){

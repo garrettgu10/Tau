@@ -8,15 +8,17 @@
 class Ball : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     QPointF* pos;
     Ball();
     int getRadius();
     QRectF* rect();
     void updateRect();
+    void updatePos();
+    virtual QRectF boundingRect() const;
 protected:
-    virtual QRectF boundingRect();
-    int angle; // angle of motion in 16ths of degrees
+    double angle = 0; // angle of motion in radians
     float speed;
     QRectF* rekt;
     int radius;

@@ -78,6 +78,8 @@ void *Ball::qt_metacast(const char *_clname)
         return static_cast<void*>(const_cast< Ball*>(this));
     if (!strcmp(_clname, "QGraphicsItem"))
         return static_cast< QGraphicsItem*>(const_cast< Ball*>(this));
+    if (!strcmp(_clname, "org.qt-project.Qt.QGraphicsItem"))
+        return static_cast< QGraphicsItem*>(const_cast< Ball*>(this));
     return QObject::qt_metacast(_clname);
 }
 
