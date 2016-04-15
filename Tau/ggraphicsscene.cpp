@@ -5,15 +5,19 @@
 #include <math.h>
 #include <constants.h>
 #include <player.h>
+#include <ball.h>
 
-GGraphicsScene::GGraphicsScene(){
+GGraphicsScene::GGraphicsScene()
+{
     p1 = new Player(2880,180,0);
     p2 = new Player(0,180,1);
+    b = new Ball();
 }
 
-void GGraphicsScene::drawGradBackground(){
+void GGraphicsScene::drawGradBackground()
+{
     QGraphicsRectItem* rect = new QGraphicsRectItem();
-    QRadialGradient grad(this->width()/2,this->height()/2, this->width()/2);
+    QRadialGradient grad(this->width()/2,this->height()/2, this->height()/2);
     grad.setColorAt(0,QColor::fromRgb(100,100,100,255));
     grad.setColorAt(1,QColor::fromRgb(0,0,0,255));
     QBrush brush(grad);
@@ -25,12 +29,11 @@ void GGraphicsScene::drawGradBackground(){
 }
 
 
-
 void GGraphicsScene::drawBoard()
 {
     QGraphicsEllipseItem* box = new QGraphicsEllipseItem();
 
-    QBrush brush(QColor::fromRgb(255,0,255));
+    QBrush brush(QColor::fromRgb(255,255,255));
     QPen arenaPen(brush,arenaWidth,Qt::SolidLine,Qt::RoundCap);
     box->setPen(arenaPen);
     box->setRect(windowWidth/2-arenaRadius,windowHeight/2-arenaRadius,arenaRadius*2,arenaRadius*2);
@@ -46,4 +49,7 @@ void GGraphicsScene::drawBoard()
     player2Pen.setColor(QColor::fromRgb(255,0,0));
     p2->setPen(player2Pen);
     this->addItem(p2);
+    b->setPen(arenaPen);
+    b->setBrush(brush);
+    this->addItem(b);
 }

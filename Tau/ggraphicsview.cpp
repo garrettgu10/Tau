@@ -14,7 +14,8 @@ void GGraphicsView::setGScene(GGraphicsScene *scene)
     this->GScene = scene;
 }
 
-void GGraphicsView::keyPressEvent(QKeyEvent *event){
+void GGraphicsView::keyPressEvent(QKeyEvent *event)
+{
     int key = event->key();
     int affectedPlayer = -1;
     bool cw = false; //clockwise

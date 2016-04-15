@@ -8,6 +8,7 @@
 #include "ggraphicsscene.h"
 #include "ggraphicsview.h"
 #include <QPainter>
+#include <constants.h>
 
 int main(int argc, char *argv[])
 {
@@ -16,8 +17,8 @@ int main(int argc, char *argv[])
     GGraphicsView* view = new GGraphicsView();
     view->setRenderHint(QPainter::Antialiasing);
     view->setGScene(scene);
-    view->setFixedSize(1425,750);
-    scene->setSceneRect(0,0,1425,750);
+    view->setFixedSize(windowWidth,windowHeight);
+    scene->setSceneRect(0,0,windowWidth,windowHeight);
     view->setVisible(true);
     scene->drawGradBackground();
     scene->drawBoard();

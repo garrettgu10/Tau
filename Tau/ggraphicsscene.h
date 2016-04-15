@@ -3,6 +3,7 @@
 #include <QGraphicsScene>
 #include <math.h>
 #include <player.h>
+#include <ball.h>
 
 class GGraphicsScene : public QGraphicsScene
 {
@@ -12,6 +13,7 @@ public:
     void drawGradBackground();
     void drawBoard();
     Player* p1;
+    Ball* b;
     Player* p2;
 };
 

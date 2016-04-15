@@ -14,15 +14,18 @@ Player::Player(double pos, double size,int playerNum)
     this->rekt = new QRectF(QPointF(windowWidth/2-playerRadius,windowHeight/2-playerRadius),QSizeF((playerRadius)*2,(playerRadius)*2));
 }
 
-int Player::startAngle(){
+int Player::startAngle()
+{
     return pos-size;
 }
 
-int Player::spanAngle(){
+int Player::spanAngle()
+{
     return size*2;
 }
 
-QRectF* Player::rect(){
+QRectF* Player::rect()
+{
     return rekt;
 }
 
@@ -59,7 +62,8 @@ void Player::setPen(QPen pen){
     this->pen = pen;
 }
 
-void Player::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget) {
+void Player::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+{
     painter->setPen(this->pen);
     painter->setBrush(this->brush);
     painter->drawArc(*rect(), startAngle(), spanAngle());
