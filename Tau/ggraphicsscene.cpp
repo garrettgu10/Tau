@@ -5,13 +5,16 @@
 #include <math.h>
 #include <constants.h>
 #include <player.h>
+#include <QTimer>
 #include <ball.h>
 
 GGraphicsScene::GGraphicsScene()
 {
     p1 = new Player(2880,180,0);
     p2 = new Player(0,180,1);
-    b = new Ball();
+    b = new Ball(p1,p2);
+    ballUpdate = new QTimer();
+    QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));
 }
 
 void GGraphicsScene::drawGradBackground()
@@ -52,4 +55,5 @@ void GGraphicsScene::drawBoard()
     b->setPen(arenaPen);
     b->setBrush(brush);
     this->addItem(b);
+    ballUpdate->start(25);
 }

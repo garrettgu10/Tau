@@ -52,7 +52,8 @@ SOURCES       = ../Tau/main.cpp \
 		../Tau/ggraphicsscene.cpp \
 		../Tau/ggraphicsview.cpp \
 		../Tau/player.cpp \
-		../Tau/ball.cpp moc_ggraphicsscene.cpp \
+		../Tau/ball.cpp \
+		../Tau/helper.cpp moc_ggraphicsscene.cpp \
 		moc_ggraphicsview.cpp \
 		moc_player.cpp \
 		moc_ball.cpp
@@ -61,6 +62,7 @@ OBJECTS       = main.o \
 		ggraphicsview.o \
 		player.o \
 		ball.o \
+		helper.o \
 		moc_ggraphicsscene.o \
 		moc_ggraphicsview.o \
 		moc_player.o \
@@ -210,11 +212,13 @@ DIST          = ../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../Tau/ggraphicsview.h \
 		../Tau/player.h \
 		../Tau/constants.h \
-		../Tau/ball.h ../Tau/main.cpp \
+		../Tau/ball.h \
+		../Tau/helper.h ../Tau/main.cpp \
 		../Tau/ggraphicsscene.cpp \
 		../Tau/ggraphicsview.cpp \
 		../Tau/player.cpp \
-		../Tau/ball.cpp
+		../Tau/ball.cpp \
+		../Tau/helper.cpp
 QMAKE_TARGET  = Tau
 DESTDIR       = 
 TARGET        = Tau.app/Contents/MacOS/Tau
@@ -547,8 +551,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/ggraphicsscene.h ../Tau/ggraphicsview.h ../Tau/player.h ../Tau/constants.h ../Tau/ball.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsscene.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp ../Tau/ball.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/ggraphicsscene.h ../Tau/ggraphicsview.h ../Tau/player.h ../Tau/constants.h ../Tau/ball.h ../Tau/helper.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsscene.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp ../Tau/ball.cpp ../Tau/helper.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -582,6 +586,16 @@ moc_ggraphicsscene.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../Tau/ball.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../Tau/constants.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../Tau/ggraphicsscene.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ggraphicsscene.h -o moc_ggraphicsscene.cpp
 
@@ -595,6 +609,16 @@ moc_ggraphicsview.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../Tau/ball.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../Tau/constants.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../Tau/ggraphicsview.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ggraphicsview.h -o moc_ggraphicsview.cpp
 
@@ -611,6 +635,12 @@ moc_ball.cpp: ../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../Tau/constants.h \
+		../Tau/player.h \
 		../Tau/ball.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ball.h -o moc_ball.cpp
 
@@ -647,6 +677,12 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../Tau/ball.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../Tau/constants.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
@@ -661,10 +697,17 @@ ggraphicsscene.o: ../Tau/ggraphicsscene.cpp ../Tau/ggraphicsscene.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
+		../Tau/ball.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
-		../Tau/constants.h
+		../Tau/constants.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ggraphicsscene.o ../Tau/ggraphicsscene.cpp
 
 ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
@@ -678,6 +721,16 @@ ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../Tau/ball.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../Tau/constants.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
@@ -694,9 +747,20 @@ player.o: ../Tau/player.cpp ../Tau/player.h \
 		../Tau/ggraphicsscene.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../Tau/ball.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../Tau/constants.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
-		../Tau/constants.h
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../Tau/player.cpp
 
 ball.o: ../Tau/ball.cpp ../Tau/ball.h \
@@ -706,8 +770,30 @@ ball.o: ../Tau/ball.cpp ../Tau/ball.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
-		../Tau/constants.h
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPen \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../Tau/constants.h \
+		../Tau/player.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../Tau/GGraphicsScene.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../Tau/helper.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ball.o ../Tau/ball.cpp
+
+helper.o: ../Tau/helper.cpp ../Tau/helper.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QGlobal.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o helper.o ../Tau/helper.cpp
 
 moc_ggraphicsscene.o: moc_ggraphicsscene.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ggraphicsscene.o moc_ggraphicsscene.cpp

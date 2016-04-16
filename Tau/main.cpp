@@ -8,10 +8,12 @@
 #include "ggraphicsscene.h"
 #include "ggraphicsview.h"
 #include <QPainter>
+#include <helper.h>
 #include <constants.h>
 
 int main(int argc, char *argv[])
 {
+    seedRandomFunction();
     QApplication a(argc, argv);
     GGraphicsScene* scene = new GGraphicsScene();
     GGraphicsView* view = new GGraphicsView();

@@ -4,6 +4,7 @@
 #include <math.h>
 #include <player.h>
 #include <ball.h>
+#include <QTimer>
 
 class GGraphicsScene : public QGraphicsScene
 {
@@ -15,6 +16,8 @@ public:
     Player* p1;
     Ball* b;
     Player* p2;
+private:
+    QTimer* ballUpdate;
 };
 
 #endif // GGRAPHICSSCENE_H

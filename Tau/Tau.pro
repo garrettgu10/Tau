@@ -16,13 +16,15 @@ SOURCES += main.cpp \
     ggraphicsscene.cpp \
     ggraphicsview.cpp \
     player.cpp \
-    ball.cpp
+    ball.cpp \
+    helper.cpp
 
 HEADERS  += \
     ggraphicsscene.h \
     ggraphicsview.h \
     player.h \
     constants.h \
-    ball.h
+    ball.h \
+    helper.h
 
 FORMS    +=

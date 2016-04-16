@@ -16,7 +16,7 @@ Player::Player(double pos, double size,int playerNum)
 
 int Player::startAngle()
 {
-    return pos-size;
+    return pos+size;
 }
 
 int Player::spanAngle()
@@ -50,12 +50,12 @@ void Player::move(int dtheta)
 
 void Player::moveClockwise()
 {
-    move(-90);
+    move(90);
 }
 
 void Player::moveCClockwise()
 {
-    move(90);
+    move(-90);
 }
 
 void Player::setPen(QPen pen){
@@ -66,5 +66,5 @@ void Player::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option
 {
     painter->setPen(this->pen);
     painter->setBrush(this->brush);
-    painter->drawArc(*rect(), startAngle(), spanAngle());
+    painter->drawArc(*rect(), -startAngle(), spanAngle());
 }
