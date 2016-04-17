@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     GGraphicsScene* scene = new GGraphicsScene();
     GGraphicsView* view = new GGraphicsView();
-    view->setRenderHint(QPainter::Antialiasing);
+    //view->setRenderHint(QPainter::Antialiasing);
     view->setGScene(scene);
     view->setFixedSize(windowWidth,windowHeight);
     scene->setSceneRect(0,0,windowWidth,windowHeight);

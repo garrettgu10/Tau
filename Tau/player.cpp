@@ -44,18 +44,18 @@ void Player::move(int dtheta)
     int newPos = this->pos+dtheta;
     if(newPos+size <=4320-2880*playerNum && newPos-size >=1440-2880*playerNum){
         this->pos+=dtheta;
-        this->scene()->update();
+        //this->scene()->update();
     }
 }
 
 void Player::moveClockwise()
 {
-    move(90);
+    move(88);
 }
 
 void Player::moveCClockwise()
 {
-    move(-90);
+    move(-88);
 }
 
 void Player::setPen(QPen pen){

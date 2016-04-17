@@ -17,7 +17,7 @@ Ball::Ball(Player *p1, Player *p2)
     pos->setY(windowHeight/2);
     radius = ballInitRadius;
     angle = randomInBound(0,5760);
-    speed = 10;
+    speed = 7;
     updateRect();
 }
 
@@ -41,24 +41,29 @@ int arcTan(double x, double y){ //returns angle in 16ths of degree made by the p
 
 void Ball::collision()
 {
-    int angleWithCenter = arcTan(pos->x()-windowWidth/2,pos->y()-windowHeight/2);
     double distFromCenter = qSqrt(qPow(pos->x()-windowWidth/2,2)+qPow(pos->y()-windowHeight/2,2));
-    int p1diff = difference(angleWithCenter,p1->pos);
-    int p2diff = difference(angleWithCenter,p2->pos);
+
     if(distFromCenter < playerRadius-playerWidth-radius || distFromCenter > arenaRadius+radius){
         bouncing = false;
-    }else if(bouncing){
-        return;
-    }else if(abs(p1diff) < p1->size+90){
-        angle = angleWithCenter+2880;
-        normalize(angle);
-        angle-=(((double)p1diff)/p1->size*720);
-        bouncing = true;
-    }else if(abs(p2diff) < p2->size+90){
-        angle = angleWithCenter+2880;
-        normalize(angle);
-        angle-=(((double)p2diff)/p2->size*720);
-        bouncing = true;
+    }else{
+        if(bouncing){
+            return;
+        }
+        int angleWithCenter = arcTan(pos->x()-windowWidth/2,pos->y()-windowHeight/2);
+        int p1diff = difference(angleWithCenter,p1->pos);
+        int p2diff = difference(angleWithCenter,p2->pos);
+
+        if(abs(p1diff) < p1->size+90){
+            angle = angleWithCenter+2880;
+            normalize(angle);
+            angle-=(((double)p1diff)/p1->size*720);
+            bouncing = true;
+        }else if(abs(p2diff) < p2->size+90){
+            angle = angleWithCenter+2880;
+            normalize(angle);
+            angle-=(((double)p2diff)/p2->size*720);
+            bouncing = true;
+        }
     }
 }
 
