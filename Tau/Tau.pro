@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     ggraphicsview.cpp \
     player.cpp \
     ball.cpp \
-    helper.cpp
+    helper.cpp \
+    powerup.cpp
 
 HEADERS  += \
     ggraphicsscene.h \
@@ -25,6 +26,7 @@ HEADERS  += \
     player.h \
     constants.h \
     ball.h \
-    helper.h
+    helper.h \
+    powerup.h
 
 FORMS    +=

@@ -13,6 +13,8 @@ GGraphicsScene::GGraphicsScene()
     p1 = new Player(2880,180,0);
     p2 = new Player(0,180,1);
     b = new Ball(p1,p2);
+    powerUps = new QList<powerup*>();
+
     ballUpdate = new QTimer();
     QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));
 }
@@ -31,19 +33,16 @@ void GGraphicsScene::drawGradBackground()
     this->addItem(rect);
 }
 
-
 void GGraphicsScene::drawBoard()
 {
     QGraphicsEllipseItem* box = new QGraphicsEllipseItem();
 
-    QBrush brush(QColor::fromRgb(255,255,255));
-    QPen arenaPen(brush,arenaWidth,Qt::SolidLine,Qt::RoundCap);
-    box->setPen(arenaPen);
+    box->setPen(*arenaPen);
     box->setRect(windowWidth/2-arenaRadius,windowHeight/2-arenaRadius,arenaRadius*2,arenaRadius*2);
     this->addItem(box);
     //draw players
 
-    QPen player1Pen(arenaPen);
+    QPen player1Pen(*arenaPen);
     player1Pen.setColor(QColor::fromRgb(0,0,255));
     player1Pen.setWidth(playerWidth);
     p1->setPen(player1Pen);
@@ -52,8 +51,18 @@ void GGraphicsScene::drawBoard()
     player2Pen.setColor(QColor::fromRgb(255,0,0));
     p2->setPen(player2Pen);
     this->addItem(p2);
-    b->setPen(arenaPen);
-    b->setBrush(brush);
+    b->setPen(*arenaPen);
+    b->setBrush(*brush);
     this->addItem(b);
     ballUpdate->start(25);
+    addPowerUp();
+}
+
+void GGraphicsScene::addPowerUp()
+{
+    powerup* newPowerup = new powerup();
+    newPowerup->setPen(*arenaPen);
+    newPowerup->setBrush(*brush);
+    powerUps->append(newPowerup);
+    this->addItem(newPowerup);
 }

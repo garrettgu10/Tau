@@ -27,7 +27,7 @@ public slots:
     void updatePos();
 protected:
     int angle = 0; // angle of motion in 160ths of degrees
-    float speed;
+    double speed;
     QRectF* rekt;
     int radius;
     void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);

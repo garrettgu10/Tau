@@ -53,20 +53,24 @@ SOURCES       = ../Tau/main.cpp \
 		../Tau/ggraphicsview.cpp \
 		../Tau/player.cpp \
 		../Tau/ball.cpp \
-		../Tau/helper.cpp moc_ggraphicsscene.cpp \
+		../Tau/helper.cpp \
+		../Tau/powerup.cpp moc_ggraphicsscene.cpp \
 		moc_ggraphicsview.cpp \
 		moc_player.cpp \
-		moc_ball.cpp
+		moc_ball.cpp \
+		moc_powerup.cpp
 OBJECTS       = main.o \
 		ggraphicsscene.o \
 		ggraphicsview.o \
 		player.o \
 		ball.o \
 		helper.o \
+		powerup.o \
 		moc_ggraphicsscene.o \
 		moc_ggraphicsview.o \
 		moc_player.o \
-		moc_ball.o
+		moc_ball.o \
+		moc_powerup.o
 DIST          = ../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.6/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.6/clang_64/mkspecs/features/device_config.prf \
@@ -213,12 +217,14 @@ DIST          = ../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../Tau/player.h \
 		../Tau/constants.h \
 		../Tau/ball.h \
-		../Tau/helper.h ../Tau/main.cpp \
+		../Tau/helper.h \
+		../Tau/powerup.h ../Tau/main.cpp \
 		../Tau/ggraphicsscene.cpp \
 		../Tau/ggraphicsview.cpp \
 		../Tau/player.cpp \
 		../Tau/ball.cpp \
-		../Tau/helper.cpp
+		../Tau/helper.cpp \
+		../Tau/powerup.cpp
 QMAKE_TARGET  = Tau
 DESTDIR       = 
 TARGET        = Tau.app/Contents/MacOS/Tau
@@ -551,8 +557,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/ggraphicsscene.h ../Tau/ggraphicsview.h ../Tau/player.h ../Tau/constants.h ../Tau/ball.h ../Tau/helper.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsscene.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp ../Tau/ball.cpp ../Tau/helper.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/ggraphicsscene.h ../Tau/ggraphicsview.h ../Tau/player.h ../Tau/constants.h ../Tau/ball.h ../Tau/helper.h ../Tau/powerup.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsscene.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp ../Tau/ball.cpp ../Tau/helper.cpp ../Tau/powerup.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -576,9 +582,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_ggraphicsscene.cpp moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp
+compiler_moc_header_make_all: moc_ggraphicsscene.cpp moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp moc_powerup.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_ggraphicsscene.cpp moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp
+	-$(DEL_FILE) moc_ggraphicsscene.cpp moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp moc_powerup.cpp
 moc_ggraphicsscene.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../Tau/player.h \
@@ -644,6 +650,15 @@ moc_ball.cpp: ../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QObject \
 		../Tau/ball.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ball.h -o moc_ball.cpp
 
+moc_powerup.cpp: ../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../Tau/powerup.h
+	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/powerup.h -o moc_powerup.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_uic_make_all:
@@ -686,7 +701,8 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
-		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../Tau/helper.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tau/main.cpp
 
 ggraphicsscene.o: ../Tau/ggraphicsscene.cpp ../Tau/ggraphicsscene.h \
@@ -795,6 +811,17 @@ helper.o: ../Tau/helper.cpp ../Tau/helper.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o helper.o ../Tau/helper.cpp
 
+powerup.o: ../Tau/powerup.cpp ../Tau/powerup.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../Tau/constants.h \
+		../Tau/helper.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o powerup.o ../Tau/powerup.cpp
+
 moc_ggraphicsscene.o: moc_ggraphicsscene.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ggraphicsscene.o moc_ggraphicsscene.cpp
 
@@ -806,6 +833,9 @@ moc_player.o: moc_player.cpp
 
 moc_ball.o: moc_ball.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ball.o moc_ball.cpp
+
+moc_powerup.o: moc_powerup.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_powerup.o moc_powerup.cpp
 
 ####### Install
 

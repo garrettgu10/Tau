@@ -2,6 +2,7 @@
 #include <math.h>
 #include <QGlobal.h>
 #include <QTime>
+#include <stdlib.h>
 
 int difference(int a, int b)
 {
@@ -30,6 +31,10 @@ void normalize(int &a)
 int randomInBound(int min, int max)
 {
     return qrand() % ((max + 1) - min) + min;
+}
+
+double randomInBound(double min, double max){
+    return (double)qrand()/RAND_MAX*(max-min)+min;
 }
 
 void seedRandomFunction()

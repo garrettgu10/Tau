@@ -17,7 +17,7 @@ Ball::Ball(Player *p1, Player *p2)
     pos->setY(windowHeight/2);
     radius = ballInitRadius;
     angle = randomInBound(0,5760);
-    speed = 7;
+    speed = ballInitSpeed;
     updateRect();
 }
 
@@ -44,6 +44,7 @@ void Ball::collision()
     double distFromCenter = qSqrt(qPow(pos->x()-windowWidth/2,2)+qPow(pos->y()-windowHeight/2,2));
 
     if(distFromCenter < playerRadius-playerWidth-radius || distFromCenter > arenaRadius+radius){
+        //speed = 15-(double)distFromCenter/playerRadius*10;
         bouncing = false;
     }else{
         if(bouncing){
