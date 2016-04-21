@@ -2,11 +2,11 @@
 #include <constants.h>
 #include <helper.h>
 #include <QPainter>
-#include <ggraphicsscene.h>
+#include <ggamescene.h>
 #include <QDebug>
 #include <QtConcurrent>
 
-powerup::powerup(int id, GGraphicsScene *parent)
+powerup::powerup(int id, GGameScene *parent)
 {
     this->parent = parent;
     this->id = id;
@@ -16,8 +16,8 @@ powerup::powerup(int id, GGraphicsScene *parent)
     radius = powerUpRadius;
     rekt = new QRectF(position->x()-radius,position->y()-radius,radius*2,radius*2);
     enabled = false;
-    ico = new QImage(":/ico/add.png");
     QtConcurrent::run(this,&powerup::fadeIn);
+    QtConcurrent::run(this,&powerup::keepRotating);
 }
 
 void powerup::enable()
@@ -25,8 +25,11 @@ void powerup::enable()
     if(enabled){
         return;
     }
+    affectedPlayer = parent->mostRecent;
     switch(this->puptype()){
-    case powerUpType::sizeUp: QtConcurrent::run((parent->b),&Ball::sizeUp); break;
+    case powerUpType::ballSizeUp: QtConcurrent::run((parent->b),&Ball::sizeUp); break;
+    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeUp); break;
+    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); break;
     default: break;
     }
     QTimer* disabler = new QTimer();
@@ -41,7 +44,9 @@ void powerup::disable()
     if(!enabled)
         return;
     switch(this->puptype()){
-    case powerUpType::sizeUp: QtConcurrent::run(parent->b,&Ball::sizeDown); break;
+    case powerUpType::ballSizeUp: QtConcurrent::run(parent->b,&Ball::sizeDown); break;
+    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeDown); break;
+    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeUp); break;
     default: break;
     }
 }
@@ -73,10 +78,14 @@ int powerup::rad()
 
 void powerup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setPen(this->pen);
-    painter->setBrush(this->brush);
-    painter->setOpacity(opacity);
-    painter->drawImage(QRectF(rect()), QImage(*ico));
+    if(!enabled){
+        painter->setPen(this->pen);
+        painter->setBrush(this->brush);
+        painter->setOpacity(opacity);
+        painter->translate(position->x(),position->y());
+        painter->rotate(angle);
+        painter->drawImage(QRectF(-radius,-radius,radius*2,radius*2), QImage(icos[(int)t]));
+    }
 }
 
 QRectF powerup::rect()
@@ -87,6 +96,14 @@ QRectF powerup::rect()
 QRectF powerup::boundingRect() const
 {
     return *rekt;
+}
+
+void powerup::keepRotating()
+{
+    while(!enabled && parent->ongoing){
+        angle+=3;
+        QThread::msleep(refreshInterval);
+    }
 }
 
 void powerup::fadeIn()

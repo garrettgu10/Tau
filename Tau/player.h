@@ -18,6 +18,8 @@ public:
     void setBrush(QBrush brush);
     virtual QRectF boundingRect() const;
     void move(int dtheta);
+    void sizeUp();
+    void sizeDown();
 
 public slots:
     void moveClockwise();

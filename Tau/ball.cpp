@@ -3,13 +3,13 @@
 #include <qmath.h>
 #include <QPainter>
 #include <QGraphicsScene>
-#include <GGraphicsScene.h>
+#include <GGameScene.h>
 #include <QDebug>
 #include <helper.h>
 #include <QList>
 #include <QThread>
 
-Ball::Ball(GGraphicsScene *parent)
+Ball::Ball(GGameScene *parent)
 {
     pos = new QPointF();
     this->parent = parent;
@@ -64,15 +64,9 @@ void Ball::collision()
         int p2diff = difference(angleWithCenter,p2->pos);
 
         if(abs(p1diff) < p1->size+90){
-            angle = angleWithCenter+2880;
-            normalize(angle);
-            angle-=(((double)p1diff)/p1->size*720);
-            bouncing = true;
+            bounce(p1,p1diff,angleWithCenter);
         }else if(abs(p2diff) < p2->size+90){
-            angle = angleWithCenter+2880;
-            normalize(angle);
-            angle-=(((double)p2diff)/p2->size*720);
-            bouncing = true;
+            bounce(p2,p2diff,angleWithCenter);
         }else{
             bouncing = false;
         }
@@ -90,6 +84,15 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setPen(this->pen);
     painter->setBrush(this->brush);
     painter->drawEllipse(pos->x()-radius,pos->y()-radius, radius*2,radius*2);
+}
+
+void Ball::bounce(Player* p, int pdiff, int angleWithCenter)
+{
+    angle = angleWithCenter+2880;
+    normalize(angle);
+    angle-=(((double)pdiff)/p->size*720);
+    parent->mostRecent = p;
+    bouncing = true;
 }
 
 QRectF *Ball::rect()

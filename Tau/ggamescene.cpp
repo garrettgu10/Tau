@@ -1,4 +1,4 @@
-#include "ggraphicsscene.h"
+#include "ggamescene.h"
 #include <QGraphicsRectItem>
 #include <QBrush>
 #include <QPen>
@@ -8,20 +8,21 @@
 #include <QTimer>
 #include <ball.h>
 
-GGraphicsScene::GGraphicsScene()
+GGameScene::GGameScene()
 {
     p1 = new Player(2880,playerInitSize,0);
     p2 = new Player(0,playerInitSize,1);
+    mostRecent = p1;
     b = new Ball(this);
     powerUps = new QList<powerup*>();
     QTimer* addPowerUps = new QTimer();
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
-    addPowerUps->start(20000);
+    addPowerUps->start(5000);
     ballUpdate = new QTimer();
     QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));
 }
 
-void GGraphicsScene::drawGradBackground()
+void GGameScene::drawGradBackground()
 {
     QGraphicsRectItem* rect = new QGraphicsRectItem();
     QRadialGradient grad(this->width()/2,this->height()/2, this->height()/2);
@@ -35,7 +36,7 @@ void GGraphicsScene::drawGradBackground()
     this->addItem(rect);
 }
 
-void GGraphicsScene::drawBoard()
+void GGameScene::drawBoard()
 {
     QGraphicsEllipseItem* box = new QGraphicsEllipseItem();
 
@@ -60,7 +61,7 @@ void GGraphicsScene::drawBoard()
     addPowerUp();
 }
 
-void GGraphicsScene::addPowerUp()
+void GGameScene::addPowerUp()
 {
     powerup* newPowerup = new powerup(powerUps->size(),this);
     newPowerup->setPen(*arenaPen);
@@ -69,10 +70,10 @@ void GGraphicsScene::addPowerUp()
     this->addItem(newPowerup);
 }
 
-void GGraphicsScene::collectedPowerup(powerup *p)
+void GGameScene::collectedPowerup(powerup *p)
 {
     if(!p->enabled){
-        powerUps->removeAt(p->id);
+        powerUps->removeOne(p);
         p->enable();
         this->removeItem(p);
     }

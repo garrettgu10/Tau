@@ -11,7 +11,7 @@
 #include <QPainterPath>
 #include <powerup.h>
 
-class GGraphicsScene;
+class GGameScene;
 
 class Ball : public QObject, public QGraphicsItem
 {
@@ -19,7 +19,7 @@ class Ball : public QObject, public QGraphicsItem
     Q_INTERFACES(QGraphicsItem)
 public:
     QPointF* pos;
-    Ball(GGraphicsScene* parent);
+    Ball(GGameScene* parent);
     int getRadius();
     QRectF* rect();
     void updateRect();
@@ -40,9 +40,10 @@ protected:
 
     void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
 private:
+    void bounce(Player *p, int pdiff, int angleWithCenter);
     int radius;
     void collision();
-    GGraphicsScene* parent;
+    GGameScene* parent;
     Player* p1;
     Player* p2;
     QPen pen;

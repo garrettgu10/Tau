@@ -1,21 +1,23 @@
 #ifndef GGRAPHICSVIEW_H
 #define GGRAPHICSVIEW_H
 #include <QGraphicsView>
-#include <ggraphicsscene.h>
+#include <ggamescene.h>
 #include <QTimer>
+#include <QCloseEvent>
 
 class GGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
     GGraphicsView();
-    void setGScene(GGraphicsScene* scene);
+    void setGScene(GGameScene* scene);
 protected:
-    GGraphicsScene* GScene;
+    GGameScene* GScene;
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 private:
+    void closeEvent(QCloseEvent *event);
     QTimer* movep1;
     QTimer* movep2;
     void setupTimer(QTimer* t, Player* p, bool cw);

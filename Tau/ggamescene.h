@@ -8,17 +8,19 @@
 #include <QList>
 #include <powerup.h>
 
-class GGraphicsScene : public QGraphicsScene
+class GGameScene : public QGraphicsScene
 {
     Q_OBJECT
 
 public:
-    GGraphicsScene();
+    GGameScene();
     void drawGradBackground();
     void drawBoard();
     Player* p1;
     Ball* b;
     Player* p2;
+    Player* mostRecent;
+    bool ongoing = true;
 
     QList<powerup*>* powerUps;
     void collectedPowerup(powerup* p);

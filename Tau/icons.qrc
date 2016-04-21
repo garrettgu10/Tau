@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/ico">
         <file>add.png</file>
+        <file>sizeUp.png</file>
+        <file>minus.png</file>
     </qresource>
 </RCC>

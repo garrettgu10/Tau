@@ -5,7 +5,7 @@
 #include <GGraphicsView.h>
 #include <QGraphicsRectItem>
 #include <QPen>
-#include "ggraphicsscene.h"
+#include "ggamescene.h"
 #include "ggraphicsview.h"
 #include <QPainter>
 #include <helper.h>
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
     seedRandomFunction();
     QApplication a(argc, argv);
-    GGraphicsScene* scene = new GGraphicsScene();
+    GGameScene* scene = new GGameScene();
     GGraphicsView* view = new GGraphicsView();
     view->setRenderHint(QPainter::Antialiasing);
     view->setGScene(scene);

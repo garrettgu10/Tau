@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui concurrent
+QT       += core gui concurrent svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,21 +13,21 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    ggraphicsscene.cpp \
     ggraphicsview.cpp \
     player.cpp \
     ball.cpp \
     helper.cpp \
-    powerup.cpp
+    powerup.cpp \
+    ggamescene.cpp
 
 HEADERS  += \
-    ggraphicsscene.h \
     ggraphicsview.h \
     player.h \
     constants.h \
     ball.h \
     helper.h \
-    powerup.h
+    powerup.h \
+    ggamescene.h
 
 FORMS    +=
 

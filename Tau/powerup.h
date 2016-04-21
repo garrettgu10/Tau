@@ -7,8 +7,9 @@
 #include <QBrush>
 #include <constants.h>
 #include <QImage>
+#include <player.h>
 
-class GGraphicsScene;
+class GGameScene;
 class Ball;
 
 class powerup : public QObject, public QGraphicsItem
@@ -16,7 +17,7 @@ class powerup : public QObject, public QGraphicsItem
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 public:
-    powerup(int id, GGraphicsScene* parent);
+    powerup(int id, GGameScene* parent);
     void setPen(QPen pen);
     QRectF rect();
     void setBrush(QBrush brush);
@@ -35,10 +36,13 @@ protected:
     virtual QRectF boundingRect()const;
 
 private:
+    Player* affectedPlayer;
+    double angle = 0;
+    void keepRotating();
     double opacity = 0;
     void fadeIn();
     QImage* ico;
-    GGraphicsScene* parent;
+    GGameScene* parent;
     powerUpType t;
     QPen pen;
     QBrush brush;

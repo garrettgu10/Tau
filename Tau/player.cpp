@@ -1,10 +1,11 @@
 #include "player.h"
 #include <QRectF>
-#include <ggraphicsscene.h>
+#include <ggamescene.h>
 #include <QPainter>
 #include <constants.h>
 #include <QPen>
 #include <QDebug>
+#include <QThread>
 
 Player::Player(double pos, double size,int playerNum)
 {
@@ -45,6 +46,22 @@ void Player::move(int dtheta)
     if(newPos+size <=4320-2880*playerNum && newPos-size >=1440-2880*playerNum){
         this->pos+=dtheta;
         //this->scene()->update();
+    }
+}
+
+void Player::sizeUp()
+{
+    for(int i = 0; i < 5; i++){
+        this->size+=6;
+        QThread::msleep(refreshInterval);
+    }
+}
+
+void Player::sizeDown()
+{
+    for(int i = 0; i < 5; i++){
+        this->size-=6;
+        QThread::msleep(refreshInterval);
     }
 }
 

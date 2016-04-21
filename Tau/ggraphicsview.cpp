@@ -8,7 +8,7 @@ GGraphicsView::GGraphicsView()
     movep2 = new QTimer(this);
 }
 
-void GGraphicsView::setGScene(GGraphicsScene *scene)
+void GGraphicsView::setGScene(GGameScene *scene)
 {
     this->setScene(scene);
     this->GScene = scene;
@@ -48,6 +48,11 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
         movep2->stop();
     }
 
+}
+
+void GGraphicsView::closeEvent(QCloseEvent *event)
+{
+    GScene->ongoing = false;
 }
 
 void GGraphicsView::setupTimer(QTimer* t, Player *p, bool cw)
