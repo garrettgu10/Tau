@@ -10,11 +10,13 @@
 
 GGraphicsScene::GGraphicsScene()
 {
-    p1 = new Player(2880,180,0);
-    p2 = new Player(0,180,1);
-    b = new Ball(p1,p2);
+    p1 = new Player(2880,playerInitSize,0);
+    p2 = new Player(0,playerInitSize,1);
+    b = new Ball(this);
     powerUps = new QList<powerup*>();
-
+    QTimer* addPowerUps = new QTimer();
+    QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
+    addPowerUps->start(20000);
     ballUpdate = new QTimer();
     QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));
 }
@@ -54,15 +56,24 @@ void GGraphicsScene::drawBoard()
     b->setPen(*arenaPen);
     b->setBrush(*brush);
     this->addItem(b);
-    ballUpdate->start(25);
+    ballUpdate->start(refreshInterval);
     addPowerUp();
 }
 
 void GGraphicsScene::addPowerUp()
 {
-    powerup* newPowerup = new powerup();
+    powerup* newPowerup = new powerup(powerUps->size(),this);
     newPowerup->setPen(*arenaPen);
     newPowerup->setBrush(*brush);
     powerUps->append(newPowerup);
     this->addItem(newPowerup);
+}
+
+void GGraphicsScene::collectedPowerup(powerup *p)
+{
+    if(!p->enabled){
+        powerUps->removeAt(p->id);
+        p->enable();
+        this->removeItem(p);
+    }
 }

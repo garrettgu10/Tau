@@ -6,18 +6,21 @@
 #include <GGraphicsScene.h>
 #include <QDebug>
 #include <helper.h>
+#include <QList>
+#include <QThread>
 
-
-Ball::Ball(Player *p1, Player *p2)
+Ball::Ball(GGraphicsScene *parent)
 {
     pos = new QPointF();
-    this->p1 = p1;
-    this->p2 = p2;
+    this->parent = parent;
+    this->p1 = parent->p1;
+    this->p2 = parent->p2;
     pos->setX(windowWidth/2);
     pos->setY(windowHeight/2);
     radius = ballInitRadius;
     angle = randomInBound(0,5760);
     speed = ballInitSpeed;
+    rekt = new QRectF();
     updateRect();
 }
 
@@ -29,6 +32,12 @@ int Ball::getRadius()
 QRectF Ball::boundingRect() const
 {
     return *rekt;
+}
+
+int Ball::setrad(int r)
+{
+    radius = r;
+    updateRect();
 }
 
 int arcTan(double x, double y){ //returns angle in 16ths of degree made by the point given
@@ -43,7 +52,7 @@ void Ball::collision()
 {
     double distFromCenter = qSqrt(qPow(pos->x()-windowWidth/2,2)+qPow(pos->y()-windowHeight/2,2));
 
-    if(distFromCenter < playerRadius-playerWidth-radius || distFromCenter > arenaRadius+radius){
+    if(distFromCenter < playerRadius-playerWidth-radius || distFromCenter > playerRadius+playerWidth+radius){
         //speed = 15-(double)distFromCenter/playerRadius*10;
         bouncing = false;
     }else{
@@ -64,6 +73,14 @@ void Ball::collision()
             normalize(angle);
             angle-=(((double)p2diff)/p2->size*720);
             bouncing = true;
+        }else{
+            bouncing = false;
+        }
+
+    }
+    for(powerup* p: *parent->powerUps){
+        if(distance(this->pos,p->pos()) < this->radius+p->rad()){
+            parent->collectedPowerup(p);
         }
     }
 }
@@ -75,14 +92,17 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawEllipse(pos->x()-radius,pos->y()-radius, radius*2,radius*2);
 }
 
-QRectF* Ball::rect()
+QRectF *Ball::rect()
 {
     return rekt;
 }
 
 void Ball::updateRect()
 {
-    rekt = new QRectF(this->x()-radius,this->y()-radius,radius*2,radius*2);
+    rekt->setLeft(this->x()-radius);
+    rekt->setTop(this->y()-radius);
+    rekt->setWidth(radius*2);
+    rekt->setHeight(radius*2);
 }
 
 void Ball::updatePos()
@@ -92,6 +112,22 @@ void Ball::updatePos()
     updateRect();
     this->scene()->update();
     collision();
+}
+
+void Ball::sizeUp()
+{
+    for(int i = 0; i < 5; i++){
+        radius+=2;
+        QThread::msleep(refreshInterval);
+    }
+}
+
+void Ball::sizeDown()
+{
+    for(int i = 0; i < 5; i++){
+        radius-=2;
+        QThread::msleep(refreshInterval);
+    }
 }
 
 void Ball::setPen(QPen pen)

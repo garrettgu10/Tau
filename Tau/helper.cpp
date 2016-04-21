@@ -3,6 +3,7 @@
 #include <QGlobal.h>
 #include <QTime>
 #include <stdlib.h>
+#include <QTimer>
 
 int difference(int a, int b)
 {
@@ -26,8 +27,6 @@ void normalize(int &a)
     }
 }
 
-
-
 int randomInBound(int min, int max)
 {
     return qrand() % ((max + 1) - min) + min;
@@ -41,4 +40,9 @@ void seedRandomFunction()
 {
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
+}
+
+double distance(QPointF* a, QPointF* b)
+{
+    return sqrt(pow(a->x()-b->x(),2)+pow(a->y()-b->y(),2));
 }

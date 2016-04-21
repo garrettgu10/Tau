@@ -58,7 +58,7 @@ void GGraphicsView::setupTimer(QTimer* t, Player *p, bool cw)
     }else{
         QObject::connect(t,SIGNAL(timeout()),p,SLOT(moveCClockwise()));
     }
-    t->start(25);
+    t->start(refreshInterval);
 }
 
 void GGraphicsView::mousePressEvent(QMouseEvent *event)
