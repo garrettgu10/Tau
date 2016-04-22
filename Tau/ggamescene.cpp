@@ -10,14 +10,14 @@
 
 GGameScene::GGameScene()
 {
-    p1 = new Player(2880,playerInitSize,0);
-    p2 = new Player(0,playerInitSize,1);
-    mostRecent = p1;
+    p[0] = new Player(2880,playerInitSize,0);
+    p[1] = new Player(0,playerInitSize,1);
+    mostRecent = 0;
     b = new Ball(this);
     powerUps = new QList<powerup*>();
     QTimer* addPowerUps = new QTimer();
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
-    addPowerUps->start(5000);
+    addPowerUps->start(powerUpInterval);
     ballUpdate = new QTimer();
     QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));
 }
@@ -48,17 +48,16 @@ void GGameScene::drawBoard()
     QPen player1Pen(*arenaPen);
     player1Pen.setColor(QColor::fromRgb(0,0,255));
     player1Pen.setWidth(playerWidth);
-    p1->setPen(player1Pen);
-    this->addItem(p1);
+    p[0]->setPen(player1Pen);
+    this->addItem(p[0]);
     QPen player2Pen(player1Pen);
     player2Pen.setColor(QColor::fromRgb(255,0,0));
-    p2->setPen(player2Pen);
-    this->addItem(p2);
+    p[1]->setPen(player2Pen);
+    this->addItem(p[1]);
     b->setPen(*arenaPen);
     b->setBrush(*brush);
     this->addItem(b);
     ballUpdate->start(refreshInterval);
-    addPowerUp();
 }
 
 void GGameScene::addPowerUp()

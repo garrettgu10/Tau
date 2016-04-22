@@ -1,5 +1,5 @@
 #include <QApplication>
-#include <QTimer>
+#include <QTimer>wwww
 #include <QObject>
 #include <QGraphicsScene>
 #include <GGraphicsView.h>
@@ -10,6 +10,7 @@
 #include <QPainter>
 #include <helper.h>
 #include <constants.h>
+#include <QWindow>
 
 int main(int argc, char *argv[])
 {
@@ -17,6 +18,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     GGameScene* scene = new GGameScene();
     GGraphicsView* view = new GGraphicsView();
+    view->setWindowTitle("Tau");
     view->setRenderHint(QPainter::Antialiasing);
     view->setGScene(scene);
     view->setFixedSize(windowWidth,windowHeight);

@@ -51,16 +51,16 @@ void Player::move(int dtheta)
 
 void Player::sizeUp()
 {
-    for(int i = 0; i < 5; i++){
-        this->size+=6;
+    for(int i = 0; i < 4; i++){
+        this->size+=11;
         QThread::msleep(refreshInterval);
     }
 }
 
 void Player::sizeDown()
 {
-    for(int i = 0; i < 5; i++){
-        this->size-=6;
+    for(int i = 0; i < 4; i++){
+        this->size-=11;
         QThread::msleep(refreshInterval);
     }
 }

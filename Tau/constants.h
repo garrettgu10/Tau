@@ -18,8 +18,8 @@ const int arenaRadius = windowHeight/2*.9; //radius of arena circle
 const int playerInitSize = 180; //in 16ths of degrees (angular difference from center to side of paddle)
 const int playerRadius = arenaRadius-playerWidth-arenaWidth/2; //radius of circle in which the paddles are drawn
 const int ballInitRadius = 10; //the ball's initial radius
-const double ballInitSpeed = 7; //ball's initial speed
+const double ballInitSpeed = 8.5; //ball's initial speed
 const int powerUpRadius = 20; //radius of a powerup
-
+const int powerUpInterval = 5000; //in ms; amount of time between powerups added
 
 #endif // CONSTANTS_H

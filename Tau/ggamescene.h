@@ -16,10 +16,9 @@ public:
     GGameScene();
     void drawGradBackground();
     void drawBoard();
-    Player* p1;
+    Player* p[2];
     Ball* b;
-    Player* p2;
-    Player* mostRecent;
+    char mostRecent;
     bool ongoing = true;
 
     QList<powerup*>* powerUps;

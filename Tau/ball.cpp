@@ -8,13 +8,14 @@
 #include <helper.h>
 #include <QList>
 #include <QThread>
+#include <QtConcurrent>
 
 Ball::Ball(GGameScene *parent)
 {
     pos = new QPointF();
     this->parent = parent;
-    this->p1 = parent->p1;
-    this->p2 = parent->p2;
+    this->p[0] = parent->p[0];
+    this->p[1] = parent->p[1];
     pos->setX(windowWidth/2);
     pos->setY(windowHeight/2);
     radius = ballInitRadius;
@@ -60,17 +61,16 @@ void Ball::collision()
             return;
         }
         int angleWithCenter = arcTan(pos->x()-windowWidth/2,pos->y()-windowHeight/2);
-        int p1diff = difference(angleWithCenter,p1->pos);
-        int p2diff = difference(angleWithCenter,p2->pos);
+        int p0diff = difference(angleWithCenter,p[0]->pos);
+        int p1diff = difference(angleWithCenter,p[1]->pos);
 
-        if(abs(p1diff) < p1->size+90){
-            bounce(p1,p1diff,angleWithCenter);
-        }else if(abs(p2diff) < p2->size+90){
-            bounce(p2,p2diff,angleWithCenter);
+        if(abs(p0diff) < p[0]->size+90){
+            bounce(p[0],p0diff,angleWithCenter);
+        }else if(abs(p1diff) < p[1]->size+90){
+            bounce(p[1],p1diff,angleWithCenter);
         }else{
             bouncing = false;
         }
-
     }
     for(powerup* p: *parent->powerUps){
         if(distance(this->pos,p->pos()) < this->radius+p->rad()){
@@ -91,8 +91,15 @@ void Ball::bounce(Player* p, int pdiff, int angleWithCenter)
     angle = angleWithCenter+2880;
     normalize(angle);
     angle-=(((double)pdiff)/p->size*720);
-    parent->mostRecent = p;
+    parent->mostRecent = p->playerNum;
     bouncing = true;
+    QtConcurrent::run(this,&Ball::setBouncingToFalse);
+}
+
+void Ball::setBouncingToFalse()
+{
+    QThread::msleep(200);
+    bouncing = false; //yes, this function serves a purpose.
 }
 
 QRectF *Ball::rect()

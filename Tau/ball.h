@@ -32,20 +32,20 @@ public slots:
     void updatePos();
     void sizeUp();
     void sizeDown();
+    void setBouncingToFalse();
 
 protected:
     int angle = 0; // angle of motion in 160ths of degrees
     double speed;
     QRectF* rekt;
-
     void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
+
 private:
     void bounce(Player *p, int pdiff, int angleWithCenter);
     int radius;
     void collision();
     GGameScene* parent;
-    Player* p1;
-    Player* p2;
+    Player* p[2];
     QPen pen;
     QBrush brush;
     bool bouncing = false;

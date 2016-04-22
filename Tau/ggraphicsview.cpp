@@ -4,8 +4,8 @@
 
 GGraphicsView::GGraphicsView()
 {
+    movep0 = new QTimer(this);
     movep1 = new QTimer(this);
-    movep2 = new QTimer(this);
 }
 
 void GGraphicsView::setGScene(GGameScene *scene)
@@ -25,10 +25,10 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Up: affectedPlayer= 2; cw = false; break;
     case Qt::Key_Down: affectedPlayer=2;cw = true;  break;
     }
-    if(affectedPlayer == 1 && !(movep1->isActive())){
-        setupTimer(movep1, this->GScene->p1,cw);
-    }else if(affectedPlayer == 2 && !(movep2->isActive())){
-        setupTimer(movep2, this->GScene->p2,cw);
+    if(affectedPlayer == 1 && !(movep0->isActive())){
+        setupTimer(movep0, this->GScene->p[0],cw);
+    }else if(affectedPlayer == 2 && !(movep1->isActive())){
+        setupTimer(movep1, this->GScene->p[1],cw);
     }
 }
 
@@ -41,11 +41,14 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
     case Qt::Key_S: affectedPlayer = 1; break;
     case Qt::Key_Up: affectedPlayer= 2; break;
     case Qt::Key_Down: affectedPlayer=2;break;
+    case Qt::Key_0: GScene->b->pos->setX(windowWidth/2);
+        GScene->b->pos->setY(windowHeight/2);
+        break;
     }
     if(affectedPlayer == 1){
-        movep1->stop();
+        movep0->stop();
     }else if(affectedPlayer==2){
-        movep2->stop();
+        movep1->stop();
     }
 
 }

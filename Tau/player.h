@@ -20,13 +20,13 @@ public:
     void move(int dtheta);
     void sizeUp();
     void sizeDown();
+    int playerNum;
 
 public slots:
     void moveClockwise();
     void moveCClockwise();
 
 protected:
-    int playerNum;
     QPen pen;
     QBrush brush;
     QRectF* rekt;

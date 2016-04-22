@@ -19,7 +19,7 @@ protected:
 private:
     void closeEvent(QCloseEvent *event);
     QTimer* movep1;
-    QTimer* movep2;
+    QTimer* movep0;
     void setupTimer(QTimer* t, Player* p, bool cw);
 };
 
