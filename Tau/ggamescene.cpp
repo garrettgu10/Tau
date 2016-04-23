@@ -7,6 +7,7 @@
 #include <player.h>
 #include <QTimer>
 #include <ball.h>
+#include <QtConcurrent>
 
 GGameScene::GGameScene()
 {
@@ -18,8 +19,9 @@ GGameScene::GGameScene()
     QTimer* addPowerUps = new QTimer();
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
     addPowerUps->start(powerUpInterval);
-    ballUpdate = new QTimer();
-    QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));
+    /*ballUpdate = new QTimer();
+    QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));*/
+
 }
 
 void GGameScene::drawGradBackground()
@@ -57,7 +59,8 @@ void GGameScene::drawBoard()
     b->setPen(*arenaPen);
     b->setBrush(*brush);
     this->addItem(b);
-    ballUpdate->start(refreshInterval);
+    //ballUpdate->start(refreshInterval);
+    QtConcurrent::run(b,&Ball::updatePos);
 }
 
 void GGameScene::addPowerUp()

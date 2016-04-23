@@ -9,7 +9,7 @@ const QString icos[(int)powerUpType::NUM_POWERUPTYPES] = {":/ico/sizeUp.png",
         ":/ico/add.png",
         ":/ico/minus.png"};
 
-const int refreshInterval = 23;
+const int refreshInterval = 18;
 const int windowWidth = 750;//width of window
 const int windowHeight = 750; //height of window
 const int playerWidth = 15; //width of paddle

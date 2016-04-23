@@ -26,7 +26,7 @@ public:
     void setPen(QPen pen);
     void setBrush(QBrush brush);
     virtual QRectF boundingRect() const;
-    int setrad(int r);
+    void setrad(int r);
 
 public slots:
     void updatePos();

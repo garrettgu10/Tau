@@ -1,5 +1,5 @@
 #include <QApplication>
-#include <QTimer>wwww
+#include <QTimer>
 #include <QObject>
 #include <QGraphicsScene>
 #include <GGraphicsView.h>
@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     GGameScene* scene = new GGameScene();
     GGraphicsView* view = new GGraphicsView();
+    a.setKeyboardInputInterval(1600);
     view->setWindowTitle("Tau");
     view->setRenderHint(QPainter::Antialiasing);
     view->setGScene(scene);

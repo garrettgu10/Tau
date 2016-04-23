@@ -5,19 +5,19 @@
 # Template: app
 #############################################################################
 
-MAKEFILE      = Makefile.Debug
+MAKEFILE      = Makefile.Release
 
 ####### Compiler, tools and options
 
 CC            = cl
 CXX           = cl
-DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DQT_QML_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CONCURRENT_LIB -DQT_CORE_LIB
-CFLAGS        = -nologo -Zc:wchar_t -FS -Zi -MDd -W3 /Fddebug\Tau.pdb $(DEFINES)
-CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zi -MDd -GR -W3 -w34100 -w34189 -w44996 -EHsc /Fddebug\Tau.pdb $(DEFINES)
-INCPATH       = -I..\Tau -I. -IC:\Qt\5.6\msvc2013_64\include -IC:\Qt\5.6\msvc2013_64\include\QtSvg -IC:\Qt\5.6\msvc2013_64\include\QtWidgets -IC:\Qt\5.6\msvc2013_64\include\QtGui -IC:\Qt\5.6\msvc2013_64\include\QtANGLE -IC:\Qt\5.6\msvc2013_64\include\QtConcurrent -IC:\Qt\5.6\msvc2013_64\include\QtCore -Idebug -IC:\Qt\5.6\msvc2013_64\mkspecs\win32-msvc2013 
+DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_SVG_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DNDEBUG
+CFLAGS        = -nologo -Zc:wchar_t -FS -O2 -MD -Zc:strictStrings -W3 $(DEFINES)
+CXXFLAGS      = -nologo -Zc:wchar_t -FS -O2 -MD -Zc:strictStrings -GR -W3 -w34100 -w34189 -w44996 -EHsc $(DEFINES)
+INCPATH       = -I..\Tau -I. -IC:\Qt\5.6\msvc2013_64\include -IC:\Qt\5.6\msvc2013_64\include\QtSvg -IC:\Qt\5.6\msvc2013_64\include\QtWidgets -IC:\Qt\5.6\msvc2013_64\include\QtGui -IC:\Qt\5.6\msvc2013_64\include\QtANGLE -IC:\Qt\5.6\msvc2013_64\include\QtConcurrent -IC:\Qt\5.6\msvc2013_64\include\QtCore -Irelease -IC:\Qt\5.6\msvc2013_64\mkspecs\win32-msvc2013 
 LINKER        = link
-LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:C:\Qt\5.6\msvc2013_64\lib C:\Qt\5.6\msvc2013_64\lib\qtmaind.lib /LIBPATH:C:\utils\postgresql\pgsql\lib /LIBPATH:C:\utils\my_sql\my_sql\lib shell32.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Svgd.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Widgetsd.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Guid.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Concurrentd.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Cored.lib 
+LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
+LIBS          = /LIBPATH:C:\Qt\5.6\msvc2013_64\lib C:\Qt\5.6\msvc2013_64\lib\qtmain.lib /LIBPATH:C:\utils\postgresql\pgsql\lib /LIBPATH:C:\utils\my_sql\my_sql\lib shell32.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Svg.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Widgets.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Gui.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Concurrent.lib C:\Qt\5.6\msvc2013_64\lib\Qt5Core.lib 
 QMAKE         = C:\Qt\5.6\msvc2013_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -39,7 +39,7 @@ INSTALL_DIR     = xcopy /s /q /y /i
 
 ####### Output directory
 
-OBJECTS_DIR   = debug
+OBJECTS_DIR   = release
 
 ####### Files
 
@@ -49,25 +49,25 @@ SOURCES       = ..\Tau\main.cpp \
 		..\Tau\ball.cpp \
 		..\Tau\helper.cpp \
 		..\Tau\powerup.cpp \
-		..\Tau\ggamescene.cpp debug\qrc_icons.cpp \
-		debug\moc_ggraphicsview.cpp \
-		debug\moc_player.cpp \
-		debug\moc_ball.cpp \
-		debug\moc_powerup.cpp \
-		debug\moc_ggamescene.cpp
-OBJECTS       = debug\main.obj \
-		debug\ggraphicsview.obj \
-		debug\player.obj \
-		debug\ball.obj \
-		debug\helper.obj \
-		debug\powerup.obj \
-		debug\ggamescene.obj \
-		debug\qrc_icons.obj \
-		debug\moc_ggraphicsview.obj \
-		debug\moc_player.obj \
-		debug\moc_ball.obj \
-		debug\moc_powerup.obj \
-		debug\moc_ggamescene.obj
+		..\Tau\ggamescene.cpp release\qrc_icons.cpp \
+		release\moc_ggraphicsview.cpp \
+		release\moc_player.cpp \
+		release\moc_ball.cpp \
+		release\moc_powerup.cpp \
+		release\moc_ggamescene.cpp
+OBJECTS       = release\main.obj \
+		release\ggraphicsview.obj \
+		release\player.obj \
+		release\ball.obj \
+		release\helper.obj \
+		release\powerup.obj \
+		release\ggamescene.obj \
+		release\qrc_icons.obj \
+		release\moc_ggraphicsview.obj \
+		release\moc_player.obj \
+		release\moc_ball.obj \
+		release\moc_powerup.obj \
+		release\moc_ggamescene.obj
 
 DIST          =  ..\Tau\ggraphicsview.h \
 		..\Tau\player.h \
@@ -83,78 +83,78 @@ DIST          =  ..\Tau\ggraphicsview.h \
 		..\Tau\powerup.cpp \
 		..\Tau\ggamescene.cpp
 QMAKE_TARGET  = Tau
-DESTDIR        = debug\ #avoid trailing-slash linebreak
+DESTDIR        = release\ #avoid trailing-slash linebreak
 TARGET         = Tau.exe
-DESTDIR_TARGET = debug\Tau.exe
+DESTDIR_TARGET = release\Tau.exe
 
 ####### Implicit rules
 
 .SUFFIXES: .c .cpp .cc .cxx
 
-{debug}.cpp{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{release}.cpp{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{debug}.cc{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{release}.cc{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{debug}.cxx{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{release}.cxx{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{debug}.c{debug\}.obj::
-	$(CC) -c $(CFLAGS) $(INCPATH) -Fodebug\ @<<
+{release}.c{release\}.obj::
+	$(CC) -c $(CFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{.}.cpp{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{.}.cpp{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{.}.cc{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{.}.cc{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{.}.cxx{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{.}.cxx{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{.}.c{debug\}.obj::
-	$(CC) -c $(CFLAGS) $(INCPATH) -Fodebug\ @<<
+{.}.c{release\}.obj::
+	$(CC) -c $(CFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{..\Tau}.cpp{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{..\Tau}.cpp{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{..\Tau}.cc{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{..\Tau}.cc{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{..\Tau}.cxx{debug\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+{..\Tau}.cxx{release\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
-{..\Tau}.c{debug\}.obj::
-	$(CC) -c $(CFLAGS) $(INCPATH) -Fodebug\ @<<
+{..\Tau}.c{release\}.obj::
+	$(CC) -c $(CFLAGS) $(INCPATH) -Forelease\ @<<
 	$<
 <<
 
 ####### Build rules
 
 first: all
-all: Makefile.Debug  $(DESTDIR_TARGET)
+all: Makefile.Release  $(DESTDIR_TARGET)
 
 $(DESTDIR_TARGET):  $(OBJECTS) 
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
@@ -162,21 +162,21 @@ $(OBJECTS) $(LIBS)
 <<
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-msvc2013 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile.Debug ..\Tau\Tau.pro
+	@$(QMAKE) -spec win32-msvc2013 -o Makefile.Release ..\Tau\Tau.pro
 
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Tau.zip $(SOURCES) $(DIST) ..\Tau\Tau.pro C:\Qt\5.6\msvc2013_64\mkspecs\features\spec_pre.prf C:\Qt\5.6\msvc2013_64\mkspecs\common\angle.conf C:\Qt\5.6\msvc2013_64\mkspecs\common\msvc-base.conf C:\Qt\5.6\msvc2013_64\mkspecs\common\msvc-desktop.conf C:\Qt\5.6\msvc2013_64\mkspecs\qconfig.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_labscontrols_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_labstemplates_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_script.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webengine.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webengine_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginecore.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginecore_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginewidgets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webview.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webview_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\features\qt_functions.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\qt_config.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\qt_config.prf C:\Qt\5.6\msvc2013_64\mkspecs\win32-msvc2013\qmake.conf C:\Qt\5.6\msvc2013_64\mkspecs\features\spec_post.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\default_pre.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\default_pre.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\resolve_config.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\default_post.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\build_pass.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\qml_debug.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\rtti.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\precompile_header.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\warn_on.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\qt.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\resources.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\moc.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\opengl.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\uic.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\windows.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\testcase_targets.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\exceptions.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\yacc.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\lex.prf ..\Tau\Tau.pro ..\Tau\icons.qrc C:\Qt\5.6\msvc2013_64\lib\qtmaind.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Svgd.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Widgetsd.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Guid.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Concurrentd.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Cored.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
+	$(ZIP) Tau.zip $(SOURCES) $(DIST) ..\Tau\Tau.pro C:\Qt\5.6\msvc2013_64\mkspecs\features\spec_pre.prf C:\Qt\5.6\msvc2013_64\mkspecs\common\angle.conf C:\Qt\5.6\msvc2013_64\mkspecs\common\msvc-base.conf C:\Qt\5.6\msvc2013_64\mkspecs\common\msvc-desktop.conf C:\Qt\5.6\msvc2013_64\mkspecs\qconfig.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_labscontrols_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_labstemplates_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_script.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webengine.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webengine_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginecore.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginecore_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginewidgets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webview.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_webview_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\5.6\msvc2013_64\mkspecs\features\qt_functions.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\qt_config.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\qt_config.prf C:\Qt\5.6\msvc2013_64\mkspecs\win32-msvc2013\qmake.conf C:\Qt\5.6\msvc2013_64\mkspecs\features\spec_post.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\default_pre.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\default_pre.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\resolve_config.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\default_post.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\build_pass.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\rtti.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\precompile_header.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\warn_on.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\qt.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\resources.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\moc.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\opengl.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\uic.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\win32\windows.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\testcase_targets.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\exceptions.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\yacc.prf C:\Qt\5.6\msvc2013_64\mkspecs\features\lex.prf ..\Tau\Tau.pro ..\Tau\icons.qrc C:\Qt\5.6\msvc2013_64\lib\qtmain.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Svg.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Widgets.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Gui.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Concurrent.prl C:\Qt\5.6\msvc2013_64\lib\Qt5Core.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.obj debug\ggraphicsview.obj debug\player.obj debug\ball.obj debug\helper.obj debug\powerup.obj debug\ggamescene.obj debug\qrc_icons.obj debug\moc_ggraphicsview.obj debug\moc_player.obj debug\moc_ball.obj debug\moc_powerup.obj debug\moc_ggamescene.obj
-	-$(DEL_FILE) debug\Tau.exp debug\Tau.ilk debug\Tau.idb
+	-$(DEL_FILE) release\main.obj release\ggraphicsview.obj release\player.obj release\ball.obj release\helper.obj release\powerup.obj release\ggamescene.obj release\qrc_icons.obj release\moc_ggraphicsview.obj release\moc_player.obj release\moc_ball.obj release\moc_powerup.obj release\moc_ggamescene.obj
+	-$(DEL_FILE) release\Tau.exp
 
 distclean: clean 
-	-$(DEL_FILE) debug\Tau.lib debug\Tau.pdb
+	-$(DEL_FILE) release\Tau.lib
 	-$(DEL_FILE) $(DESTDIR_TARGET)
-	-$(DEL_FILE) Makefile.Debug
+	-$(DEL_FILE) Makefile.Release
 
 mocclean: compiler_moc_header_clean compiler_moc_source_clean
 
@@ -186,19 +186,19 @@ check: first
 
 compiler_no_pch_compiler_make_all:
 compiler_no_pch_compiler_clean:
-compiler_rcc_make_all: debug\qrc_icons.cpp
+compiler_rcc_make_all: release\qrc_icons.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) debug\qrc_icons.cpp
-debug\qrc_icons.cpp: ..\Tau\icons.qrc \
+	-$(DEL_FILE) release\qrc_icons.cpp
+release\qrc_icons.cpp: ..\Tau\icons.qrc \
 		..\Tau\add.png \
 		..\Tau\sizeUp.png \
 		..\Tau\minus.png
-	C:\Qt\5.6\msvc2013_64\bin\rcc.exe -name icons ..\Tau\icons.qrc -o debug\qrc_icons.cpp
+	C:\Qt\5.6\msvc2013_64\bin\rcc.exe -name icons ..\Tau\icons.qrc -o release\qrc_icons.cpp
 
-compiler_moc_header_make_all: debug\moc_ggraphicsview.cpp debug\moc_player.cpp debug\moc_ball.cpp debug\moc_powerup.cpp debug\moc_ggamescene.cpp
+compiler_moc_header_make_all: release\moc_ggraphicsview.cpp release\moc_player.cpp release\moc_ball.cpp release\moc_powerup.cpp release\moc_ggamescene.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug\moc_ggraphicsview.cpp debug\moc_player.cpp debug\moc_ball.cpp debug\moc_powerup.cpp debug\moc_ggamescene.cpp
-debug\moc_ggraphicsview.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsView \
+	-$(DEL_FILE) release\moc_ggraphicsview.cpp release\moc_player.cpp release\moc_ball.cpp release\moc_powerup.cpp release\moc_ggamescene.cpp
+release\moc_ggraphicsview.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsView \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\qgraphicsview.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qmetatype.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qglobal.h \
@@ -331,9 +331,9 @@ debug\moc_ggraphicsview.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsVi
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QList \
 		C:\Qt\5.6\msvc2013_64\include\QtGui\QCloseEvent \
 		..\Tau\ggraphicsview.h
-	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\ggraphicsview.h -o debug\moc_ggraphicsview.cpp
+	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\ggraphicsview.h -o release\moc_ggraphicsview.cpp
 
-debug\moc_player.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsItem \
+release\moc_player.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsItem \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\qgraphicsitem.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qglobal.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qconfig.h \
@@ -426,9 +426,9 @@ debug\moc_player.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsItem \
 		C:\Qt\5.6\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\5.6\msvc2013_64\include\QtGui\qbrush.h \
 		..\Tau\player.h
-	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\player.h -o debug\moc_player.cpp
+	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\player.h -o release\moc_player.cpp
 
-debug\moc_ball.cpp: C:\Qt\5.6\msvc2013_64\include\QtCore\QObject \
+release\moc_ball.cpp: C:\Qt\5.6\msvc2013_64\include\QtCore\QObject \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qobject.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qobjectdefs.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qnamespace.h \
@@ -533,9 +533,9 @@ debug\moc_ball.cpp: C:\Qt\5.6\msvc2013_64\include\QtCore\QObject \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qbasictimer.h \
 		C:\Qt\5.6\msvc2013_64\include\QtGui\QImage \
 		..\Tau\ball.h
-	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\ball.h -o debug\moc_ball.cpp
+	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\ball.h -o release\moc_ball.cpp
 
-debug\moc_powerup.cpp: C:\Qt\5.6\msvc2013_64\include\QtCore\QTimer \
+release\moc_powerup.cpp: C:\Qt\5.6\msvc2013_64\include\QtCore\QTimer \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qtimer.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qglobal.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qconfig.h \
@@ -637,9 +637,9 @@ debug\moc_powerup.cpp: C:\Qt\5.6\msvc2013_64\include\QtCore\QTimer \
 		C:\Qt\5.6\msvc2013_64\include\QtGui\QImage \
 		..\Tau\player.h \
 		..\Tau\powerup.h
-	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\powerup.h -o debug\moc_powerup.cpp
+	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\powerup.h -o release\moc_powerup.cpp
 
-debug\moc_ggamescene.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsScene \
+release\moc_ggamescene.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsScene \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\qgraphicsscene.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qobject.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qobjectdefs.h \
@@ -749,7 +749,7 @@ debug\moc_ggamescene.cpp: C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsScene
 		C:\Qt\5.6\msvc2013_64\include\QtGui\QImage \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QList \
 		..\Tau\ggamescene.h
-	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\ggamescene.h -o debug\moc_ggamescene.cpp
+	C:\Qt\5.6\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.6/msvc2013_64/mkspecs/win32-msvc2013 -I"C:/Users/Garrett Gu/Desktop/Tau/Tau" -IC:/Qt/5.6/msvc2013_64/include -IC:/Qt/5.6/msvc2013_64/include/QtSvg -IC:/Qt/5.6/msvc2013_64/include/QtWidgets -IC:/Qt/5.6/msvc2013_64/include/QtGui -IC:/Qt/5.6/msvc2013_64/include/QtANGLE -IC:/Qt/5.6/msvc2013_64/include/QtConcurrent -IC:/Qt/5.6/msvc2013_64/include/QtCore -I. ..\Tau\ggamescene.h -o release\moc_ggamescene.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -767,7 +767,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean
 
 ####### Compile
 
-debug\main.obj: ..\Tau\main.cpp C:\Qt\5.6\msvc2013_64\include\QtWidgets\QApplication \
+release\main.obj: ..\Tau\main.cpp C:\Qt\5.6\msvc2013_64\include\QtWidgets\QApplication \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\qapplication.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qcoreapplication.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qglobal.h \
@@ -920,7 +920,7 @@ debug\main.obj: ..\Tau\main.cpp C:\Qt\5.6\msvc2013_64\include\QtWidgets\QApplica
 		C:\Qt\5.6\msvc2013_64\include\QtGui\qsurfaceformat.h \
 		C:\Qt\5.6\msvc2013_64\include\QtGui\qicon.h
 
-debug\ggraphicsview.obj: ..\Tau\ggraphicsview.cpp ../Tau/ggraphicsview.h \
+release\ggraphicsview.obj: ..\Tau\ggraphicsview.cpp ../Tau/ggraphicsview.h \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsView \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\qgraphicsview.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qmetatype.h \
@@ -1054,9 +1054,11 @@ debug\ggraphicsview.obj: ..\Tau\ggraphicsview.cpp ../Tau/ggraphicsview.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QList \
 		C:\Qt\5.6\msvc2013_64\include\QtGui\QCloseEvent \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QDebug \
-		C:\Qt\5.6\msvc2013_64\include\QtGui\QMouseEvent
+		C:\Qt\5.6\msvc2013_64\include\QtGui\QMouseEvent \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\QTime \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qdatetime.h
 
-debug\player.obj: ..\Tau\player.cpp ../Tau/player.h \
+release\player.obj: ..\Tau\player.cpp ../Tau/player.h \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsItem \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\qgraphicsitem.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qglobal.h \
@@ -1176,7 +1178,7 @@ debug\player.obj: ..\Tau\player.cpp ../Tau/player.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QThread \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qthread.h
 
-debug\ball.obj: ..\Tau\ball.cpp ../Tau/ball.h \
+release\ball.obj: ..\Tau\ball.cpp ../Tau/ball.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QObject \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qobject.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qobjectdefs.h \
@@ -1424,7 +1426,7 @@ debug\ball.obj: ..\Tau\ball.cpp ../Tau/ball.h \
 		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentstoredfunctioncall.h \
 		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentversion.h
 
-debug\helper.obj: ..\Tau\helper.cpp ../Tau/helper.h \
+release\helper.obj: ..\Tau\helper.cpp ../Tau/helper.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QPointF \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qpoint.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qnamespace.h \
@@ -1490,7 +1492,7 @@ debug\helper.obj: ..\Tau\helper.cpp ../Tau/helper.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qobject_impl.h
 
-debug\powerup.obj: ..\Tau\powerup.cpp ../Tau/powerup.h \
+release\powerup.obj: ..\Tau\powerup.cpp ../Tau/powerup.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QTimer \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qtimer.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qglobal.h \
@@ -1737,7 +1739,7 @@ debug\powerup.obj: ..\Tau\powerup.cpp ../Tau/powerup.h \
 		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentstoredfunctioncall.h \
 		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentversion.h
 
-debug\ggamescene.obj: ..\Tau\ggamescene.cpp ../Tau/ggamescene.h \
+release\ggamescene.obj: ..\Tau\ggamescene.cpp ../Tau/ggamescene.h \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsScene \
 		C:\Qt\5.6\msvc2013_64\include\QtWidgets\qgraphicsscene.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qobject.h \
@@ -1847,19 +1849,148 @@ debug\ggamescene.obj: ..\Tau\ggamescene.cpp ../Tau/ggamescene.h \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\qbasictimer.h \
 		C:\Qt\5.6\msvc2013_64\include\QtGui\QImage \
 		C:\Qt\5.6\msvc2013_64\include\QtCore\QList \
-		C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsRectItem
+		C:\Qt\5.6\msvc2013_64\include\QtWidgets\QGraphicsRectItem \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\QtConcurrent \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\QtConcurrentDepends \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\QtCore \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\QtCoreDepends \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qabstractanimation.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qanimationgroup.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qparallelanimationgroup.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qpauseanimation.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qpropertyanimation.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qvariantanimation.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qeasingcurve.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsequentialanimationgroup.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qtextcodec.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qendian.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qlibraryinfo.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qdatetime.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qbuffer.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qdir.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfileinfo.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfile.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfiledevice.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qdiriterator.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfileselector.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\QStringList \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfilesystemwatcher.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qlockfile.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qloggingcategory.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qprocess.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qresource.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsavefile.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsettings.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qstandardpaths.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qstorageinfo.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qtemporarydir.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\QScopedPointer \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qtemporaryfile.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qurl.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qurlquery.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qabstractproxymodel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qidentityproxymodel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsortfilterproxymodel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qstringlistmodel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qjsonarray.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qjsonvalue.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qjsondocument.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qjsonobject.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qabstracteventdispatcher.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qeventloop.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qabstractnativeeventfilter.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qcoreapplication.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qmath.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qmetaobject.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qmimedata.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qobjectcleanuphandler.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qpointer.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsharedmemory.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsignalmapper.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsocketnotifier.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsystemsemaphore.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qtranslator.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qwineventnotifier.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qmimedatabase.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qmimetype.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfactoryinterface.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qlibrary.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qplugin.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qpluginloader.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\quuid.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qabstractstate.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qabstracttransition.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qeventtransition.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfinalstate.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qhistorystate.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsignaltransition.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qstate.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qstatemachine.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qexception.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfuture.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfutureinterface.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qrunnable.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qresultstore.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfuturesynchronizer.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qfuturewatcher.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qreadwritelock.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qsemaphore.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qthread.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qthreadpool.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qthreadstorage.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qwaitcondition.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qarraydataops.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qarraydatapointer.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qbitarray.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qbytearraymatcher.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qcache.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qcollator.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qcommandlineoption.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qcommandlineparser.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qcryptographichash.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qelapsedtimer.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qlinkedlist.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qmessageauthenticationcode.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qqueue.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qregularexpression.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qscopedvaluerollback.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qstack.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qtextboundaryfinder.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qtimeline.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qtimezone.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qversionnumber.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qxmlstream.h \
+		C:\Qt\5.6\msvc2013_64\include\QtCore\qtcoreversion.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentcompilertest.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrent_global.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentexception.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentfilter.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentfilterkernel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentiteratekernel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentmedian.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentthreadengine.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentmapkernel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentreducekernel.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentfunctionwrappers.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentmap.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentrun.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentrunbase.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentstoredfunctioncall.h \
+		C:\Qt\5.6\msvc2013_64\include\QtConcurrent\qtconcurrentversion.h
 
-debug\qrc_icons.obj: debug\qrc_icons.cpp 
+release\qrc_icons.obj: release\qrc_icons.cpp 
 
-debug\moc_ggraphicsview.obj: debug\moc_ggraphicsview.cpp 
+release\moc_ggraphicsview.obj: release\moc_ggraphicsview.cpp 
 
-debug\moc_player.obj: debug\moc_player.cpp 
+release\moc_player.obj: release\moc_player.cpp 
 
-debug\moc_ball.obj: debug\moc_ball.cpp 
+release\moc_ball.obj: release\moc_ball.cpp 
 
-debug\moc_powerup.obj: debug\moc_powerup.cpp 
+release\moc_powerup.obj: release\moc_powerup.cpp 
 
-debug\moc_ggamescene.obj: debug\moc_ggamescene.cpp 
+release\moc_ggamescene.obj: release\moc_ggamescene.cpp 
 
 ####### Install
 

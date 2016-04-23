@@ -35,7 +35,7 @@ QRectF Ball::boundingRect() const
     return *rekt;
 }
 
-int Ball::setrad(int r)
+void Ball::setrad(int r)
 {
     radius = r;
     updateRect();
@@ -117,11 +117,14 @@ void Ball::updateRect()
 
 void Ball::updatePos()
 {
-    pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
-    pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
-    updateRect();
-    this->scene()->update();
-    collision();
+    while(parent->ongoing){
+        pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
+        pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
+        updateRect();
+        this->scene()->update();
+        collision();
+        QThread::msleep(refreshInterval);
+    }
 }
 
 void Ball::sizeUp()
