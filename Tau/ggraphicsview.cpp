@@ -56,7 +56,7 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
-void GGraphicsView::closeEvent(QCloseEvent *event)
+void GGraphicsView::closeEvent(QCloseEvent * /*unused*/)
 {
     GScene->ongoing = false;
 }

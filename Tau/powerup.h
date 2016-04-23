@@ -32,10 +32,11 @@ public slots:
     void disable();
 
 protected:
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*);
     virtual QRectF boundingRect()const;
 
 private:
+    QTimer* disabler;
     Player* affectedPlayer;
     double angle = 0;
     void keepRotating();

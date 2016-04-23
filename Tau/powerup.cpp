@@ -32,17 +32,15 @@ void powerup::enable()
     case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); break;
     default: break;
     }
-    QTimer* disabler = new QTimer();
-    disabler->setSingleShot(true);
-    QObject::connect(disabler,SIGNAL(timeout()),this,SLOT(disable()));
-    disabler->start(10000);
     enabled = true;
+    QTimer::singleShot(10000,Qt::PreciseTimer,this,SLOT(disable()));
 }
 
 void powerup::disable()
 {
-    if(!enabled)
+    if(!enabled){
         return;
+    }
     switch(this->puptype()){
     case powerUpType::ballSizeUp: QtConcurrent::run(parent->b,&Ball::sizeDown); break;
     case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeDown); break;
@@ -76,7 +74,7 @@ int powerup::rad()
     return radius;
 }
 
-void powerup::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void powerup::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/, QWidget * /*unused*/)
 {
     if(!enabled){
         painter->setPen(this->pen);

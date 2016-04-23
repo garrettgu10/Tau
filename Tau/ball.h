@@ -38,12 +38,12 @@ protected:
     int angle = 0; // angle of motion in 160ths of degrees
     double speed;
     QRectF* rekt;
-    void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
+    void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
     void bounce(Player *p, int pdiff, int angleWithCenter);
     int radius;
-    void collision();
+    void checkCollision();
     GGameScene* parent;
     Player* p[2];
     QPen pen;

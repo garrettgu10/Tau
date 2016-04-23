@@ -49,7 +49,7 @@ int arcTan(double x, double y){ //returns angle in 16ths of degree made by the p
     return angleWithCenter;
 }
 
-void Ball::collision()
+void Ball::checkCollision()
 {
     double distFromCenter = qSqrt(qPow(pos->x()-windowWidth/2,2)+qPow(pos->y()-windowHeight/2,2));
 
@@ -79,7 +79,7 @@ void Ball::collision()
     }
 }
 
-void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/, QWidget * /*unused*/)
 {
     painter->setPen(this->pen);
     painter->setBrush(this->brush);
@@ -117,14 +117,11 @@ void Ball::updateRect()
 
 void Ball::updatePos()
 {
-    while(parent->ongoing){
-        pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
-        pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
-        updateRect();
-        this->scene()->update();
-        collision();
-        QThread::msleep(refreshInterval);
-    }
+    pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
+    pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
+    updateRect();
+    this->scene()->update();
+    checkCollision();
 }
 
 void Ball::sizeUp()

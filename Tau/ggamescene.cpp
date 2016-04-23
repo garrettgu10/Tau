@@ -7,6 +7,7 @@
 #include <player.h>
 #include <QTimer>
 #include <ball.h>
+#include <arena.h>
 #include <QtConcurrent>
 
 GGameScene::GGameScene()
@@ -19,9 +20,9 @@ GGameScene::GGameScene()
     QTimer* addPowerUps = new QTimer();
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
     addPowerUps->start(powerUpInterval);
-    /*ballUpdate = new QTimer();
-    QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));*/
-
+    ballUpdate = new QTimer();
+    QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));
+    ballUpdate->setTimerType(Qt::PreciseTimer);
 }
 
 void GGameScene::drawGradBackground()
@@ -40,8 +41,7 @@ void GGameScene::drawGradBackground()
 
 void GGameScene::drawBoard()
 {
-    QGraphicsEllipseItem* box = new QGraphicsEllipseItem();
-
+    Arena* box = new Arena();
     box->setPen(*arenaPen);
     box->setRect(windowWidth/2-arenaRadius,windowHeight/2-arenaRadius,arenaRadius*2,arenaRadius*2);
     this->addItem(box);
@@ -50,6 +50,7 @@ void GGameScene::drawBoard()
     QPen player1Pen(*arenaPen);
     player1Pen.setColor(QColor::fromRgb(0,0,255));
     player1Pen.setWidth(playerWidth);
+    player1Pen.setCapStyle(Qt::RoundCap);
     p[0]->setPen(player1Pen);
     this->addItem(p[0]);
     QPen player2Pen(player1Pen);
@@ -59,8 +60,8 @@ void GGameScene::drawBoard()
     b->setPen(*arenaPen);
     b->setBrush(*brush);
     this->addItem(b);
-    //ballUpdate->start(refreshInterval);
-    QtConcurrent::run(b,&Ball::updatePos);
+    ballUpdate->start(refreshInterval);
+    addPowerUp();
 }
 
 void GGameScene::addPowerUp()

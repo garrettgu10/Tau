@@ -79,7 +79,7 @@ void Player::setPen(QPen pen){
     this->pen = pen;
 }
 
-void Player::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+void Player::paint ( QPainter * painter, const QStyleOptionGraphicsItem* /*unused*/, QWidget* /*unused*/)
 {
     painter->setPen(this->pen);
     painter->setBrush(this->brush);

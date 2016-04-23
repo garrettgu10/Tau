@@ -30,7 +30,7 @@ protected:
     QPen pen;
     QBrush brush;
     QRectF* rekt;
-    void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
+    void paint (QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *);
 };
 
 #endif // PLAYER_H

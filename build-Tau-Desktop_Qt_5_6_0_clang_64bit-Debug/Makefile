@@ -54,7 +54,8 @@ SOURCES       = ../Tau/main.cpp \
 		../Tau/ball.cpp \
 		../Tau/helper.cpp \
 		../Tau/powerup.cpp \
-		../Tau/ggamescene.cpp qrc_icons.cpp \
+		../Tau/ggamescene.cpp \
+		../Tau/arena.cpp qrc_icons.cpp \
 		moc_ggraphicsview.cpp \
 		moc_player.cpp \
 		moc_ball.cpp \
@@ -67,6 +68,7 @@ OBJECTS       = main.o \
 		helper.o \
 		powerup.o \
 		ggamescene.o \
+		arena.o \
 		qrc_icons.o \
 		moc_ggraphicsview.o \
 		moc_player.o \
@@ -220,13 +222,15 @@ DIST          = ../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../Tau/ball.h \
 		../Tau/helper.h \
 		../Tau/powerup.h \
-		../Tau/ggamescene.h ../Tau/main.cpp \
+		../Tau/ggamescene.h \
+		../Tau/arena.h ../Tau/main.cpp \
 		../Tau/ggraphicsview.cpp \
 		../Tau/player.cpp \
 		../Tau/ball.cpp \
 		../Tau/helper.cpp \
 		../Tau/powerup.cpp \
-		../Tau/ggamescene.cpp
+		../Tau/ggamescene.cpp \
+		../Tau/arena.cpp
 QMAKE_TARGET  = Tau
 DESTDIR       = 
 TARGET        = Tau.app/Contents/MacOS/Tau
@@ -566,8 +570,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tau/icons.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/ggraphicsview.h ../Tau/player.h ../Tau/constants.h ../Tau/ball.h ../Tau/helper.h ../Tau/powerup.h ../Tau/ggamescene.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp ../Tau/ball.cpp ../Tau/helper.cpp ../Tau/powerup.cpp ../Tau/ggamescene.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/ggraphicsview.h ../Tau/player.h ../Tau/constants.h ../Tau/ball.h ../Tau/helper.h ../Tau/powerup.h ../Tau/ggamescene.h ../Tau/arena.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp ../Tau/ball.cpp ../Tau/helper.cpp ../Tau/powerup.cpp ../Tau/ggamescene.cpp ../Tau/arena.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -768,7 +772,9 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
-		../Tau/helper.h
+		../Tau/helper.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QWindow \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tau/main.cpp
 
 ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
@@ -805,7 +811,9 @@ ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QMouseEvent
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ggraphicsview.o ../Tau/ggraphicsview.cpp
 
 player.o: ../Tau/player.cpp ../Tau/player.h \
@@ -879,7 +887,23 @@ ball.o: ../Tau/ball.cpp ../Tau/ball.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Tau/helper.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QThread \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qthread.h
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/QtConcurrent \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentcompilertest.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentexception.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfilter.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfilterkernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfunctionwrappers.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentiteratekernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmap.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmapkernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmedian.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentreducekernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentrun.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentrunbase.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentstoredfunctioncall.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentthreadengine.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ball.o ../Tau/ball.cpp
 
 helper.o: ../Tau/helper.cpp ../Tau/helper.h \
@@ -969,8 +993,35 @@ ggamescene.o: ../Tau/ggamescene.cpp ../Tau/ggamescene.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
+		../Tau/arena.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/QtConcurrent \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentcompilertest.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentexception.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfilter.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfilterkernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfunctionwrappers.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentiteratekernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmap.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmapkernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmedian.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentreducekernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentrun.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentrunbase.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentstoredfunctioncall.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentthreadengine.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ggamescene.o ../Tau/ggamescene.cpp
+
+arena.o: ../Tau/arena.cpp ../Tau/arena.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arena.o ../Tau/arena.cpp
 
 qrc_icons.o: qrc_icons.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_icons.o qrc_icons.cpp

@@ -17,7 +17,7 @@ protected:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 private:
-    void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent*);
     QTimer* movep1;
     QTimer* movep0;
     void setupTimer(QTimer* t, Player* p, bool cw);
