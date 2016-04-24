@@ -10,6 +10,7 @@
 #include <player.h>
 #include <QPainterPath>
 #include <powerup.h>
+#include <QSoundEffect>
 
 class GGameScene;
 
@@ -41,6 +42,9 @@ protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
+    QSoundEffect* sizeUpSound;
+    QSoundEffect* sizeDownSound;
+    QSoundEffect* collisionSound;
     void bounce(Player *p, int pdiff, int angleWithCenter);
     int radius;
     void checkCollision();

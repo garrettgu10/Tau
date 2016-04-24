@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QList>
 #include <powerup.h>
+#include <QSoundEffect>
 
 class GGameScene : public QGraphicsScene
 {
@@ -23,8 +24,11 @@ public:
 
     QList<powerup*>* powerUps;
     void collectedPowerup(powerup* p);
+    QSoundEffect* sizeUp;
+    QSoundEffect* sizeDown;
 
 public slots:
+    void refresh();
     void addPowerUp();
 
 private:

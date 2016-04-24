@@ -18,6 +18,7 @@ powerup::powerup(int id, GGameScene *parent)
     enabled = false;
     QtConcurrent::run(this,&powerup::fadeIn);
     QtConcurrent::run(this,&powerup::keepRotating);
+
 }
 
 void powerup::enable()
@@ -27,9 +28,9 @@ void powerup::enable()
     }
     affectedPlayer = parent->p[parent->mostRecent];
     switch(this->puptype()){
-    case powerUpType::ballSizeUp: QtConcurrent::run((parent->b),&Ball::sizeUp); break;
-    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeUp); break;
-    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); break;
+    case powerUpType::ballSizeUp: QtConcurrent::run((parent->b),&Ball::sizeUp); parent->sizeUp->play(); break;
+    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
+    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
     default: break;
     }
     enabled = true;
@@ -42,9 +43,9 @@ void powerup::disable()
         return;
     }
     switch(this->puptype()){
-    case powerUpType::ballSizeUp: QtConcurrent::run(parent->b,&Ball::sizeDown); break;
-    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeDown); break;
-    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeUp); break;
+    case powerUpType::ballSizeUp: QtConcurrent::run(parent->b,&Ball::sizeDown); parent->sizeDown->play(); break;
+    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
+    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
     default: break;
     }
 }

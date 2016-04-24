@@ -11,7 +11,7 @@
 #include <QtConcurrent>
 
 Ball::Ball(GGameScene *parent)
-{
+{   
     pos = new QPointF();
     this->parent = parent;
     this->p[0] = parent->p[0];
@@ -23,6 +23,10 @@ Ball::Ball(GGameScene *parent)
     speed = ballInitSpeed;
     rekt = new QRectF();
     updateRect();
+
+    collisionSound = new QSoundEffect();
+    collisionSound->setVolume(0);
+    collisionSound->setSource(QUrl::fromLocalFile(":/sound/collide.wav"));
 }
 
 int Ball::getRadius()
@@ -93,6 +97,7 @@ void Ball::bounce(Player* p, int pdiff, int angleWithCenter)
     angle-=(((double)pdiff)/p->size*720);
     parent->mostRecent = p->playerNum;
     bouncing = true;
+    collisionSound->play();
     QtConcurrent::run(this,&Ball::setBouncingToFalse);
 }
 
@@ -120,7 +125,6 @@ void Ball::updatePos()
     pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
     pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
     updateRect();
-    this->scene()->update();
     checkCollision();
 }
 

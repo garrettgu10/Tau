@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui concurrent svg
+QT       += core gui concurrent multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,4 +34,8 @@ HEADERS  += \
 FORMS    +=
 
 RESOURCES += \
-    icons.qrc
+    icons.qrc \
+    audioeffects.qrc
+
+DISTFILES += \
+    LICENSE.md

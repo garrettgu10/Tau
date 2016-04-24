@@ -11,6 +11,9 @@
 #include <helper.h>
 #include <constants.h>
 #include <QWindow>
+#include <QMediaPlayer>
+#include <QThread>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {

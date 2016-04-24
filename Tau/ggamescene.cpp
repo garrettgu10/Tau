@@ -21,8 +21,13 @@ GGameScene::GGameScene()
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
     addPowerUps->start(powerUpInterval);
     ballUpdate = new QTimer();
-    QObject::connect(ballUpdate,SIGNAL(timeout()), b,SLOT(updatePos()));
+    QObject::connect(ballUpdate,SIGNAL(timeout()), this,SLOT(refresh()));
     ballUpdate->setTimerType(Qt::PreciseTimer);
+
+    sizeUp = new QSoundEffect();
+    sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));
+    sizeDown = new QSoundEffect();
+    sizeDown->setSource(QUrl::fromLocalFile(":/sound/sizeDown.wav"));
 }
 
 void GGameScene::drawGradBackground()
@@ -80,4 +85,10 @@ void GGameScene::collectedPowerup(powerup *p)
         p->enable();
         this->removeItem(p);
     }
+}
+
+void GGameScene::refresh()
+{
+    b->updatePos();
+    this->update();
 }
