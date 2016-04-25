@@ -10,8 +10,7 @@ powerup::powerup(int id, GGameScene *parent)
 {
     this->parent = parent;
     this->id = id;
-    //t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
-    t = powerUpType::arrow;
+    t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
     position = new QPointF(randomInBound(windowWidth/2-arenaRadius/2,windowWidth/2+arenaRadius/2),
                       randomInBound(windowHeight/2-arenaRadius/2,windowHeight/2+arenaRadius/2));
     radius = powerUpRadius;
