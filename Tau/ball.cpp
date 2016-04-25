@@ -21,6 +21,7 @@ Ball::Ball(GGameScene *parent)
     radius = ballInitRadius;
     angle = randomInBound(0,5760);
     speed = ballInitSpeed;
+    tempSpeed = speed;
     rekt = new QRectF();
     updateRect();
 
@@ -50,6 +51,16 @@ void Ball::setAngle(int angle)
     this->angle = angle;
 }
 
+void Ball::explode()
+{
+    tempSpeed = 0;
+    for(int i = 0; i < 10; i++){
+        opacity-=0.1;
+        radius+=5;
+        QThread::msleep(refreshInterval);
+    }
+}
+
 int arcTan(double x, double y){ //returns angle in 16ths of degree made by the point given
     int angleWithCenter = (int)(qAtan2(y,x)/M_PI*2880);
     if(angleWithCenter < 0){
@@ -60,11 +71,17 @@ int arcTan(double x, double y){ //returns angle in 16ths of degree made by the p
 
 void Ball::checkCollision()
 {
+    if(disabled){
+        return;
+    }
     double distFromCenter = qSqrt(qPow(pos->x()-windowWidth/2,2)+qPow(pos->y()-windowHeight/2,2));
 
-    if(distFromCenter < playerRadius-playerWidth-radius || distFromCenter > playerRadius+playerWidth+radius){
+    if(distFromCenter < playerRadius-playerWidth-radius){
         //speed = 15-(double)distFromCenter/playerRadius*10;
         bouncing = false;
+    }else if(distFromCenter > playerRadius+playerWidth-radius){
+        bouncing = false;
+        this->parent->gameOver();
     }else{
         if(bouncing){
             return;
@@ -92,6 +109,7 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/,
 {
     painter->setPen(this->pen);
     painter->setBrush(this->brush);
+    painter->setOpacity(opacity);
     painter->drawEllipse(pos->x()-radius,pos->y()-radius, radius*2,radius*2);
 }
 
@@ -127,8 +145,8 @@ void Ball::updateRect()
 
 void Ball::updatePos()
 {
-    pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
-    pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
+    pos->setX(pos->x()+tempSpeed*cos(angle*M_PI/2880));
+    pos->setY(pos->y()+tempSpeed*sin(angle*M_PI/2880));
     updateRect();
     checkCollision();
 }

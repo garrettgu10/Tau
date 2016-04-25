@@ -29,6 +29,9 @@ public:
     virtual QRectF boundingRect() const;
     void setrad(int r);
     void setAngle(int angle);
+    void explode();
+    bool disabled = false;
+    double tempSpeed;
 
 public slots:
     void updatePos();
@@ -43,6 +46,7 @@ protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
+    double opacity = 1.0;
     QSoundEffect* sizeUpSound;
     QSoundEffect* sizeDownSound;
     QSoundEffect* collisionSound;

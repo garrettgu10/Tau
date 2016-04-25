@@ -1,9 +1,9 @@
 #ifndef GGRAPHICSVIEW_H
 #define GGRAPHICSVIEW_H
 #include <QGraphicsView>
-#include <ggamescene.h>
 #include <QTimer>
 #include <QCloseEvent>
+#include <ggamescene.h>
 
 class GGraphicsView : public QGraphicsView
 {
@@ -11,11 +11,13 @@ class GGraphicsView : public QGraphicsView
 public:
     GGraphicsView();
     void setGScene(GGameScene* scene);
+
 protected:
     GGameScene* GScene;
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+
 private:
     void closeEvent(QCloseEvent*);
     QTimer* movep1;

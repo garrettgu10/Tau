@@ -9,6 +9,7 @@
 #include <ball.h>
 #include <arena.h>
 #include <QtConcurrent>
+#include <QGraphicsView>
 
 GGameScene::GGameScene()
 {
@@ -86,6 +87,12 @@ void GGameScene::collectedPowerup(powerup *p)
         p->enable();
         this->removeItem(p);
     }
+}
+
+void GGameScene::gameOver()
+{
+    b->disabled = true;
+    QtConcurrent::run(b,&Ball::explode);
 }
 
 void GGameScene::refresh()

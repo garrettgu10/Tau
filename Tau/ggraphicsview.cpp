@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QMouseEvent>
 #include <QTime>
+#include <QtConcurrent>
+#include <QThread>
 
 GGraphicsView::GGraphicsView()
 {

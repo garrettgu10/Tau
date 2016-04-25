@@ -30,16 +30,17 @@ public:
 public slots:
     void enable();
     void disable();
+    void rotate();
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*);
     virtual QRectF boundingRect()const;
 
 private:
+    QTimer* rotator;
     QTimer* disabler;
     Player* affectedPlayer;
     int angle = 0; // in degrees
-    void keepRotating();
     double opacity = 0;
     void fadeIn();
     QImage* ico;

@@ -17,12 +17,14 @@ powerup::powerup(int id, GGameScene *parent)
     rekt = new QRectF(position->x()-radius,position->y()-radius,radius*2,radius*2);
     enabled = false;
     QtConcurrent::run(this,&powerup::fadeIn);
-    QtConcurrent::run(this,&powerup::keepRotating);
-
+    QTimer* rotator = new QTimer();
+    QObject::connect(rotator,SIGNAL(timeout()),this,SLOT(rotate()));
+    rotator->start(refreshInterval);
 }
 
 void powerup::enable()
 {
+    qDebug() << "hello";
     if(enabled){
         return;
     }
@@ -35,7 +37,7 @@ void powerup::enable()
     default: break;
     }
     enabled = true;
-    QTimer::singleShot(10000,Qt::PreciseTimer,this,SLOT(disable()));
+    QTimer::singleShot(powerUpEnabledTime,Qt::PreciseTimer,this,SLOT(disable()));
 }
 
 void powerup::disable()
@@ -99,12 +101,9 @@ QRectF powerup::boundingRect() const
     return *rekt;
 }
 
-void powerup::keepRotating()
+void powerup::rotate()
 {
-    while(!enabled && parent->ongoing){
-        angle+=3;
-        QThread::msleep(refreshInterval);
-    }
+    angle+=3;
 }
 
 void powerup::fadeIn()

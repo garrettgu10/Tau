@@ -9,6 +9,8 @@
 #include <powerup.h>
 #include <QSoundEffect>
 
+class GGraphicsView;
+
 class GGameScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -26,6 +28,7 @@ public:
     void collectedPowerup(powerup* p);
     QSoundEffect* sizeUp;
     QSoundEffect* sizeDown;
+    void gameOver();
 
 public slots:
     void refresh();
