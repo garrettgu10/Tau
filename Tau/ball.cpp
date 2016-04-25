@@ -45,6 +45,11 @@ void Ball::setrad(int r)
     updateRect();
 }
 
+void Ball::setAngle(int angle)
+{
+    this->angle = angle;
+}
+
 int arcTan(double x, double y){ //returns angle in 16ths of degree made by the point given
     int angleWithCenter = (int)(qAtan2(y,x)/M_PI*2880);
     if(angleWithCenter < 0){

@@ -10,7 +10,8 @@ powerup::powerup(int id, GGameScene *parent)
 {
     this->parent = parent;
     this->id = id;
-    t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
+    //t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
+    t = powerUpType::arrow;
     position = new QPointF(randomInBound(windowWidth/2-arenaRadius/2,windowWidth/2+arenaRadius/2),
                       randomInBound(windowHeight/2-arenaRadius/2,windowHeight/2+arenaRadius/2));
     radius = powerUpRadius;
@@ -31,6 +32,7 @@ void powerup::enable()
     case powerUpType::ballSizeUp: QtConcurrent::run((parent->b),&Ball::sizeUp); parent->sizeUp->play(); break;
     case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
     case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
+    case powerUpType::arrow: parent->b->setAngle((int)(this->angle*16));
     default: break;
     }
     enabled = true;
@@ -46,6 +48,7 @@ void powerup::disable()
     case powerUpType::ballSizeUp: QtConcurrent::run(parent->b,&Ball::sizeDown); parent->sizeDown->play(); break;
     case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
     case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
+    case powerUpType::arrow: /*do nothing*/ break;
     default: break;
     }
 }

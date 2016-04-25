@@ -28,6 +28,7 @@ public:
     void setBrush(QBrush brush);
     virtual QRectF boundingRect() const;
     void setrad(int r);
+    void setAngle(int angle);
 
 public slots:
     void updatePos();

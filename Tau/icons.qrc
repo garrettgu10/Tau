@@ -3,5 +3,6 @@
         <file>add.png</file>
         <file>sizeUp.png</file>
         <file>minus.png</file>
+        <file>arrowRight.png</file>
     </qresource>
 </RCC>

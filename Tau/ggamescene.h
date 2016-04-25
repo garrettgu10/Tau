@@ -32,7 +32,7 @@ public slots:
     void addPowerUp();
 
 private:
-    QTimer* ballUpdate;
+    QTimer* refresher;
     QBrush* brush = new QBrush(QColor::fromRgb(255,255,255));
     QPen* arenaPen = new QPen(*brush,arenaWidth,Qt::SolidLine,Qt::SquareCap);
 };

@@ -38,7 +38,7 @@ protected:
 private:
     QTimer* disabler;
     Player* affectedPlayer;
-    double angle = 0;
+    int angle = 0; // in degrees
     void keepRotating();
     double opacity = 0;
     void fadeIn();

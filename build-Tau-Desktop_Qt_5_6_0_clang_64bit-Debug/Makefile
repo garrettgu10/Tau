@@ -604,6 +604,7 @@ compiler_rcc_make_all: qrc_icons.cpp qrc_audioeffects.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_icons.cpp qrc_audioeffects.cpp
 qrc_icons.cpp: ../Tau/icons.qrc \
+		../Tau/arrowRight.png \
 		../Tau/add.png \
 		../Tau/sizeUp.png \
 		../Tau/minus.png
