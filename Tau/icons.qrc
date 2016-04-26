@@ -4,5 +4,8 @@
         <file>sizeUp.png</file>
         <file>minus.png</file>
         <file>arrowRight.png</file>
+        <file>warp.png</file>
+        <file>lightning.png</file>
+        <file>wobble.png</file>
     </qresource>
 </RCC>

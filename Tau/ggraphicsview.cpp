@@ -45,8 +45,6 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
         case Qt::Key_S: affectedPlayer = 1; break;
         case Qt::Key_Up: affectedPlayer= 2; break;
         case Qt::Key_Down: affectedPlayer=2;break;
-        case Qt::Key_0: GScene->b->pos->setX(windowWidth/2);
-            GScene->b->pos->setY(windowHeight/2);
             break;
         }
 

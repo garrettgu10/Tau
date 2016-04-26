@@ -31,9 +31,14 @@ public:
     void setAngle(int angle);
     void explode();
     bool disabled = false;
-    double tempSpeed;
+    double speed;
+    QTimer* warper;
+    QTimer* wobbler;
 
 public slots:
+    void setup();
+    void wobble();
+    void warpToggleSpeeds();
     void updatePos();
     void sizeUp();
     void sizeDown();
@@ -41,11 +46,15 @@ public slots:
 
 protected:
     int angle = 0; // angle of motion in 160ths of degrees
-    double speed;
     QRectF* rekt;
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
+    double arrowLength = 0;
+    bool drawArrow = false;
+    void initSpin();
+    bool spedUp = false;
+    bool warpSpedUp = false;
     double opacity = 1.0;
     QSoundEffect* sizeUpSound;
     QSoundEffect* sizeDownSound;

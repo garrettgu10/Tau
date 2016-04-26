@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Ball_t {
-    QByteArrayData data[6];
-    char stringdata0[51];
+    QByteArrayData data[9];
+    char stringdata0[81];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,15 +30,18 @@ struct qt_meta_stringdata_Ball_t {
 static const qt_meta_stringdata_Ball_t qt_meta_stringdata_Ball = {
     {
 QT_MOC_LITERAL(0, 0, 4), // "Ball"
-QT_MOC_LITERAL(1, 5, 9), // "updatePos"
-QT_MOC_LITERAL(2, 15, 0), // ""
-QT_MOC_LITERAL(3, 16, 6), // "sizeUp"
-QT_MOC_LITERAL(4, 23, 8), // "sizeDown"
-QT_MOC_LITERAL(5, 32, 18) // "setBouncingToFalse"
+QT_MOC_LITERAL(1, 5, 5), // "setup"
+QT_MOC_LITERAL(2, 11, 0), // ""
+QT_MOC_LITERAL(3, 12, 6), // "wobble"
+QT_MOC_LITERAL(4, 19, 16), // "warpToggleSpeeds"
+QT_MOC_LITERAL(5, 36, 9), // "updatePos"
+QT_MOC_LITERAL(6, 46, 6), // "sizeUp"
+QT_MOC_LITERAL(7, 53, 8), // "sizeDown"
+QT_MOC_LITERAL(8, 62, 18) // "setBouncingToFalse"
 
     },
-    "Ball\0updatePos\0\0sizeUp\0sizeDown\0"
-    "setBouncingToFalse"
+    "Ball\0setup\0\0wobble\0warpToggleSpeeds\0"
+    "updatePos\0sizeUp\0sizeDown\0setBouncingToFalse"
 };
 #undef QT_MOC_LITERAL
 
@@ -48,7 +51,7 @@ static const uint qt_meta_data_Ball[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -56,12 +59,18 @@ static const uint qt_meta_data_Ball[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x0a /* Public */,
-       3,    0,   35,    2, 0x0a /* Public */,
-       4,    0,   36,    2, 0x0a /* Public */,
-       5,    0,   37,    2, 0x0a /* Public */,
+       1,    0,   49,    2, 0x0a /* Public */,
+       3,    0,   50,    2, 0x0a /* Public */,
+       4,    0,   51,    2, 0x0a /* Public */,
+       5,    0,   52,    2, 0x0a /* Public */,
+       6,    0,   53,    2, 0x0a /* Public */,
+       7,    0,   54,    2, 0x0a /* Public */,
+       8,    0,   55,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -76,10 +85,13 @@ void Ball::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         Ball *_t = static_cast<Ball *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->updatePos(); break;
-        case 1: _t->sizeUp(); break;
-        case 2: _t->sizeDown(); break;
-        case 3: _t->setBouncingToFalse(); break;
+        case 0: _t->setup(); break;
+        case 1: _t->wobble(); break;
+        case 2: _t->warpToggleSpeeds(); break;
+        case 3: _t->updatePos(); break;
+        case 4: _t->sizeUp(); break;
+        case 5: _t->sizeDown(); break;
+        case 6: _t->setBouncingToFalse(); break;
         default: ;
         }
     }
@@ -115,13 +127,13 @@ int Ball::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 7;
     }
     return _id;
 }

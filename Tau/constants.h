@@ -3,12 +3,15 @@
 #include <QPointF>
 #include <QString>
 
-enum class powerUpType{ballSizeUp=0,paddleSizeUp,paddleSizeDown,arrow,
+enum class powerUpType{ballSizeUp=0,paddleSizeUp,paddleSizeDown,arrow,warp,lightning,wobble,
                        NUM_POWERUPTYPES};
 const QString icos[(int)powerUpType::NUM_POWERUPTYPES] = {":/ico/sizeUp.png",
         ":/ico/add.png",
         ":/ico/minus.png",
-        ":/ico/arrowRight.png"};
+        ":/ico/arrowRight.png",
+        ":/ico/warp.png",
+        ":/ico/lightning.png",
+        ":/ico/wobble.png"};
 
 const int refreshInterval = 20; //time between frame refreshes
 const int windowWidth = 750; //width of window
@@ -21,7 +24,7 @@ const int playerRadius = arenaRadius-playerWidth-arenaWidth/2; //radius of circl
 const int ballInitRadius = 10; //the ball's initial radius
 const double ballInitSpeed = 8.5; //ball's initial speed
 const int powerUpRadius = 20; //radius of a powerup
-const int powerUpInterval = 5000; //in ms; amount of time between powerups added
+const int powerUpInterval = 3000; //in ms; amount of time between powerups added
 const int powerUpEnabledTime = 10000; //how long a powerup lasts
 const int powerUpAvailableTime = 15000; //how long a powerup is available for pickup
 

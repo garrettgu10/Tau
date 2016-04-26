@@ -83,7 +83,6 @@ void GGameScene::addPowerUp()
 void GGameScene::collectedPowerup(powerup *p)
 {
     if(!p->enabled){
-        powerUps->removeOne(p);
         p->enable();
         this->removeItem(p);
     }
@@ -92,7 +91,15 @@ void GGameScene::collectedPowerup(powerup *p)
 void GGameScene::gameOver()
 {
     b->disabled = true;
+    for(powerup* p: *powerUps){
+        p->disable();
+        powerUps->removeOne(p);
+        if(p->scene() == this){
+            this->removeItem(p);
+        }
+    }
     QtConcurrent::run(b,&Ball::explode);
+    QTimer::singleShot(350,Qt::PreciseTimer,b,SLOT(setup()));
 }
 
 void GGameScene::refresh()

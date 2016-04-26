@@ -24,7 +24,6 @@ powerup::powerup(int id, GGameScene *parent)
 
 void powerup::enable()
 {
-    qDebug() << "hello";
     if(enabled){
         return;
     }
@@ -33,7 +32,10 @@ void powerup::enable()
     case powerUpType::ballSizeUp: QtConcurrent::run((parent->b),&Ball::sizeUp); parent->sizeUp->play(); break;
     case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
     case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
-    case powerUpType::arrow: parent->b->setAngle((int)(this->angle*16));
+    case powerUpType::arrow: parent->b->setAngle((int)(this->angle*16)); break;
+    case powerUpType::warp: parent->b->warper->start(500); break;
+    case powerUpType::lightning: parent->b->speed+=3; break;
+    case powerUpType::wobble: parent->b->wobbler->start(100); break;
     default: break;
     }
     enabled = true;
@@ -42,6 +44,9 @@ void powerup::enable()
 
 void powerup::disable()
 {
+    if(disabled){
+        return;
+    }
     if(!enabled){
         return;
     }
@@ -50,8 +55,12 @@ void powerup::disable()
     case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
     case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
     case powerUpType::arrow: /*do nothing*/ break;
+    case powerUpType::warp: parent->b->warper->stop(); break;
+    case powerUpType::lightning: parent->b->speed-=3; break;
+    case powerUpType::wobble: parent->b->wobbler->stop(); break;
     default: break;
     }
+    disabled = true;
 }
 
 void powerup::setPen(QPen pen)

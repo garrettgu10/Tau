@@ -605,7 +605,10 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_icons.cpp qrc_audioeffects.cpp
 qrc_icons.cpp: ../Tau/icons.qrc \
 		../Tau/arrowRight.png \
+		../Tau/lightning.png \
 		../Tau/add.png \
+		../Tau/wobble.png \
+		../Tau/warp.png \
 		../Tau/sizeUp.png \
 		../Tau/minus.png
 	/Users/garrettgu/Qt/5.6/clang_64/bin/rcc -name icons ../Tau/icons.qrc -o qrc_icons.cpp
@@ -620,6 +623,10 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp moc_powerup.cpp moc_ggamescene.cpp
 moc_ggraphicsview.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../Tau/ggamescene.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
@@ -641,16 +648,12 @@ moc_ggraphicsview.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainterPath \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainterpath.h \
 		../Tau/powerup.h \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QImage \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QSoundEffect \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
-		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
-		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../Tau/ggraphicsview.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ggraphicsview.h -o moc_ggraphicsview.cpp
 
@@ -764,6 +767,8 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../Tau/GGraphicsView.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../Tau/ggamescene.h \
 		../Tau/player.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
@@ -787,8 +792,6 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
-		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
-		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
@@ -807,6 +810,10 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../Tau/ggamescene.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
@@ -828,21 +835,35 @@ ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainterPath \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainterpath.h \
 		../Tau/powerup.h \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QImage \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QSoundEffect \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
-		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QCloseEvent \
-		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTime \
-		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/QtConcurrent \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentcompilertest.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentexception.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfilter.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfilterkernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentfunctionwrappers.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentiteratekernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmap.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmapkernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentmedian.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentreducekernel.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentrun.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentrunbase.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentstoredfunctioncall.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentthreadengine.h \
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentversion.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QThread \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ggraphicsview.o ../Tau/ggraphicsview.cpp
 
 player.o: ../Tau/player.cpp ../Tau/player.h \
@@ -1050,7 +1071,9 @@ ggamescene.o: ../Tau/ggamescene.cpp ../Tau/ggamescene.h \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentrunbase.h \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentstoredfunctioncall.h \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentthreadengine.h \
-		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentversion.h
+		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentversion.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ggamescene.o ../Tau/ggamescene.cpp
 
 arena.o: ../Tau/arena.cpp ../Tau/arena.h \

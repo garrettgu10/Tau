@@ -37,6 +37,7 @@ protected:
     virtual QRectF boundingRect()const;
 
 private:
+    bool disabled = false;
     QTimer* rotator;
     QTimer* disabler;
     Player* affectedPlayer;
