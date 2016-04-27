@@ -19,13 +19,19 @@ void GGraphicsView::setGScene(GGameScene *scene)
 
 void GGraphicsView::keyPressEvent(QKeyEvent *event)
 {
+    if(event->isAutoRepeat())
+        return;
     int key = event->key();
     int affectedPlayer = -1;
     bool cw = false; //clockwise
     switch(key){
+    case Qt::Key_D:
     case Qt::Key_W: affectedPlayer = 0; cw = true;  break;
+    case Qt::Key_A:
     case Qt::Key_S: affectedPlayer = 0; cw = false; break;
+    case Qt::Key_Left:
     case Qt::Key_Up: affectedPlayer= 1; cw = false; break;
+    case Qt::Key_Right:
     case Qt::Key_Down: affectedPlayer=1;cw = true;  break;
     }
     if(affectedPlayer == 0 && !(movep0->isActive())){
@@ -41,9 +47,13 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
         int key = event->key();
         int affectedPlayer = -1;
         switch(key){
+        case Qt::Key_D:
         case Qt::Key_W: affectedPlayer = 1; break;
+        case Qt::Key_A:
         case Qt::Key_S: affectedPlayer = 1; break;
+        case Qt::Key_Left:
         case Qt::Key_Up: affectedPlayer= 2; break;
+        case Qt::Key_Right:
         case Qt::Key_Down: affectedPlayer=2;break;
             break;
         }
@@ -64,6 +74,7 @@ void GGraphicsView::closeEvent(QCloseEvent * /*unused*/)
 void GGraphicsView::setupTimer(QTimer* t, Player *p, bool cw)
 {
     t->disconnect();
+    t->stop();
     if(cw){
         QObject::connect(t,SIGNAL(timeout()),p,SLOT(moveClockwise()));
     }else{

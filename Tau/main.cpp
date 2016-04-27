@@ -17,7 +17,6 @@
 
 int main(int argc, char *argv[])
 {
-    //powerUpInterval = 10;
     seedRandomFunction();
     QApplication a(argc, argv);
     GGraphicsView* view = new GGraphicsView();

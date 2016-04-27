@@ -7,5 +7,6 @@
         <file>warp.png</file>
         <file>lightning.png</file>
         <file>wobble.png</file>
+        <file>random.png</file>
     </qresource>
 </RCC>

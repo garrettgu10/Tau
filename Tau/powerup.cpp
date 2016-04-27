@@ -27,6 +27,9 @@ void powerup::enable()
     if(enabled){
         return;
     }
+    while(t==powerUpType::random){
+        t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
+    }
     affectedPlayer = parent->p[parent->mostRecent];
     switch(this->puptype()){
     case powerUpType::ballSizeUp: QtConcurrent::run((parent->b),&Ball::sizeUp); parent->sizeUp->play(); break;

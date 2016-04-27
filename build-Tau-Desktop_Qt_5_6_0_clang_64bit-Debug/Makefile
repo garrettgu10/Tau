@@ -606,6 +606,7 @@ compiler_rcc_clean:
 qrc_icons.cpp: ../Tau/icons.qrc \
 		../Tau/arrowRight.png \
 		../Tau/lightning.png \
+		../Tau/random.png \
 		../Tau/add.png \
 		../Tau/wobble.png \
 		../Tau/warp.png \
