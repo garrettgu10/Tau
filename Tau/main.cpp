@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     view->setFixedSize(windowWidth,windowHeight);
     scene->setSceneRect(0,0,windowWidth,windowHeight);
     view->setVisible(true);
-    scene->drawGradBackground();
+    scene->updateGradBackground();
     scene->drawBoard();
 
     return a.exec();

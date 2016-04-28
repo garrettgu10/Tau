@@ -19,6 +19,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+    bool clockWise[2];
     void closeEvent(QCloseEvent*);
     QTimer* movep1;
     QTimer* movep0;

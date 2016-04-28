@@ -10,6 +10,7 @@
 #include <arena.h>
 #include <QtConcurrent>
 #include <QGraphicsView>
+#include <helper.h>
 
 GGameScene::GGameScene()
 {
@@ -26,24 +27,37 @@ GGameScene::GGameScene()
     QObject::connect(refresher,SIGNAL(timeout()), this,SLOT(refresh()));
     refresher->setTimerType(Qt::PreciseTimer);
 
+    music = new QMediaPlayer();
+    playlist = new QMediaPlaylist();
+    playlist->addMedia(QUrl("qrc:/sound/music.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    music->setPlaylist(playlist);
+
+    music->setVolume(100);
+    music->play();
+
+    initGradBackground();
+
+    QTimer* updateBg = new QTimer();
+    updateBg->setTimerType(Qt::PreciseTimer);
+    QObject::connect(updateBg,SIGNAL(timeout()),this,SLOT(updateGradBackground()));
+    updateBg->start(469);
+
     sizeUp = new QSoundEffect();
-    sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));
+    //sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));
     sizeDown = new QSoundEffect();
-    sizeDown->setSource(QUrl::fromLocalFile(":/sound/sizeDown.wav"));
+    //sizeDown->setSource(QUrl::fromLocalFile(":/sound/sizeDown.wav"));
 }
 
-void GGameScene::drawGradBackground()
+void GGameScene::updateGradBackground()
 {
-    QGraphicsRectItem* rect = new QGraphicsRectItem();
-    QRadialGradient grad(this->width()/2,this->height()/2, this->height()/2);
-    grad.setColorAt(0,QColor::fromRgb(100,100,100,255));
-    grad.setColorAt(1,QColor::fromRgb(0,0,0,255));
-    QBrush brush(grad);
+    grad->setColorAt(0,QColor::fromRgb(randomInBound(50,150),randomInBound(50,150),randomInBound(50,150),255));
+
+    QBrush brush(*grad);
     QPen clear(QColor::fromRgb(255,255,255,0));
-    rect->setBrush(brush);
-    rect->setPen(clear);
-    rect->setRect(0,0,this->width(),this->height());
-    this->addItem(rect);
+    BgRect->setBrush(brush);
+    BgRect->setPen(clear);
+    BgRect->setRect(0,0,this->width(),this->height());
 }
 
 void GGameScene::drawBoard()
@@ -78,6 +92,14 @@ void GGameScene::addPowerUp()
     newPowerup->setBrush(*brush);
     powerUps->append(newPowerup);
     this->addItem(newPowerup);
+}
+
+void GGameScene::initGradBackground()
+{
+    grad = new QRadialGradient(windowWidth/2,windowHeight/2, windowHeight/2);
+    grad->setColorAt(1,QColor::fromRgb(0,0,0,255));
+    updateGradBackground();
+    this->addItem(BgRect);
 }
 
 void GGameScene::collectedPowerup(powerup *p)

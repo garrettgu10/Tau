@@ -8,6 +8,9 @@
 #include <QList>
 #include <powerup.h>
 #include <QSoundEffect>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
+#include <QRadialGradient>
 
 class GGraphicsView;
 
@@ -17,7 +20,6 @@ class GGameScene : public QGraphicsScene
 
 public:
     GGameScene();
-    void drawGradBackground();
     void drawBoard();
     Player* p[2];
     Ball* b;
@@ -29,13 +31,19 @@ public:
     QSoundEffect* sizeUp;
     QSoundEffect* sizeDown;
     void gameOver();
+    QMediaPlayer* music;
+    QMediaPlaylist* playlist;
 
 public slots:
+    void updateGradBackground();
     void refresh();
     void addPowerUp();
 
 private:
+    void initGradBackground();
     QTimer* refresher;
+    QRadialGradient* grad;
+    QGraphicsRectItem* BgRect = new QGraphicsRectItem();
     QBrush* brush = new QBrush(QColor::fromRgb(255,255,255));
     QPen* arenaPen = new QPen(*brush,arenaWidth,Qt::SolidLine,Qt::SquareCap);
 };

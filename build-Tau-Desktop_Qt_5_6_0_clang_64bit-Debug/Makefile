@@ -616,7 +616,7 @@ qrc_icons.cpp: ../Tau/icons.qrc \
 
 qrc_audioeffects.cpp: ../Tau/audioeffects.qrc \
 		../Tau/collide.wav \
-		../Tau/Spellbound.mp3
+		../Tau/music.mp3
 	/Users/garrettgu/Qt/5.6/clang_64/bin/rcc -name audioeffects ../Tau/audioeffects.qrc -o qrc_audioeffects.cpp
 
 compiler_moc_header_make_all: moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp moc_powerup.cpp moc_ggamescene.cpp
@@ -655,6 +655,8 @@ moc_ggraphicsview.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../Tau/ggraphicsview.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ggraphicsview.h -o moc_ggraphicsview.cpp
 
@@ -738,6 +740,8 @@ moc_ggamescene.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGr
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../Tau/ggamescene.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ggamescene.h -o moc_ggamescene.cpp
 
@@ -793,6 +797,8 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
@@ -800,8 +806,6 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../Tau/helper.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QWindow \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qwindow.h \
-		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
-		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QThread \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
@@ -842,6 +846,8 @@ ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
@@ -898,6 +904,8 @@ player.o: ../Tau/player.cpp ../Tau/player.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
@@ -938,6 +946,8 @@ ball.o: ../Tau/ball.cpp ../Tau/ball.h \
 		../Tau/GGameScene.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Tau/helper.h \
@@ -1003,6 +1013,8 @@ powerup.o: ../Tau/powerup.cpp ../Tau/powerup.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/QtConcurrent \
@@ -1052,6 +1064,8 @@ ggamescene.o: ../Tau/ggamescene.cpp ../Tau/ggamescene.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qsoundeffect.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QList \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../Tau/arena.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \

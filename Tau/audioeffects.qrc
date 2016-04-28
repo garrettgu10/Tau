@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/sound">
         <file>collide.wav</file>
-        <file>Spellbound.mp3</file>
+        <file>music.mp3</file>
     </qresource>
 </RCC>

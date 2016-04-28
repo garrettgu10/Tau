@@ -105,7 +105,7 @@ int arcTan(double x, double y){ //returns angle in 16ths of degree made by the p
 
 void Ball::checkCollision()
 {
-    if(disabled){
+    if(disabled || speed == 0){
         return;
     }
     double distFromCenter = qSqrt(qPow(pos->x()-windowWidth/2,2)+qPow(pos->y()-windowHeight/2,2));
@@ -151,8 +151,8 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/,
         double doubleAngle = (double)angle/2880*M_PI;
         QPointF endPt(windowWidth/2+arrowLength*cos(doubleAngle),windowHeight/2+arrowLength*sin(doubleAngle));
         painter->drawLine(*this->pos,endPt);
-        painter->drawLine(endPt,QPointF(endPt.x()+15*cos(doubleAngle+3*M_PI/4),endPt.y()+15*sin(doubleAngle+3*M_PI/4)));
-        painter->drawLine(endPt,QPointF(endPt.x()+15*cos(doubleAngle-3*M_PI/4),endPt.y()+15*sin(doubleAngle-3*M_PI/4)));
+        painter->drawLine(endPt,QPointF(endPt.x()+10*cos(doubleAngle+3*M_PI/4),endPt.y()+10*sin(doubleAngle+3*M_PI/4)));
+        painter->drawLine(endPt,QPointF(endPt.x()+10*cos(doubleAngle-3*M_PI/4),endPt.y()+10*sin(doubleAngle-3*M_PI/4)));
     }
 }
 
@@ -167,7 +167,7 @@ void Ball::initSpin()
     for(int i = 0; i < 10; i++){
         opacity+=0.1;
         radius-=5;
-        arrowLength+=10;
+        arrowLength+=7;
         QThread::msleep(refreshInterval);
     }
     int framesRotating = randomInBound(50,150);
@@ -176,7 +176,7 @@ void Ball::initSpin()
         QThread::msleep(refreshInterval);
     }
     speed = ballInitSpeed;
-    QThread::msleep(100/speed*refreshInterval-refreshInterval);
+    QThread::msleep((100/speed-3)*refreshInterval);
     drawArrow = false;
 }
 

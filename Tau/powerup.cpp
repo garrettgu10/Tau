@@ -27,8 +27,10 @@ void powerup::enable()
     if(enabled){
         return;
     }
-    while(t==powerUpType::random){
-        t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
+    if(t==powerUpType::random){
+        while(t==powerUpType::random || t==powerUpType::arrow){
+            t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
+        }
     }
     affectedPlayer = parent->p[parent->mostRecent];
     switch(this->puptype()){
