@@ -23,3 +23,9 @@ void Arena::setPen(const QPen &pen)
     redPen = new QPen(pen);
     redPen->setColor(QColor::fromRgb(255,165,165));
 }
+
+void Arena::setRadius(int rad)
+{
+    this->radius = rad;
+    this->setRect(windowWidth/2-rad,windowHeight/2-rad,rad*2,rad*2);
+}

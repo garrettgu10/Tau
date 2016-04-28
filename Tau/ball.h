@@ -34,6 +34,8 @@ public:
     double speed;
     QTimer* warper;
     QTimer* wobbler;
+    void startGhost();
+    void stopGhost();
 
 public slots:
     void setup();
@@ -43,6 +45,7 @@ public slots:
     void sizeUp();
     void sizeDown();
     void setBouncingToFalse();
+    void ghostUpdate();
 
 protected:
     int angle = 0; // angle of motion in 160ths of degrees
@@ -50,6 +53,8 @@ protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
+    bool goingBrighter = false;
+    QTimer* ghoster;
     double arrowLength = 0;
     bool drawArrow = false;
     void initSpin();

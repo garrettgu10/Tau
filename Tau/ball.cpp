@@ -66,6 +66,23 @@ void Ball::explode()
     }
 }
 
+void Ball::startGhost()
+{
+    if(ghoster == NULL || !ghoster->isActive()){
+        opacity = 1.0;
+        goingBrighter = false;
+        ghoster = new QTimer();
+        QObject::connect(ghoster, SIGNAL(timeout()),this,SLOT(ghostUpdate()));
+        ghoster->start(refreshInterval);
+    }
+}
+
+void Ball::stopGhost()
+{
+    ghoster->stop();
+    opacity = 1.0;
+}
+
 void Ball::setup()
 {
     this->speed = 0;
@@ -153,6 +170,20 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/,
         painter->drawLine(*this->pos,endPt);
         painter->drawLine(endPt,QPointF(endPt.x()+10*cos(doubleAngle+3*M_PI/4),endPt.y()+10*sin(doubleAngle+3*M_PI/4)));
         painter->drawLine(endPt,QPointF(endPt.x()+10*cos(doubleAngle-3*M_PI/4),endPt.y()+10*sin(doubleAngle-3*M_PI/4)));
+    }
+}
+
+void Ball::ghostUpdate()
+{
+    if(goingBrighter){
+        opacity+=0.02;
+    }else{
+        opacity-=0.02;
+    }
+    if(opacity>=1.0){
+        goingBrighter = false;
+    }else if(opacity <= 0){
+        goingBrighter = true;
     }
 }
 

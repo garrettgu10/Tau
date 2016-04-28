@@ -11,6 +11,7 @@
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 #include <QRadialGradient>
+#include <arena.h>
 
 class GGraphicsView;
 
@@ -40,6 +41,7 @@ public slots:
     void addPowerUp();
 
 private:
+    Arena* box;
     void initGradBackground();
     QTimer* refresher;
     QRadialGradient* grad;

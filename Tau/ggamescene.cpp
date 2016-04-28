@@ -14,6 +14,7 @@
 
 GGameScene::GGameScene()
 {
+    box = new Arena();
     p[0] = new Player(2880,playerInitSize,0);
     p[1] = new Player(0,playerInitSize,1);
     mostRecent = 0;
@@ -58,11 +59,11 @@ void GGameScene::updateGradBackground()
     BgRect->setBrush(brush);
     BgRect->setPen(clear);
     BgRect->setRect(0,0,this->width(),this->height());
+    box->setRadius(arenaRadius+10);
 }
 
 void GGameScene::drawBoard()
 {
-    Arena* box = new Arena();
     box->setPen(*arenaPen);
     box->setRect(windowWidth/2-arenaRadius,windowHeight/2-arenaRadius,arenaRadius*2,arenaRadius*2);
     this->addItem(box);
@@ -128,4 +129,7 @@ void GGameScene::refresh()
 {
     b->updatePos();
     this->update();
+    if(box->radius>arenaRadius){
+        box->setRadius(box->radius-1);
+    }
 }

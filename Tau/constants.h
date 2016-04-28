@@ -3,7 +3,7 @@
 #include <QPointF>
 #include <QString>
 
-enum class powerUpType{ballSizeUp=0,paddleSizeUp,paddleSizeDown,arrow,warp,lightning,wobble,random,
+enum class powerUpType{ballSizeUp=0,paddleSizeUp,paddleSizeDown,arrow,warp,lightning,wobble,random,ghost,
                        NUM_POWERUPTYPES};
 const QString icos[(int)powerUpType::NUM_POWERUPTYPES] = {":/ico/sizeUp.png",
         ":/ico/add.png",
@@ -12,7 +12,8 @@ const QString icos[(int)powerUpType::NUM_POWERUPTYPES] = {":/ico/sizeUp.png",
         ":/ico/warp.png",
         ":/ico/lightning.png",
         ":/ico/wobble.png",
-        ":/ico/random.png"};
+        ":/ico/random.png",
+        ":/ico/ghost.png"};
 
 const int refreshInterval = 20; //time between frame refreshes
 const int windowWidth = 750; //width of window

@@ -8,5 +8,6 @@
         <file>lightning.png</file>
         <file>wobble.png</file>
         <file>random.png</file>
+        <file>ghost.png</file>
     </qresource>
 </RCC>
