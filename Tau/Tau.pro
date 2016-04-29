@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     helper.cpp \
     powerup.cpp \
     ggamescene.cpp \
-    arena.cpp
+    arena.cpp \
+    scoredisplay.cpp
 
 HEADERS  += \
     ggraphicsview.h \
@@ -29,7 +30,8 @@ HEADERS  += \
     helper.h \
     powerup.h \
     ggamescene.h \
-    arena.h
+    arena.h \
+    scoredisplay.h
 
 FORMS    +=
 

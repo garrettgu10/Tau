@@ -16,6 +16,7 @@
 GGameScene::GGameScene()
 {
     box = new Arena();
+    scores = new ScoreDisplay();
     p[0] = new Player(2880,playerInitSize,0);
     p[1] = new Player(0,playerInitSize,1);
     mostRecent = 0;
@@ -83,6 +84,9 @@ void GGameScene::drawBoard()
     b->setPen(*arenaPen);
     b->setBrush(*brush);
     this->addItem(b);
+    scores->setPen(*arenaPen);
+    scores->setBrush(*brush);
+    this->addItem(scores);
     refresher->start(refreshInterval);
     addPowerUp();
 }
@@ -121,6 +125,11 @@ void GGameScene::gameOver()
         if(p->scene() == this){
             this->removeItem(p);
         }
+    }
+    if(b->pos->x() > windowWidth/2){
+        scores->score(0);
+    }else{
+        scores->score(1);
     }
     QtConcurrent::run(b,&Ball::explode);
     QTimer::singleShot(350,Qt::PreciseTimer,b,SLOT(setup()));

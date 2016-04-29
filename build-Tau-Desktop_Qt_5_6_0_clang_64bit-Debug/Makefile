@@ -55,13 +55,15 @@ SOURCES       = ../Tau/main.cpp \
 		../Tau/helper.cpp \
 		../Tau/powerup.cpp \
 		../Tau/ggamescene.cpp \
-		../Tau/arena.cpp qrc_icons.cpp \
+		../Tau/arena.cpp \
+		../Tau/scoredisplay.cpp qrc_icons.cpp \
 		qrc_audioeffects.cpp \
 		moc_ggraphicsview.cpp \
 		moc_player.cpp \
 		moc_ball.cpp \
 		moc_powerup.cpp \
-		moc_ggamescene.cpp
+		moc_ggamescene.cpp \
+		moc_scoredisplay.cpp
 OBJECTS       = main.o \
 		ggraphicsview.o \
 		player.o \
@@ -70,13 +72,15 @@ OBJECTS       = main.o \
 		powerup.o \
 		ggamescene.o \
 		arena.o \
+		scoredisplay.o \
 		qrc_icons.o \
 		qrc_audioeffects.o \
 		moc_ggraphicsview.o \
 		moc_player.o \
 		moc_ball.o \
 		moc_powerup.o \
-		moc_ggamescene.o
+		moc_ggamescene.o \
+		moc_scoredisplay.o
 DIST          = ../Tau/LICENSE.md \
 		../../../Qt/5.6/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.6/clang_64/mkspecs/qdevice.pri \
@@ -226,14 +230,16 @@ DIST          = ../Tau/LICENSE.md \
 		../Tau/helper.h \
 		../Tau/powerup.h \
 		../Tau/ggamescene.h \
-		../Tau/arena.h ../Tau/main.cpp \
+		../Tau/arena.h \
+		../Tau/scoredisplay.h ../Tau/main.cpp \
 		../Tau/ggraphicsview.cpp \
 		../Tau/player.cpp \
 		../Tau/ball.cpp \
 		../Tau/helper.cpp \
 		../Tau/powerup.cpp \
 		../Tau/ggamescene.cpp \
-		../Tau/arena.cpp
+		../Tau/arena.cpp \
+		../Tau/scoredisplay.cpp
 QMAKE_TARGET  = Tau
 DESTDIR       = 
 TARGET        = Tau.app/Contents/MacOS/Tau
@@ -577,8 +583,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tau/icons.qrc ../Tau/audioeffects.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/ggraphicsview.h ../Tau/player.h ../Tau/constants.h ../Tau/ball.h ../Tau/helper.h ../Tau/powerup.h ../Tau/ggamescene.h ../Tau/arena.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp ../Tau/ball.cpp ../Tau/helper.cpp ../Tau/powerup.cpp ../Tau/ggamescene.cpp ../Tau/arena.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/ggraphicsview.h ../Tau/player.h ../Tau/constants.h ../Tau/ball.h ../Tau/helper.h ../Tau/powerup.h ../Tau/ggamescene.h ../Tau/arena.h ../Tau/scoredisplay.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tau/main.cpp ../Tau/ggraphicsview.cpp ../Tau/player.cpp ../Tau/ball.cpp ../Tau/helper.cpp ../Tau/powerup.cpp ../Tau/ggamescene.cpp ../Tau/arena.cpp ../Tau/scoredisplay.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -621,9 +627,9 @@ qrc_audioeffects.cpp: ../Tau/audioeffects.qrc \
 		../Tau/music.mp3
 	/Users/garrettgu/Qt/5.6/clang_64/bin/rcc -name audioeffects ../Tau/audioeffects.qrc -o qrc_audioeffects.cpp
 
-compiler_moc_header_make_all: moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp moc_powerup.cpp moc_ggamescene.cpp
+compiler_moc_header_make_all: moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp moc_powerup.cpp moc_ggamescene.cpp moc_scoredisplay.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp moc_powerup.cpp moc_ggamescene.cpp
+	-$(DEL_FILE) moc_ggraphicsview.cpp moc_player.cpp moc_ball.cpp moc_powerup.cpp moc_ggamescene.cpp moc_scoredisplay.cpp
 moc_ggraphicsview.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QTimer \
@@ -760,6 +766,11 @@ moc_ggamescene.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGr
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
 		../Tau/ggamescene.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ggamescene.h -o moc_ggamescene.cpp
+
+moc_scoredisplay.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../Tau/scoredisplay.h
+	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/scoredisplay.h -o moc_scoredisplay.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1135,7 +1146,9 @@ ggamescene.o: ../Tau/ggamescene.cpp ../Tau/ggamescene.h \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentversion.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		../Tau/helper.h
+		../Tau/helper.h \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaMetaData \
+		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediametadata.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ggamescene.o ../Tau/ggamescene.cpp
 
 arena.o: ../Tau/arena.cpp ../Tau/arena.h \
@@ -1149,6 +1162,11 @@ arena.o: ../Tau/arena.cpp ../Tau/arena.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arena.o ../Tau/arena.cpp
+
+scoredisplay.o: ../Tau/scoredisplay.cpp ../Tau/scoredisplay.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scoredisplay.o ../Tau/scoredisplay.cpp
 
 qrc_icons.o: qrc_icons.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_icons.o qrc_icons.cpp
@@ -1170,6 +1188,9 @@ moc_powerup.o: moc_powerup.cpp
 
 moc_ggamescene.o: moc_ggamescene.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ggamescene.o moc_ggamescene.cpp
+
+moc_scoredisplay.o: moc_scoredisplay.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_scoredisplay.o moc_scoredisplay.cpp
 
 ####### Install
 

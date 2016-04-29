@@ -12,6 +12,7 @@
 #include <QMediaPlaylist>
 #include <QRadialGradient>
 #include <arena.h>
+#include <scoredisplay.h>
 
 class GGraphicsView;
 
@@ -26,7 +27,6 @@ public:
     Ball* b;
     int mostRecent;
     bool ongoing = true;
-
     QList<powerup*>* powerUps;
     void collectedPowerup(powerup* p);
     QSoundEffect* sizeUp;
@@ -34,6 +34,7 @@ public:
     void gameOver();
     QMediaPlayer* music;
     QMediaPlaylist* playlist;
+    ScoreDisplay* scores;
 
 public slots:
     void updateGradBackground();
