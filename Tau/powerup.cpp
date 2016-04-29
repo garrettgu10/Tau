@@ -39,9 +39,10 @@ void powerup::enable()
     case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
     case powerUpType::arrow: parent->b->setAngle((int)(this->angle*16)); break;
     case powerUpType::warp: parent->b->warper->start(500); break;
-    case powerUpType::lightning: parent->b->speed+=3; break;
+    case powerUpType::lightning: parent->b->setSpeed(parent->b->getSpeed()+3); break;
     case powerUpType::wobble: parent->b->wobbler->start(100); break;
     case powerUpType::ghost: parent->b->startGhost(); break;
+    case powerUpType::snail:parent->b->setSpeed(parent->b->getSpeed()-3); break;
     default: break;
     }
     enabled = true;
@@ -62,9 +63,10 @@ void powerup::disable()
     case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
     case powerUpType::arrow: /*do nothing*/ break;
     case powerUpType::warp: parent->b->warper->stop(); break;
-    case powerUpType::lightning: parent->b->speed-=3; break;
+    case powerUpType::lightning: parent->b->setSpeed(parent->b->getSpeed()-3); break;
     case powerUpType::wobble: parent->b->wobbler->stop(); break;
     case powerUpType::ghost: parent->b->stopGhost(); break;
+    case powerUpType::snail: parent->b->setSpeed(parent->b->getSpeed()+3); break;
     default: break;
     }
     disabled = true;

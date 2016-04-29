@@ -42,7 +42,7 @@ GGameScene::GGameScene()
     QTimer* updateBg = new QTimer();
     updateBg->setTimerType(Qt::PreciseTimer);
     QObject::connect(updateBg,SIGNAL(timeout()),this,SLOT(updateGradBackground()));
-    updateBg->start(469);
+    updateBg->start(468);
 
     sizeUp = new QSoundEffect();
     //sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));

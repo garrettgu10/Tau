@@ -31,11 +31,13 @@ public:
     void setAngle(int angle);
     void explode();
     bool disabled = false;
-    double speed;
+
     QTimer* warper;
     QTimer* wobbler;
     void startGhost();
     void stopGhost();
+    double getSpeed();
+    void setSpeed(double newSpeed);
 
 public slots:
     void setup();
@@ -53,6 +55,7 @@ protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
+    double speed;
     bool goingBrighter = false;
     QTimer* ghoster;
     double arrowLength = 0;

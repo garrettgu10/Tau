@@ -20,7 +20,7 @@ Ball::Ball(GGameScene *parent)
     pos->setY(windowHeight/2);
     radius = ballInitRadius;
     angle = randomInBound(0,5760);
-    speed = ballInitSpeed;
+    setSpeed(ballInitSpeed);
     rekt = new QRectF();
     updateRect();
 
@@ -83,9 +83,21 @@ void Ball::stopGhost()
     opacity = 1.0;
 }
 
+double Ball::getSpeed()
+{
+    return speed;
+}
+
+void Ball::setSpeed(double newSpeed)
+{
+    if(newSpeed>=0){
+        speed = newSpeed;
+    }
+}
+
 void Ball::setup()
 {
-    this->speed = 0;
+    this->setSpeed(0);
     this->pos->setX(windowWidth/2);
     this->pos->setY(windowHeight/2);
     this->opacity = 1.0;
@@ -104,10 +116,10 @@ void Ball::wobble()
 void Ball::warpToggleSpeeds()
 {
     if(warpSpedUp){
-        speed -= 2;
+        setSpeed(speed-2);
         warpSpedUp = false;
     }else{
-        speed += 2;
+        setSpeed(speed+2);
         warpSpedUp = true;
     }
 }
@@ -193,7 +205,7 @@ void Ball::initSpin()
     drawArrow = true;
     arrowLength = 0;
     radius = ballInitRadius+50;
-    speed = 0;
+    setSpeed(0);
     angle = randomInBound(0,5760);
     for(int i = 0; i < 10; i++){
         opacity+=0.1;
@@ -206,7 +218,7 @@ void Ball::initSpin()
         angle+=96;
         QThread::msleep(refreshInterval);
     }
-    speed = ballInitSpeed;
+    setSpeed(ballInitSpeed);
     QThread::msleep((100/speed-3)*refreshInterval);
     drawArrow = false;
 }

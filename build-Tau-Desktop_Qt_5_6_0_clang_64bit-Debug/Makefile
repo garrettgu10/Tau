@@ -607,6 +607,7 @@ qrc_icons.cpp: ../Tau/icons.qrc \
 		../Tau/arrowRight.png \
 		../Tau/lightning.png \
 		../Tau/random.png \
+		../Tau/snail.png \
 		../Tau/add.png \
 		../Tau/wobble.png \
 		../Tau/warp.png \
@@ -661,6 +662,10 @@ moc_ggraphicsview.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QRadialGradient \
+		../Tau/arena.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
 		../Tau/ggraphicsview.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ggraphicsview.h -o moc_ggraphicsview.cpp
 
@@ -749,6 +754,10 @@ moc_ggamescene.cpp: ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGr
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QRadialGradient \
+		../Tau/arena.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
 		../Tau/ggamescene.h
 	/Users/garrettgu/Qt/5.6/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/garrettgu/Qt/5.6/clang_64/mkspecs/macx-clang -I/Users/garrettgu/Documents/Game3/Tau -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtGui.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/garrettgu/Qt/5.6/clang_64/lib/QtCore.framework/Headers -I. -F/Users/garrettgu/Qt/5.6/clang_64/lib ../Tau/ggamescene.h -o moc_ggamescene.cpp
 
@@ -809,10 +818,12 @@ main.o: ../Tau/main.cpp ../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QRadialGradient \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../Tau/ggraphicsview.h \
+		../Tau/arena.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
+		../Tau/ggraphicsview.h \
 		../Tau/helper.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QWindow \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qwindow.h \
@@ -861,6 +872,10 @@ ggraphicsview.o: ../Tau/ggraphicsview.cpp ../Tau/ggraphicsview.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QRadialGradient \
+		../Tau/arena.h \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
@@ -922,8 +937,10 @@ player.o: ../Tau/player.cpp ../Tau/player.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QRadialGradient \
+		../Tau/arena.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QThread \
@@ -967,6 +984,8 @@ ball.o: ../Tau/ball.cpp ../Tau/ball.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QRadialGradient \
+		../Tau/arena.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Tau/helper.h \
@@ -1037,6 +1056,8 @@ powerup.o: ../Tau/powerup.cpp ../Tau/powerup.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QRadialGradient \
+		../Tau/arena.h \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/QtConcurrent \
@@ -1091,11 +1112,11 @@ ggamescene.o: ../Tau/ggamescene.cpp ../Tau/ggamescene.h \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlaylist \
 		../../../Qt/5.6/clang_64/lib/QtMultimedia.framework/Headers/qmediaplaylist.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QRadialGradient \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../Tau/arena.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/QtConcurrent \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentcompilertest.h \
 		../../../Qt/5.6/clang_64/lib/QtConcurrent.framework/Headers/qtconcurrentexception.h \
@@ -1121,7 +1142,12 @@ arena.o: ../Tau/arena.cpp ../Tau/arena.h \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/QPainter \
 		../../../Qt/5.6/clang_64/lib/QtGui.framework/Headers/qpainter.h \
 		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+		../../../Qt/5.6/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../Tau/constants.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QPointF \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.6/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arena.o ../Tau/arena.cpp
 
 qrc_icons.o: qrc_icons.cpp 
