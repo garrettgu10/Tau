@@ -194,7 +194,7 @@ void Ball::ghostUpdate()
     }
     if(opacity>=1.0){
         goingBrighter = false;
-    }else if(opacity <= 0){
+    }else if(opacity <= -0.10){
         goingBrighter = true;
     }
 }

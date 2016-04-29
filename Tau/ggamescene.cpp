@@ -11,6 +11,7 @@
 #include <QtConcurrent>
 #include <QGraphicsView>
 #include <helper.h>
+#include <QMediaMetaData>
 
 GGameScene::GGameScene()
 {
