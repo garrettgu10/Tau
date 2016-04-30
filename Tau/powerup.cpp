@@ -45,6 +45,7 @@ void powerup::enable()
     case powerUpType::snail:parent->b->setSpeed(parent->b->getSpeed()-3); break;
     default: break;
     }
+    parent->overlappingPups[(int)t]++;
     enabled = true;
     QTimer::singleShot(powerUpEnabledTime,Qt::PreciseTimer,this,SLOT(disable()));
 }
@@ -55,6 +56,11 @@ void powerup::disable()
         return;
     }
     if(!enabled){
+        return;
+    }
+    parent->overlappingPups[(int)t]--;
+    if(powerupExtendable[(int)t] && parent->overlappingPups[(int)t]!=0){
+        disabled = true;
         return;
     }
     switch(this->puptype()){

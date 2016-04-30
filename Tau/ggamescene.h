@@ -35,6 +35,7 @@ public:
     QMediaPlayer* music;
     QMediaPlaylist* playlist;
     ScoreDisplay* scores;
+    int overlappingPups[(int)powerUpType::NUM_POWERUPTYPES];
 
 public slots:
     void updateGradBackground();

@@ -15,6 +15,8 @@ const QString icos[(int)powerUpType::NUM_POWERUPTYPES] = {":/ico/sizeUp.png",
         ":/ico/random.png",
         ":/ico/ghost.png",
         ":/ico/snail.png"};
+const bool powerupExtendable[(int)powerUpType::NUM_POWERUPTYPES] =
+        {false, false, false, false, true, false, true, false, true, false};
 
 const int refreshInterval = 20; //time between frame refreshes
 const int windowWidth = 900; //width of window
