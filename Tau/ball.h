@@ -37,7 +37,7 @@ public:
     void startGhost();
     void stopGhost();
     double getSpeed();
-    void setSpeed(double newSpeed);
+    bool setSpeed(double newSpeed);
 
 public slots:
     void setup();

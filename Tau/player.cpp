@@ -55,6 +55,12 @@ void Player::sizeUp()
         this->size+=11;
         QThread::msleep(refreshInterval);
     }
+    if(this->pos+this->size > 4320-2880*playerNum){
+        this->moveCClockwise();
+    }
+    if(this->pos-this->size < 1440-2280*playerNum){
+        this->moveClockwise();
+    }
 }
 
 void Player::sizeDown()

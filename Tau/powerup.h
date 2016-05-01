@@ -46,7 +46,7 @@ private:
     void fadeIn();
     QImage* ico;
     GGameScene* parent;
-    powerUpType t;
+    powerUpType pupType;
     QPen pen;
     QBrush brush;
     int radius;

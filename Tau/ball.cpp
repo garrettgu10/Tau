@@ -88,11 +88,13 @@ double Ball::getSpeed()
     return speed;
 }
 
-void Ball::setSpeed(double newSpeed)
+bool Ball::setSpeed(double newSpeed)
 {
     if(newSpeed>=0){
         speed = newSpeed;
+        return true;
     }
+    return false;
 }
 
 void Ball::setup()
@@ -116,10 +118,10 @@ void Ball::wobble()
 void Ball::warpToggleSpeeds()
 {
     if(warpSpedUp){
-        setSpeed(speed-2);
+        setSpeed(speed-2.5);
         warpSpedUp = false;
     }else{
-        setSpeed(speed+2);
+        setSpeed(speed+2.5);
         warpSpedUp = true;
     }
 }

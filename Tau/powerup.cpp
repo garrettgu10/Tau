@@ -10,7 +10,7 @@ powerup::powerup(int id, GGameScene *parent)
 {
     this->parent = parent;
     this->id = id;
-    t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
+    pupType = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
     position = new QPointF(randomInBound(windowWidth/2-arenaRadius/2,windowWidth/2+arenaRadius/2),
                       randomInBound(windowHeight/2-arenaRadius/2,windowHeight/2+arenaRadius/2));
     radius = powerUpRadius;
@@ -27,9 +27,9 @@ void powerup::enable()
     if(enabled){
         return;
     }
-    if(t==powerUpType::random){
-        while(t==powerUpType::random || t==powerUpType::arrow){
-            t = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
+    if(pupType==powerUpType::random){
+        while(pupType==powerUpType::random || pupType==powerUpType::arrow){
+            pupType = static_cast<powerUpType>(qrand() % (int)powerUpType::NUM_POWERUPTYPES);
         }
     }
     affectedPlayer = parent->p[parent->mostRecent];
@@ -42,11 +42,11 @@ void powerup::enable()
     case powerUpType::lightning: parent->b->setSpeed(parent->b->getSpeed()+3); break;
     case powerUpType::wobble: parent->b->wobbler->start(100); break;
     case powerUpType::ghost: parent->b->startGhost(); break;
-    case powerUpType::snail:parent->b->setSpeed(parent->b->getSpeed()-3); break;
+    case powerUpType::snail: if(!parent->b->setSpeed(parent->b->getSpeed()-3)){ disabled = true; } break;
     default: break;
     }
-    parent->overlappingPups[(int)t]++;
     enabled = true;
+    parent->overlappingPups[(int)pupType]++;
     QTimer::singleShot(powerUpEnabledTime,Qt::PreciseTimer,this,SLOT(disable()));
 }
 
@@ -58,8 +58,8 @@ void powerup::disable()
     if(!enabled){
         return;
     }
-    parent->overlappingPups[(int)t]--;
-    if(powerupExtendable[(int)t] && parent->overlappingPups[(int)t]!=0){
+    parent->overlappingPups[(int)pupType]--;
+    if(powerupExtendable[(int)pupType] && parent->overlappingPups[(int)pupType]!=0){
         disabled = true;
         return;
     }
@@ -95,7 +95,7 @@ QPointF* powerup::pos()
 
 powerUpType powerup::puptype()
 {
-    return t;
+    return pupType;
 }
 
 int powerup::rad()
@@ -111,7 +111,7 @@ void powerup::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused
         painter->setOpacity(opacity);
         painter->translate(position->x(),position->y());
         painter->rotate(angle);
-        painter->drawImage(QRectF(-radius,-radius,radius*2,radius*2), QImage(icos[(int)t]));
+        painter->drawImage(QRectF(-radius,-radius,radius*2,radius*2), QImage(icos[(int)pupType]));
     }
 }
 
