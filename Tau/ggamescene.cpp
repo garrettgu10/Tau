@@ -32,8 +32,11 @@ GGameScene::GGameScene()
 
     music = new QMediaPlayer();
     playlist = new QMediaPlaylist();
-    playlist->addMedia(QUrl("qrc:/sound/music.mp3"));
+    for(int i = 0; i < numSongs;i++){
+        playlist->addMedia(QUrl("qrc:/sound/"+songs[i]+".mp3"));
+    }
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
     music->setPlaylist(playlist);
 
     music->setVolume(100);
@@ -41,10 +44,11 @@ GGameScene::GGameScene()
 
     initGradBackground();
 
-    QTimer* updateBg = new QTimer();
+    updateBg = new QTimer();
     updateBg->setTimerType(Qt::PreciseTimer);
     QObject::connect(updateBg,SIGNAL(timeout()),this,SLOT(updateGradBackground()));
-    updateBg->start(468);
+    updateBg->start(60000/BPM[playlist->currentIndex()]);
+    QObject::connect(playlist,SIGNAL(currentIndexChanged(int)),this,SLOT(changeBPM(int)));
 
     sizeUp = new QSoundEffect();
     //sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));
@@ -98,6 +102,14 @@ void GGameScene::addPowerUp()
     newPowerup->setBrush(*brush);
     powerUps->append(newPowerup);
     this->addItem(newPowerup);
+}
+
+void GGameScene::changeBPM(int i)
+{
+    updateBg->stop();
+    if(BPM[i]!=0){
+        updateBg->start(60000/BPM[i]);
+    }
 }
 
 void GGameScene::initGradBackground()

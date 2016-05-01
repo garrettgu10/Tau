@@ -41,8 +41,10 @@ public slots:
     void updateGradBackground();
     void refresh();
     void addPowerUp();
+    void changeBPM(int i);
 
 private:
+    QTimer* updateBg;
     Arena* box;
     void initGradBackground();
     QTimer* refresher;
