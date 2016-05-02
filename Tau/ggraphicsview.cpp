@@ -4,17 +4,26 @@
 #include <QTime>
 #include <QtConcurrent>
 #include <QThread>
+#include <arena.h>
 
 GGraphicsView::GGraphicsView()
 {
     movep0 = new QTimer(this);
     movep1 = new QTimer(this);
+    box = new Arena();
 }
 
 void GGraphicsView::setGScene(GGameScene *scene)
 {
     this->setScene(scene);
     this->GScene = scene;
+}
+
+void GGraphicsView::startGame()
+{
+    setGScene(new GGameScene(box));
+    GScene->setSceneRect(0,0,windowWidth,windowHeight);
+    GScene->drawBoard();
 }
 
 void GGraphicsView::keyPressEvent(QKeyEvent *event)

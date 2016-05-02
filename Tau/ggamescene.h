@@ -21,7 +21,7 @@ class GGameScene : public QGraphicsScene
     Q_OBJECT
 
 public:
-    GGameScene();
+    GGameScene(Arena *box);
     void drawBoard();
     Player* p[2];
     Ball* b;
@@ -38,7 +38,6 @@ public:
     int overlappingPups[(int)powerUpType::NUM_POWERUPTYPES];
 
 public slots:
-    void updateGradBackground();
     void refresh();
     void addPowerUp();
     void changeBPM(int i);
@@ -46,7 +45,6 @@ public slots:
 private:
     QTimer* updateBg;
     Arena* box;
-    void initGradBackground();
     QTimer* refresher;
     QRadialGradient* grad;
     QGraphicsRectItem* BgRect = new QGraphicsRectItem();

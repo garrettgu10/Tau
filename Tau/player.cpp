@@ -6,12 +6,14 @@
 #include <QPen>
 #include <QDebug>
 #include <QThread>
+#include <QtConcurrent>
 
 Player::Player(double pos, double size,int playerNum)
 {
     this->playerNum = playerNum;
     this->pos = pos;
     this->size = size;
+    QtConcurrent::run(this,&Player::fadeIn);
     this->rekt = new QRectF(QPointF(windowWidth/2-playerRadius,windowHeight/2-playerRadius),QSizeF((playerRadius)*2,(playerRadius)*2));
 }
 
@@ -71,6 +73,14 @@ void Player::sizeDown()
     }
 }
 
+void Player::fadeIn()
+{
+    for(int i = 0; i < 10; i++){
+        opacity+=0.10;
+        QThread::msleep(refreshInterval);
+    }
+}
+
 void Player::moveClockwise()
 {
     move(88);
@@ -87,6 +97,7 @@ void Player::setPen(QPen pen){
 
 void Player::paint ( QPainter * painter, const QStyleOptionGraphicsItem* /*unused*/, QWidget* /*unused*/)
 {
+    painter->setOpacity(opacity);
     painter->setPen(this->pen);
     painter->setBrush(this->brush);
     painter->drawArc(*rect(), -startAngle(), spanAngle());

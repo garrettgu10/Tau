@@ -20,18 +20,14 @@ int main(int argc, char *argv[])
     seedRandomFunction();
     QApplication a(argc, argv);
     GGraphicsView* view = new GGraphicsView();
-    GGameScene* scene = new GGameScene();
     a.setKeyboardInputInterval(1600);
     view->setWindowTitle("Tau");
     view->setRenderHint(QPainter::Antialiasing);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setGScene(scene);
     view->setFixedSize(windowWidth,windowHeight);
-    scene->setSceneRect(0,0,windowWidth,windowHeight);
     view->setVisible(true);
-    scene->updateGradBackground();
-    scene->drawBoard();
+    view->startGame();
 
     return a.exec();
 }

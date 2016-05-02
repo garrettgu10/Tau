@@ -11,6 +11,7 @@ class GGraphicsView : public QGraphicsView
 public:
     GGraphicsView();
     void setGScene(GGameScene* scene);
+    void startGame();
 
 protected:
     GGameScene* GScene;
@@ -19,6 +20,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+    Arena* box;
     bool clockWise[2];
     void closeEvent(QCloseEvent*);
     QTimer* movep1;

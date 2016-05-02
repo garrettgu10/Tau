@@ -13,9 +13,12 @@
 #include <helper.h>
 #include <QMediaMetaData>
 
-GGameScene::GGameScene()
+GGameScene::GGameScene(Arena* box)
 {
-    box = new Arena();
+    for(int i = 0; i < (int)powerUpType::NUM_POWERUPTYPES; i++){
+        overlappingPups[i] = 0;
+    }
+    this->box = box;
     scores = new ScoreDisplay();
     p[0] = new Player(2880,playerInitSize,0);
     p[1] = new Player(0,playerInitSize,1);
@@ -42,11 +45,10 @@ GGameScene::GGameScene()
     music->setVolume(100);
     music->play();
 
-    initGradBackground();
-
     updateBg = new QTimer();
     updateBg->setTimerType(Qt::PreciseTimer);
-    QObject::connect(updateBg,SIGNAL(timeout()),this,SLOT(updateGradBackground()));
+    box->pulse();
+    QObject::connect(updateBg,SIGNAL(timeout()),box,SLOT(pulse()));
     updateBg->start(60000/BPM[playlist->currentIndex()]);
     QObject::connect(playlist,SIGNAL(currentIndexChanged(int)),this,SLOT(changeBPM(int)));
 
@@ -54,18 +56,6 @@ GGameScene::GGameScene()
     //sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));
     sizeDown = new QSoundEffect();
     //sizeDown->setSource(QUrl::fromLocalFile(":/sound/sizeDown.wav"));
-}
-
-void GGameScene::updateGradBackground()
-{
-    grad->setColorAt(0,QColor::fromRgb(randomInBound(50,150),randomInBound(50,150),randomInBound(50,150),255));
-
-    QBrush brush(*grad);
-    QPen clear(QColor::fromRgb(255,255,255,0));
-    BgRect->setBrush(brush);
-    BgRect->setPen(clear);
-    BgRect->setRect(0,0,this->width(),this->height());
-    box->setRadius(arenaRadius+10);
 }
 
 void GGameScene::drawBoard()
@@ -109,15 +99,9 @@ void GGameScene::changeBPM(int i)
     updateBg->stop();
     if(BPM[i]!=0){
         updateBg->start(60000/BPM[i]);
+    }else{
+        box->grad->setColorAt(0,QColor::fromRgb(150,150,150,255));
     }
-}
-
-void GGameScene::initGradBackground()
-{
-    grad = new QRadialGradient(windowWidth/2,windowHeight/2, windowHeight/2);
-    grad->setColorAt(1,QColor::fromRgb(0,0,0,255));
-    updateGradBackground();
-    this->addItem(BgRect);
 }
 
 void GGameScene::collectedPowerup(powerup *p)

@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/sound">
-        <file>collide.wav</file>
         <file>Free.mp3</file>
-        <file>Turn_Up.mp3</file>
     </qresource>
 </RCC>

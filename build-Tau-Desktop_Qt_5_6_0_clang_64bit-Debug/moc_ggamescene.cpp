@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GGameScene_t {
-    QByteArrayData data[5];
-    char stringdata0[52];
+    QByteArrayData data[6];
+    char stringdata0[43];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,14 +30,15 @@ struct qt_meta_stringdata_GGameScene_t {
 static const qt_meta_stringdata_GGameScene_t qt_meta_stringdata_GGameScene = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "GGameScene"
-QT_MOC_LITERAL(1, 11, 20), // "updateGradBackground"
-QT_MOC_LITERAL(2, 32, 0), // ""
-QT_MOC_LITERAL(3, 33, 7), // "refresh"
-QT_MOC_LITERAL(4, 41, 10) // "addPowerUp"
+QT_MOC_LITERAL(1, 11, 7), // "refresh"
+QT_MOC_LITERAL(2, 19, 0), // ""
+QT_MOC_LITERAL(3, 20, 10), // "addPowerUp"
+QT_MOC_LITERAL(4, 31, 9), // "changeBPM"
+QT_MOC_LITERAL(5, 41, 1) // "i"
 
     },
-    "GGameScene\0updateGradBackground\0\0"
-    "refresh\0addPowerUp"
+    "GGameScene\0refresh\0\0addPowerUp\0changeBPM\0"
+    "i"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,12 +58,12 @@ static const uint qt_meta_data_GGameScene[] = {
  // slots: name, argc, parameters, tag, flags
        1,    0,   29,    2, 0x0a /* Public */,
        3,    0,   30,    2, 0x0a /* Public */,
-       4,    0,   31,    2, 0x0a /* Public */,
+       4,    1,   31,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    5,
 
        0        // eod
 };
@@ -73,13 +74,12 @@ void GGameScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         GGameScene *_t = static_cast<GGameScene *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->updateGradBackground(); break;
-        case 1: _t->refresh(); break;
-        case 2: _t->addPowerUp(); break;
+        case 0: _t->refresh(); break;
+        case 1: _t->addPowerUp(); break;
+        case 2: _t->changeBPM((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObject GGameScene::staticMetaObject = {

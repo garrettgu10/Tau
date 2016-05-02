@@ -4,11 +4,15 @@
 
 Arena::Arena()
 {
-
+    grad->setColorAt(0,QColor(0,0,0,0));
+    grad->setColorAt(1,QColor::fromRgb(0,0,0,255));
 }
 
-void Arena::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Arena::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
+    painter->setBrush(QBrush(*grad));
+    painter->setPen(*clear);
+    painter->drawRect(0,0,windowWidth,windowHeight);
     painter->setPen(*redPen);
     painter->setBrush(this->brush());
     painter->drawArc(rect(), -1440, 2880);
@@ -28,4 +32,11 @@ void Arena::setRadius(int rad)
 {
     this->radius = rad;
     this->setRect(windowWidth/2-rad,windowHeight/2-rad,rad*2,rad*2);
+}
+
+void Arena::pulse()
+{
+    grad->setColorAt(0,QColor::fromRgb(randomInBound(50,150),randomInBound(50,150),randomInBound(50,150),255));
+
+    setRadius(arenaRadius+10);
 }
