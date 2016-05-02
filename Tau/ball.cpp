@@ -54,6 +54,7 @@ void Ball::setrad(int r)
 void Ball::setAngle(int angle)
 {
     this->angle = angle;
+    this->wobbleTargetAngle = angle;
 }
 
 void Ball::explode()
@@ -109,10 +110,13 @@ void Ball::setup()
     QtConcurrent::run(this,&Ball::initSpin);
 }
 
+void Ball::startWobble(){
+    wobbler->start(100);
+}
+
 void Ball::wobble()
 {
-    int quadrantNum = (angle%5760)/1440; //0 to 3
-    angle = randomInBound(quadrantNum*1440,(quadrantNum+1)*1440);
+    angle = wobbleTargetAngle+randomInBound(-720,720);
 }
 
 void Ball::warpToggleSpeeds()
@@ -208,7 +212,7 @@ void Ball::initSpin()
     arrowLength = 0;
     radius = ballInitRadius+50;
     setSpeed(0);
-    angle = randomInBound(0,5760);
+    this->setAngle(randomInBound(0,5760));
     for(int i = 0; i < 10; i++){
         opacity+=0.1;
         radius-=5;
@@ -217,7 +221,7 @@ void Ball::initSpin()
     }
     int framesRotating = randomInBound(50,150);
     for(int i = 0; i < framesRotating; i++){
-        angle+=96;
+        setAngle(angle+96);
         QThread::msleep(refreshInterval);
     }
     setSpeed(ballInitSpeed);
@@ -227,9 +231,9 @@ void Ball::initSpin()
 
 void Ball::bounce(Player* p, int pdiff, int angleWithCenter)
 {
-    angle = angleWithCenter+2880;
+    setAngle(angleWithCenter+2880);
     normalize(angle);
-    angle-=(((double)pdiff)/p->size*720);
+    setAngle(angle-(((double)pdiff)/p->size*720));
     parent->mostRecent = p->playerNum;
     bouncing = true;
     collisionSound->play();

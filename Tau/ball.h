@@ -38,6 +38,7 @@ public:
     void stopGhost();
     double getSpeed();
     bool setSpeed(double newSpeed);
+    void startWobble();
 
 public slots:
     void setup();
@@ -50,11 +51,12 @@ public slots:
     void ghostUpdate();
 
 protected:
-    int angle = 0; // angle of motion in 160ths of degrees
+    int angle = 0; // angle of motion in 16ths of degrees
     QRectF* rekt;
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
+    int wobbleTargetAngle;
     double speed;
     bool goingBrighter = false;
     QTimer* ghoster;

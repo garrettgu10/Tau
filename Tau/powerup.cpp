@@ -40,7 +40,7 @@ void powerup::enable()
     case powerUpType::arrow: parent->b->setAngle((int)(this->angle*16)); break;
     case powerUpType::warp: parent->b->warper->start(500); break;
     case powerUpType::lightning: parent->b->setSpeed(parent->b->getSpeed()+3); break;
-    case powerUpType::wobble: parent->b->wobbler->start(100); break;
+    case powerUpType::wobble: parent->b->startWobble(); break;
     case powerUpType::ghost: parent->b->startGhost(); break;
     case powerUpType::snail: if(!parent->b->setSpeed(parent->b->getSpeed()-3)){ disabled = true; } break;
     default: break;
