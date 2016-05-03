@@ -38,12 +38,14 @@ GGameScene::GGameScene(Arena* box)
     for(int i = 0; i < numSongs;i++){
         playlist->addMedia(QUrl("qrc:/sound/"+songs[i]+".mp3"));
     }
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    playlist->setPlaybackMode(QMediaPlaylist::Random);
 
     music->setPlaylist(playlist);
 
     music->setVolume(100);
     music->play();
+    playlist->setCurrentIndex(randomInBound(0,numSongs-1));
+    qDebug() << playlist->currentIndex();
 
     updateBg = new QTimer();
     updateBg->setTimerType(Qt::PreciseTimer);

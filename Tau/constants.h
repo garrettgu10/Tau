@@ -18,9 +18,9 @@ const QString icos[(int)powerUpType::NUM_POWERUPTYPES] = {":/ico/sizeUp.png",
 const bool powerupExtendable[(int)powerUpType::NUM_POWERUPTYPES] =
         {false, false, false, false, true, false, true, false, true, false};
 
-const int numSongs = 1;
-const QString songs[numSongs] = {"Free"};
-const int BPM[numSongs] = {140};
+const int numSongs = 3;
+const QString songs[numSongs] = {"Overriding Concern","Variation on Egmont","In a Heartbeat"};
+const int BPM[numSongs] = {120,111,130};
 
 const int refreshInterval = 20; //time between frame refreshes
 const int windowWidth = 900; //width of window

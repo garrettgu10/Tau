@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/sound">
+        <file>Overriding Concern.mp3</file>
+        <file>In a Heartbeat.mp3</file>
+        <file>Variation on Egmont.mp3</file>
+    </qresource>
+</RCC>

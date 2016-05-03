@@ -39,7 +39,7 @@ FORMS    +=
 
 RESOURCES += \
     icons.qrc \
-    audioeffects.qrc
+    music.qrc
 
 DISTFILES += \
     LICENSE.md

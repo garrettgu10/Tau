@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/sound">
         <file>Free.mp3</file>
+        <file>Overriding Concern.mp3</file>
     </qresource>
 </RCC>
