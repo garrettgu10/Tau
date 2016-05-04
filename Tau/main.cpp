@@ -27,7 +27,6 @@ int main(int argc, char *argv[])
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setFixedSize(windowWidth,windowHeight);
     view->setVisible(true);
-    view->startGame();
 
     return a.exec();
 }

@@ -33,27 +33,6 @@ GGameScene::GGameScene(Arena* box)
     QObject::connect(refresher,SIGNAL(timeout()), this,SLOT(refresh()));
     refresher->setTimerType(Qt::PreciseTimer);
 
-    music = new QMediaPlayer();
-    playlist = new QMediaPlaylist();
-    for(int i = 0; i < numSongs;i++){
-        playlist->addMedia(QUrl("qrc:/sound/"+songs[i]+".mp3"));
-    }
-    playlist->setPlaybackMode(QMediaPlaylist::Random);
-
-    music->setPlaylist(playlist);
-
-    music->setVolume(100);
-    music->play();
-    playlist->setCurrentIndex(randomInBound(0,numSongs-1));
-    qDebug() << playlist->currentIndex();
-
-    updateBg = new QTimer();
-    updateBg->setTimerType(Qt::PreciseTimer);
-    box->pulse();
-    QObject::connect(updateBg,SIGNAL(timeout()),box,SLOT(pulse()));
-    updateBg->start(60000/BPM[playlist->currentIndex()]);
-    QObject::connect(playlist,SIGNAL(currentIndexChanged(int)),this,SLOT(changeBPM(int)));
-
     sizeUp = new QSoundEffect();
     //sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));
     sizeDown = new QSoundEffect();
@@ -94,16 +73,6 @@ void GGameScene::addPowerUp()
     newPowerup->setBrush(*brush);
     powerUps->append(newPowerup);
     this->addItem(newPowerup);
-}
-
-void GGameScene::changeBPM(int i)
-{
-    updateBg->stop();
-    if(BPM[i]!=0){
-        updateBg->start(60000/BPM[i]);
-    }else{
-        box->grad->setColorAt(0,QColor::fromRgb(150,150,150,255));
-    }
 }
 
 void GGameScene::collectedPowerup(powerup *p)

@@ -32,7 +32,6 @@ Ball::Ball(GGameScene *parent)
     collisionSound = new QSoundEffect();
     collisionSound->setVolume(0);
     collisionSound->setSource(QUrl::fromLocalFile(":/sound/collide.wav"));
-    setup();
 }
 
 int Ball::getRadius()

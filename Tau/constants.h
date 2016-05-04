@@ -18,9 +18,9 @@ const QString icos[(int)powerUpType::NUM_POWERUPTYPES] = {":/ico/sizeUp.png",
 const bool powerupExtendable[(int)powerUpType::NUM_POWERUPTYPES] =
         {false, false, false, false, true, false, true, false, true, false};
 
-const int numSongs = 3;
-const QString songs[numSongs] = {"Overriding Concern","Variation on Egmont","In a Heartbeat"};
-const int BPM[numSongs] = {120,111,130};
+const int numSongs = 2;
+const QString songs[numSongs] = {"Overriding Concern","Proof_of_Concept"};
+const int BPM[numSongs] = {120,140};
 
 const int refreshInterval = 20; //time between frame refreshes
 const int windowWidth = 900; //width of window
@@ -28,6 +28,7 @@ const int windowHeight = 750; //height of window
 const int playerWidth = 15; //width of paddle
 const int arenaWidth = 5; //width of arena circle
 const int arenaRadius = windowHeight/2*.9; //radius of arena circle
+const int mainMenuArenaRadius = arenaRadius/3;
 const int playerInitSize = 180; //in 16ths of degrees (angular difference from center to side of paddle)
 const int playerRadius = arenaRadius-playerWidth-arenaWidth/2; //radius of circle in which the paddles are drawn
 const int ballInitRadius = 10; //the ball's initial radius

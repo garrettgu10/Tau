@@ -32,18 +32,14 @@ public:
     QSoundEffect* sizeUp;
     QSoundEffect* sizeDown;
     void gameOver();
-    QMediaPlayer* music;
-    QMediaPlaylist* playlist;
     ScoreDisplay* scores;
     int overlappingPups[(int)powerUpType::NUM_POWERUPTYPES];
 
 public slots:
     void refresh();
     void addPowerUp();
-    void changeBPM(int i);
 
 private:
-    QTimer* updateBg;
     Arena* box;
     QTimer* refresher;
     QRadialGradient* grad;

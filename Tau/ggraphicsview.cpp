@@ -11,6 +11,29 @@ GGraphicsView::GGraphicsView()
     movep0 = new QTimer(this);
     movep1 = new QTimer(this);
     box = new Arena();
+    this->GScene = new GGameScene(box);
+    MScene = new GMainMenuScene(box);
+    MScene->setSceneRect(0,0,windowWidth,windowHeight);
+    this->setScene(MScene);
+
+    music = new QMediaPlayer();
+    playlist = new QMediaPlaylist();
+    for(int i = 0; i < numSongs;i++){
+        playlist->addMedia(QUrl("qrc:/sound/"+songs[i]+".mp3"));
+    }
+    playlist->setPlaybackMode(QMediaPlaylist::Random);
+
+    music->setPlaylist(playlist);
+
+    music->setVolume(100);
+    music->play();
+    playlist->setCurrentIndex(randomInBound(0,numSongs-1));
+    qDebug() << playlist->currentIndex();
+
+    box->startPulse(BPM[playlist->currentIndex()]);
+    QObject::connect(playlist,SIGNAL(currentIndexChanged(int)),box,SLOT(changeBPM(int)));
+
+    //startGame();
 }
 
 void GGraphicsView::setGScene(GGameScene *scene)
@@ -21,9 +44,15 @@ void GGraphicsView::setGScene(GGameScene *scene)
 
 void GGraphicsView::startGame()
 {
-    setGScene(new GGameScene(box));
-    GScene->setSceneRect(0,0,windowWidth,windowHeight);
-    GScene->drawBoard();
+    if(!startedGame){
+        setGScene(GScene);
+        box->pulseDist = 10;
+        box->setPermRadius(arenaRadius);
+        GScene->b->setup();
+        GScene->setSceneRect(0,0,windowWidth,windowHeight);
+        GScene->drawBoard();
+        startedGame = true;
+    }
 }
 
 void GGraphicsView::keyPressEvent(QKeyEvent *event)
@@ -82,8 +111,10 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
 
 void GGraphicsView::closeEvent(QCloseEvent * /*unused*/)
 {
-    GScene->ongoing = false;
-    GScene->music->stop();
+    this->music->stop();
+    if(startedGame){
+        GScene->ongoing = false;
+    }
 }
 
 void GGraphicsView::setupTimer(QTimer* t, Player *p, bool cw)
@@ -100,6 +131,8 @@ void GGraphicsView::setupTimer(QTimer* t, Player *p, bool cw)
 
 void GGraphicsView::mousePressEvent(QMouseEvent *event)
 {
-    qDebug() << event->x();
-    qDebug() << event->y();
+    double distFromCenter = sqrt(pow(event->x()-windowWidth/2,2)+pow(event->y()-windowHeight/2,2));
+    if(distFromCenter < mainMenuArenaRadius){
+        startGame();
+    }
 }

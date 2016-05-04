@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QCloseEvent>
 #include <ggamescene.h>
+#include <gmainmenuscene.h>
 
 class GGraphicsView : public QGraphicsView
 {
@@ -14,12 +15,17 @@ public:
     void startGame();
 
 protected:
+    GMainMenuScene* MScene;
     GGameScene* GScene;
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+    QTimer* updateBg;
+    QMediaPlayer* music;
+    QMediaPlaylist* playlist;
+    bool startedGame = false;
     Arena* box;
     bool clockWise[2];
     void closeEvent(QCloseEvent*);
