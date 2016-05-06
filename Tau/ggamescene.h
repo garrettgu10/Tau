@@ -40,6 +40,7 @@ public slots:
     void addPowerUp();
 
 private:
+    QTimer* addPowerUps;
     Arena* box;
     QTimer* refresher;
     QRadialGradient* grad;

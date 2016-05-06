@@ -39,7 +39,6 @@ void Arena::startPulse(int bpm)
 {
     updateBg = new QTimer();
     updateBg->setTimerType(Qt::PreciseTimer);
-    this->pulseDist = pulseDist;
     pulse();
     QObject::connect(updateBg,SIGNAL(timeout()),this,SLOT(pulse()));
     updateBg->start(60000/bpm);
@@ -53,6 +52,7 @@ void Arena::setPermRadius(int prad)
 
 void Arena::pulse()
 {
+    pulsed();
     grad->setColorAt(0,QColor::fromRgb(randomInBound(50,150),randomInBound(50,150),randomInBound(50,150),255));
 
     setRadius(permRadius+pulseDist);

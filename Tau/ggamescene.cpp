@@ -25,10 +25,9 @@ GGameScene::GGameScene(Arena* box)
     mostRecent = 0;
     b = new Ball(this);
     powerUps = new QList<powerup*>();
-    QTimer* addPowerUps = new QTimer();
+    addPowerUps = new QTimer();
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
     addPowerUps->setTimerType(Qt::PreciseTimer);
-    addPowerUps->start(powerUpInterval);
     refresher = new QTimer();
     QObject::connect(refresher,SIGNAL(timeout()), this,SLOT(refresh()));
     refresher->setTimerType(Qt::PreciseTimer);
@@ -63,6 +62,7 @@ void GGameScene::drawBoard()
     scores->setBrush(*brush);
     this->addItem(scores);
     refresher->start(refreshInterval);
+    addPowerUps->start(powerUpInterval);
     addPowerUp();
 }
 

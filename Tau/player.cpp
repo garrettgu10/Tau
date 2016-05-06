@@ -60,7 +60,7 @@ void Player::sizeUp()
     if(this->pos+this->size > 4320-2880*playerNum){
         this->moveCClockwise();
     }
-    if(this->pos-this->size < 1440-2280*playerNum){
+    if(this->pos-this->size < 1440-2880*playerNum){
         this->moveClockwise();
     }
 }

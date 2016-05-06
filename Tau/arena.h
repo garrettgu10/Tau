@@ -21,13 +21,16 @@ public:
     void startPulse(int bpm);
     void setPermRadius(int prad);
     int pulseDist = 10;
+    QTimer* updateBg;
+
+signals:
+    void pulsed();
 
 public slots:
     void pulse();
     void changeBPM(int i);
 
 private:
-    QTimer* updateBg;
     QPen* clear = new QPen(QColor(0,0,0,0));
     QPen* bluePen;
     QPen* redPen;

@@ -21,7 +21,7 @@ GGraphicsView::GGraphicsView()
     for(int i = 0; i < numSongs;i++){
         playlist->addMedia(QUrl("qrc:/sound/"+songs[i]+".mp3"));
     }
-    playlist->setPlaybackMode(QMediaPlaylist::Random);
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
 
     music->setPlaylist(playlist);
 
