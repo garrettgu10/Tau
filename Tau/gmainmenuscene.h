@@ -24,6 +24,7 @@ public slots:
     void refresh();
 
 private:
+    titleText* description;
     titleText* title;
     playButton* pb;
     QBrush* brush = new QBrush(QColor::fromRgb(255,255,255));

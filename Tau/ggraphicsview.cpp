@@ -59,6 +59,8 @@ void GGraphicsView::startGame()
 
 void GGraphicsView::keyPressEvent(QKeyEvent *event)
 {
+    if(!startedGame)
+        return;
     if(event->isAutoRepeat())
         return;
     int key = event->key();
@@ -86,6 +88,8 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
 
 void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
+    if(!startedGame)
+        return;
     if(!event->isAutoRepeat()){
         int key = event->key();
         int affectedPlayer = -1;
@@ -99,7 +103,6 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
         case Qt::Key_Up: affectedPlayer= 1; cw = false; break;
         case Qt::Key_Right:
         case Qt::Key_Down: affectedPlayer=1;cw = true; break;
-            break;
         }
         if(clockWise[affectedPlayer] == cw){
             if(affectedPlayer == 0){

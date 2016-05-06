@@ -14,7 +14,7 @@ class titleText : public QObject, public QGraphicsItem
     Q_INTERFACES(QGraphicsItem)
 
 public:
-    titleText(QPointF *center, int size, QString text);
+    titleText(QString fontName, QPointF *titleCenter, int size, QString text);
     virtual QRectF boundingRect() const;
     double opacity = 1.0;
 
@@ -23,10 +23,10 @@ protected:
 
 private:
     QString text;
-    QFontMetrics* fontMetrics;
-    QFont* textFont;
+    QFontMetrics* titleFontMetrics;
+    QFont* titleFont;
     int size;
-    QPointF* center;
+    QPointF* titleCenter;
 };
 
 #endif // TITLETEXT_H
