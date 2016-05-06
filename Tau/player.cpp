@@ -13,7 +13,6 @@ Player::Player(double pos, double size,int playerNum)
     this->playerNum = playerNum;
     this->pos = pos;
     this->size = size;
-    QtConcurrent::run(this,&Player::fadeIn);
     this->rekt = new QRectF(QPointF(windowWidth/2-playerRadius,windowHeight/2-playerRadius),QSizeF((playerRadius)*2,(playerRadius)*2));
 }
 

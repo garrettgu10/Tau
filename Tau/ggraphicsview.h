@@ -12,6 +12,8 @@ class GGraphicsView : public QGraphicsView
 public:
     GGraphicsView();
     void setGScene(GGameScene* scene);
+
+public slots:
     void startGame();
 
 protected:
@@ -22,6 +24,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+    void startBeginSequence();
     QTimer* updateBg;
     QMediaPlayer* music;
     QMediaPlaylist* playlist;

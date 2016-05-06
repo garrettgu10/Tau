@@ -16,6 +16,21 @@ GMainMenuScene::GMainMenuScene(Arena* box)
     refresher = new QTimer();
     QObject::connect(refresher,SIGNAL(timeout()),this,SLOT(refresh()));
     refresher->start(refreshInterval);
+    title = new titleText(new QPointF(windowWidth/2,windowHeight/4),200,"\u03C4");
+    this->addItem(this->title);
+}
+
+void GMainMenuScene::exitSequence()
+{
+    box->pulseDist = 10;
+    while(box->radius<arenaRadius){
+        title->opacity-=0.1;
+        pb->setSize(pb->getSize()-7);
+        box->radius+=(arenaRadius-box->radius)/3+3;
+        box->setPermRadius(box->radius-box->pulseDist);
+        QThread::msleep(refreshInterval);
+    }
+    doneExiting();
 }
 
 void GMainMenuScene::refresh()

@@ -10,6 +10,7 @@
 class playButton : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     playButton(int size);
     virtual QRectF boundingRect() const;
@@ -19,6 +20,7 @@ public:
     void setSize(int size);
     int getSize();
     int permSize;
+    double opacity=1.0;
 
 public slots:
     void pulse();

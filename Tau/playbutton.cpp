@@ -46,6 +46,7 @@ void playButton::pulse()
 
 void playButton::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
+    painter->setOpacity(opacity);
     painter->setBrush(*brush);
     painter->setPen(*pen);
     painter->translate(windowWidth/2,windowHeight/2);

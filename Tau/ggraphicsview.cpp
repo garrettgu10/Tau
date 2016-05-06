@@ -46,6 +46,8 @@ void GGraphicsView::startGame()
 {
     if(!startedGame){
         setGScene(GScene);
+        QtConcurrent::run(GScene->p[0],&Player::fadeIn);
+        QtConcurrent::run(GScene->p[1],&Player::fadeIn);
         box->pulseDist = 10;
         box->setPermRadius(arenaRadius);
         GScene->b->setup();
@@ -109,6 +111,12 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+void GGraphicsView::startBeginSequence()
+{
+    QtConcurrent::run(MScene,&GMainMenuScene::exitSequence);
+    QObject::connect(MScene,SIGNAL(doneExiting()),this,SLOT(startGame()));
+}
+
 void GGraphicsView::closeEvent(QCloseEvent * /*unused*/)
 {
     this->music->stop();
@@ -133,6 +141,6 @@ void GGraphicsView::mousePressEvent(QMouseEvent *event)
 {
     double distFromCenter = sqrt(pow(event->x()-windowWidth/2,2)+pow(event->y()-windowHeight/2,2));
     if(distFromCenter < mainMenuArenaRadius){
-        startGame();
+        startBeginSequence();
     }
 }

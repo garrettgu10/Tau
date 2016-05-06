@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     GGraphicsView* view = new GGraphicsView();
     a.setKeyboardInputInterval(1600);
-    view->setWindowTitle("Tau");
+    view->setWindowTitle("\u03C4");
     view->setRenderHint(QPainter::Antialiasing);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
