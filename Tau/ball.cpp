@@ -262,7 +262,7 @@ void Ball::updatePos()
 {
     pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
     pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
-    updateRect();
+    //updateRect();
     checkCollision();
 }
 

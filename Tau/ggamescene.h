@@ -24,7 +24,7 @@ public:
     GGameScene(Arena *box);
     void drawBoard();
     Player* p[2];
-    Ball* b;
+    Ball* ball;
     int mostRecent;
     bool ongoing = true;
     QList<powerup*>* powerUps;

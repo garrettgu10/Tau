@@ -23,7 +23,7 @@ GGameScene::GGameScene(Arena* box)
     p[0] = new Player(2880,playerInitSize,0);
     p[1] = new Player(0,playerInitSize,1);
     mostRecent = 0;
-    b = new Ball(this);
+    ball = new Ball(this);
     powerUps = new QList<powerup*>();
     addPowerUps = new QTimer();
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
@@ -55,9 +55,11 @@ void GGameScene::drawBoard()
     player2Pen.setColor(QColor::fromRgb(255,0,0));
     p[1]->setPen(player2Pen);
     this->addItem(p[1]);
-    b->setPen(*arenaPen);
-    b->setBrush(*brush);
-    this->addItem(b);
+
+    ball->setPen(*arenaPen);
+    ball->setBrush(*brush);
+    this->addItem(ball);
+
     scores->setPen(*arenaPen);
     scores->setBrush(*brush);
     this->addItem(scores);
@@ -85,7 +87,7 @@ void GGameScene::collectedPowerup(powerup *p)
 
 void GGameScene::gameOver()
 {
-    b->disabled = true;
+    ball->disabled = true;
     for(powerup* p: *powerUps){
         p->disable();
         powerUps->removeOne(p);
@@ -93,19 +95,19 @@ void GGameScene::gameOver()
             this->removeItem(p);
         }
     }
-    if(b->pos->x() > windowWidth/2){
+    if(ball->pos->x() > windowWidth/2){
         scores->score(0);
     }else{
         scores->score(1);
     }
-    QtConcurrent::run(b,&Ball::explode);
-    QTimer::singleShot(350,Qt::PreciseTimer,b,SLOT(setup()));
+    QtConcurrent::run(ball,&Ball::explode);
+    QTimer::singleShot(350,Qt::PreciseTimer,ball,SLOT(setup()));
 }
 
 void GGameScene::refresh()
 {
-    b->updatePos();
     this->update();
+    ball->updatePos();
     if(box->radius>arenaRadius){
         box->setRadius(box->radius-1);
     }

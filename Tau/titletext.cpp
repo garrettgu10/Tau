@@ -3,10 +3,11 @@
 titleText::titleText(QString fontName, QPointF* center, int size, QString text)
 {
     this->text = text;
-    titleFont = new QFont("Times New Roman",size,QFont::Light,false);
+    titleFont = new QFont(fontName,size,QFont::Light,false);
     titleFontMetrics = new QFontMetrics(QFont(*titleFont));
     this->titleCenter = center;
     this->opacity = 1.0;
+    qDebug() << opacity;
 }
 
 QRectF titleText::boundingRect() const

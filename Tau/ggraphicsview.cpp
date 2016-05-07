@@ -50,7 +50,7 @@ void GGraphicsView::startGame()
         QtConcurrent::run(GScene->p[1],&Player::fadeIn);
         box->pulseDist = 10;
         box->setPermRadius(arenaRadius);
-        GScene->b->setup();
+        GScene->ball->setup();
         GScene->setSceneRect(0,0,windowWidth,windowHeight);
         GScene->drawBoard();
         startedGame = true;
