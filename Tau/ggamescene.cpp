@@ -43,6 +43,7 @@ void GGameScene::drawBoard()
     box->setPen(*arenaPen);
     box->setRect(windowWidth/2-arenaRadius,windowHeight/2-arenaRadius,arenaRadius*2,arenaRadius*2);
     this->addItem(box);
+    this->addItem(box->bkg);
     //draw players
 
     QPen player1Pen(*arenaPen);
@@ -106,8 +107,8 @@ void GGameScene::gameOver()
 
 void GGameScene::refresh()
 {
-    this->update();
     ball->updatePos();
+    this->update();
     if(box->radius>arenaRadius){
         box->setRadius(box->radius-1);
     }

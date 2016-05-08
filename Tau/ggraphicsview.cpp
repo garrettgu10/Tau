@@ -5,6 +5,7 @@
 #include <QtConcurrent>
 #include <QThread>
 #include <arena.h>
+#include <QGraphicsRectItem>
 
 GGraphicsView::GGraphicsView()
 {
@@ -59,14 +60,13 @@ void GGraphicsView::startGame()
 
 void GGraphicsView::keyPressEvent(QKeyEvent *event)
 {
-    if(!startedGame)
-        return;
     if(event->isAutoRepeat())
         return;
     int key = event->key();
     int affectedPlayer = -1;
     bool cw = false; //clockwise
     switch(key){
+    case Qt::Key_Return: playlist->setCurrentIndex(playlist->currentIndex()==playlist->mediaCount()-1?0:playlist->currentIndex()+1); return;
     case Qt::Key_D:
     case Qt::Key_W: affectedPlayer = 0; cw = true;  break;
     case Qt::Key_A:
@@ -76,9 +76,13 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Right:
     case Qt::Key_Down: affectedPlayer=1;cw = true;  break;
     }
-    if(affectedPlayer!=-1)
-        clockWise[affectedPlayer] = cw;
 
+    if(!startedGame)
+        return;
+
+    if(affectedPlayer!=-1){
+        clockWise[affectedPlayer] = cw;
+    }
     if(affectedPlayer == 0){
         setupTimer(movep0, this->GScene->p[0],cw);
     }else if(affectedPlayer == 1){

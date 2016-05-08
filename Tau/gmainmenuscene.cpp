@@ -7,6 +7,7 @@ GMainMenuScene::GMainMenuScene(Arena* box)
     this->box->setPen(*arenaPen);
     this->box->setRadius(mainMenuArenaRadius);
     this->addItem(this->box);
+    this->addItem(this->box->bkg);
     this->box->pulseDist = 5;
     pb = new playButton(playButtonSize);
     pb->setBrush(brush);

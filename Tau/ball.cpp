@@ -1,5 +1,4 @@
 #include "ball.h"
-#include <constants.h>
 #include <qmath.h>
 #include <QPainter>
 #include <QGraphicsScene>

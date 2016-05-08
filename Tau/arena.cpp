@@ -1,19 +1,20 @@
 #include "arena.h"
-#include <QPainter>
-#include <QGraphicsEllipseItem>
 
 Arena::Arena()
 {
     radius = permRadius;
+
+    bkg = new QGraphicsRectItem(0,0,windowWidth,windowHeight);
+
     grad->setColorAt(0,QColor(0,0,0,0));
     grad->setColorAt(1,QColor::fromRgb(0,0,0,255));
+    bkg->setPen(*clear);
+    bkg->setBrush(QBrush(*grad));
+    bkg->setZValue(-1);
 }
 
 void Arena::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->setBrush(QBrush(*grad));
-    painter->setPen(*clear);
-    painter->drawRect(0,0,windowWidth,windowHeight);
     painter->setPen(*redPen);
     painter->setBrush(this->brush());
     painter->drawArc(rect(), -1440, 2880);
@@ -41,7 +42,8 @@ void Arena::startPulse(int bpm)
     updateBg->setTimerType(Qt::PreciseTimer);
     QObject::connect(updateBg,SIGNAL(timeout()),this,SLOT(pulse()));
     if(bpm == 0){
-        this->grad->setColorAt(0,QColor::fromRgb(150,150,150,255));
+        grad->setColorAt(0,QColor::fromRgb(150,150,150,255));
+        bkg->setBrush(QBrush(*grad));
         return;
     }
     pulse();
@@ -52,12 +54,15 @@ void Arena::setPermRadius(int prad)
 {
     this->permRadius = prad;
     grad->setRadius(permRadius/0.9);
+    bkg->setBrush(QBrush(*grad));
 }
 
 void Arena::pulse()
 {
     pulsed();
+
     grad->setColorAt(0,QColor::fromRgb(randomInBound(50,150),randomInBound(50,150),randomInBound(50,150),255));
+    bkg->setBrush(QBrush(*grad));
 
     setRadius(permRadius+pulseDist);
 }
@@ -69,6 +74,7 @@ void Arena::changeBPM(int i)
     if(BPM[i]!=0){
         updateBg->start(60000/BPM[i]);
     }else{
-        this->grad->setColorAt(0,QColor::fromRgb(150,150,150,255));
+        grad->setColorAt(0,QColor::fromRgb(150,150,150,255));
+        bkg->setBrush(QBrush(*grad));
     }
 }

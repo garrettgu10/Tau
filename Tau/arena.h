@@ -5,6 +5,8 @@
 #include <constants.h>
 #include <helper.h>
 #include <QTimer>
+#include <QGraphicsRectItem>
+#include <QGraphicsScene>
 
 class Arena : public QObject, public QGraphicsEllipseItem
 {
@@ -16,12 +18,12 @@ public:
     void setRadius(int rad);
     int permRadius = arenaRadius;
     int radius = permRadius;
-    QBrush* gradBrush;
-    QRadialGradient* grad = new QRadialGradient(windowWidth/2,windowHeight/2, permRadius/0.9);
     void startPulse(int bpm);
     void setPermRadius(int prad);
+    QRadialGradient* grad = new QRadialGradient(windowWidth/2,windowHeight/2, arenaRadius/0.9);
     int pulseDist = 10;
     QTimer* updateBg;
+    QGraphicsRectItem* bkg;
 
 signals:
     void pulsed();

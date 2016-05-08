@@ -20,7 +20,7 @@ const bool powerupExtendable[(int)powerUpType::NUM_POWERUPTYPES] =
 
 const int numSongs = 3;
 const QString songs[numSongs] = {"Overriding Concern","Proof_of_Concept","Spectre"};
-const int BPM[numSongs] = {120,140,0};
+const int BPM[numSongs] = {120,140,128};
 
 const int refreshInterval = 20; //time between frame refreshes
 const int windowWidth = 900; //width of window
