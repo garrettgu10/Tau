@@ -13,6 +13,7 @@
 #include <QRadialGradient>
 #include <arena.h>
 #include <scoredisplay.h>
+#include <titletext.h>
 
 class GGraphicsView;
 
@@ -34,12 +35,20 @@ public:
     void gameOver();
     ScoreDisplay* scores;
     int overlappingPups[(int)powerUpType::NUM_POWERUPTYPES];
+    int winningScore = 3;
+    int winner = -1;
+    void exitSequence();
+
+signals:
+    void doneExiting();
 
 public slots:
     void refresh();
     void addPowerUp();
 
 private:
+    void win(int winner);
+    titleText* winnerText;
     QTimer* addPowerUps;
     Arena* box;
     QTimer* refresher;

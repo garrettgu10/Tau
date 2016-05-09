@@ -15,6 +15,7 @@ public:
 
 public slots:
     void startGame();
+    void startMainMenu();
 
 protected:
     GMainMenuScene* MScene;
@@ -24,6 +25,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+    void startEndSequence();
     void startBeginSequence();
     QTimer* updateBg;
     QMediaPlayer* music;

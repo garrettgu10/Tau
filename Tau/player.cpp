@@ -80,6 +80,14 @@ void Player::fadeIn()
     }
 }
 
+void Player::fadeOut()
+{
+    for(int i = 0; i < 10; i++){
+        opacity-=0.10;
+        QThread::msleep(refreshInterval);
+    }
+}
+
 void Player::moveClockwise()
 {
     move(88);

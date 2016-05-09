@@ -37,6 +37,7 @@ void ScoreDisplay::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QW
 {
     int ballHeight = ballInitRadius+padding*2;
     int height0 = ballHeight*scores[0];
+    painter->setOpacity(opacity);
     painter->setPen(pen);
     painter->setBrush(brush);
     for(int i = 0; i < scores[0];i++){

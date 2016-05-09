@@ -1,4 +1,5 @@
 #include "gmainmenuscene.h"
+#include <QtConcurrent>
 
 GMainMenuScene::GMainMenuScene(Arena* box)
 {
@@ -19,6 +20,7 @@ GMainMenuScene::GMainMenuScene(Arena* box)
 
     this->addItem(title);
     this->addItem(description);
+    QtConcurrent::run(this,&GMainMenuScene::entrySequence);
 
     QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
     refresher = new QTimer();
@@ -28,7 +30,6 @@ GMainMenuScene::GMainMenuScene(Arena* box)
 
 void GMainMenuScene::exitSequence()
 {
-    box->pulseDist = 10;
     while(box->radius<arenaRadius){
         title->opacity-=0.1;
         description->opacity-=0.1;
@@ -38,6 +39,20 @@ void GMainMenuScene::exitSequence()
         QThread::msleep(refreshInterval);
     }
     doneExiting();
+}
+
+void GMainMenuScene::entrySequence()
+{
+    pb->setSize(0);
+    title->opacity = 0;
+    description->opacity = 0;
+    for(int i = 0; i < 50; i++){
+        pb->setSize(pb->getSize()+playButtonSize/50);
+        title->opacity+=0.02;
+        description->opacity+=0.02;
+        QThread::msleep(refreshInterval);
+    }
+    pb->setSize(playButtonSize);
 }
 
 void GMainMenuScene::refresh()

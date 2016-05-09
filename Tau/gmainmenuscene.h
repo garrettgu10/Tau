@@ -16,6 +16,7 @@ public:
     GMainMenuScene(Arena* box);
     QTimer* refresher;
     void exitSequence();
+    void entrySequence();
 
 signals:
     void doneExiting();

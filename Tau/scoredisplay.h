@@ -16,6 +16,7 @@ public:
     void setPen(QPen pen);
     void setBrush(QBrush brush);
     void score(int playerNum);
+    double opacity = 1.0;
 
 protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);

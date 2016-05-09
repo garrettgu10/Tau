@@ -10,7 +10,7 @@
 #include <QtConcurrent>
 
 Ball::Ball(GGameScene *parent)
-{   
+{
     pos = new QPointF();
     this->parent = parent;
     this->p[0] = parent->p[0];
@@ -205,6 +205,7 @@ void Ball::ghostUpdate()
 
 void Ball::initSpin()
 {
+    seedRandomFunction();
     opacity = 0;
     drawArrow = true;
     arrowLength = 0;

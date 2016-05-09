@@ -11,6 +11,7 @@
 #include <QtConcurrent>
 #include <QGraphicsView>
 #include <helper.h>
+#include <titletext.h>
 #include <QMediaMetaData>
 
 GGameScene::GGameScene(Arena* box)
@@ -78,6 +79,15 @@ void GGameScene::addPowerUp()
     this->addItem(newPowerup);
 }
 
+void GGameScene::win(int winner)
+{
+    this->winner = winner;
+    winnerText=new titleText("Georgia",new QPointF(windowWidth/2,windowHeight/2+10),20,(winner==0? QString("Blue"):QString("Red"))+QString(" wins. "
+                                                                                                                                        "Press space to continue."));
+    this->addItem(winnerText);
+    addPowerUps->stop();
+}
+
 void GGameScene::collectedPowerup(powerup *p)
 {
     if(!p->enabled){
@@ -102,14 +112,40 @@ void GGameScene::gameOver()
         scores->score(1);
     }
     QtConcurrent::run(ball,&Ball::explode);
-    QTimer::singleShot(350,Qt::PreciseTimer,ball,SLOT(setup()));
+    if(scores->getScore(0)>=winningScore){
+        win(0);
+    }else if(scores->getScore(1)>=winningScore){
+        win(1);
+    }else{
+        QTimer::singleShot(350,Qt::PreciseTimer,ball,SLOT(setup()));
+    }
+}
+
+void GGameScene::exitSequence()
+{
+    for(int i = 0; i < 20; i++){
+        p[0]->opacity-=0.05;
+        p[1]->opacity-=0.05;
+        winnerText->opacity-=0.05;
+        scores->opacity-=0.05;
+        QThread::msleep(refreshInterval);
+    }
+
+    while(box->radius>mainMenuArenaRadius){
+        box->radius-=30;
+        box->radius+=(mainMenuArenaRadius-box->radius)/3-3;
+        box->setPermRadius(box->radius-box->pulseDist);
+        QThread::msleep(refreshInterval);
+    }
+
+    doneExiting();
 }
 
 void GGameScene::refresh()
 {
     ball->updatePos();
     this->update();
-    if(box->radius>arenaRadius){
+    if(box->radius>box->permRadius){
         box->setRadius(box->radius-1);
     }
 }

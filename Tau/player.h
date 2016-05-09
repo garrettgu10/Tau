@@ -22,6 +22,8 @@ public:
     void sizeDown();
     int playerNum;
     void fadeIn();
+    void fadeOut();
+    double opacity = 0;
 
 public slots:
     void moveClockwise();
@@ -33,8 +35,6 @@ protected:
     QRectF* rekt;
     void paint (QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *);
 
-private:
-    double opacity = 0;
 };
 
 #endif // PLAYER_H

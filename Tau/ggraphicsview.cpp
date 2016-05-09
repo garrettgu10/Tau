@@ -12,7 +12,6 @@ GGraphicsView::GGraphicsView()
     movep0 = new QTimer(this);
     movep1 = new QTimer(this);
     box = new Arena();
-    this->GScene = new GGameScene(box);
     MScene = new GMainMenuScene(box);
     MScene->setSceneRect(0,0,windowWidth,windowHeight);
     this->setScene(MScene);
@@ -46,7 +45,9 @@ void GGraphicsView::setGScene(GGameScene *scene)
 void GGraphicsView::startGame()
 {
     if(!startedGame){
+        GScene = new GGameScene(box);
         setGScene(GScene);
+        MScene->deleteLater();
         QtConcurrent::run(GScene->p[0],&Player::fadeIn);
         QtConcurrent::run(GScene->p[1],&Player::fadeIn);
         box->pulseDist = 10;
@@ -58,11 +59,27 @@ void GGraphicsView::startGame()
     }
 }
 
+void GGraphicsView::startMainMenu()
+{
+    if(startedGame){
+        MScene = new GMainMenuScene(box);
+        GScene->deleteLater();
+        setScene(MScene);
+        box->pulseDist = 5;
+        box->setPermRadius(mainMenuArenaRadius);
+        startedGame = false;
+    }
+}
+
 void GGraphicsView::keyPressEvent(QKeyEvent *event)
 {
-    if(event->isAutoRepeat())
+    if(event->isAutoRepeat()){
         return;
+    }
     int key = event->key();
+    if(GScene->winner!=-1 && key==Qt::Key_Space){
+        startEndSequence();
+    }
     int affectedPlayer = -1;
     bool cw = false; //clockwise
     switch(key){
@@ -116,6 +133,12 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
             }
         }
     }
+}
+
+void GGraphicsView::startEndSequence()
+{
+    QtConcurrent::run(GScene,&GGameScene::exitSequence);
+    QObject::connect(GScene,SIGNAL(doneExiting()),this,SLOT(startMainMenu()));
 }
 
 void GGraphicsView::startBeginSequence()
