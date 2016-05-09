@@ -47,7 +47,7 @@ void GGraphicsView::startGame()
     if(!startedGame){
         GScene = new GGameScene(box);
         setGScene(GScene);
-        MScene->deleteLater();
+        QTimer::singleShot(1000,Qt::CoarseTimer,MScene,SLOT(deleteLater()));
         QtConcurrent::run(GScene->p[0],&Player::fadeIn);
         QtConcurrent::run(GScene->p[1],&Player::fadeIn);
         box->pulseDist = 10;

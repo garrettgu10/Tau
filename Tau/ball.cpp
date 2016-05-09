@@ -27,10 +27,8 @@ Ball::Ball(GGameScene *parent)
     QObject::connect(warper,SIGNAL(timeout()),this,SLOT(warpToggleSpeeds()));
     wobbler = new QTimer();
     QObject::connect(wobbler,SIGNAL(timeout()),this,SLOT(wobble()));
-
-    collisionSound = new QSoundEffect();
-    collisionSound->setVolume(0);
-    collisionSound->setSource(QUrl::fromLocalFile(":/sound/collide.wav"));
+    ghoster = new QTimer();
+    QObject::connect(ghoster, SIGNAL(timeout()),this,SLOT(ghostUpdate()));
 }
 
 int Ball::getRadius()
@@ -67,11 +65,9 @@ void Ball::explode()
 
 void Ball::startGhost()
 {
-    if(ghoster == NULL || !ghoster->isActive()){
+    if(!ghoster->isActive()){
         opacity = 1.0;
         goingBrighter = false;
-        ghoster = new QTimer();
-        QObject::connect(ghoster, SIGNAL(timeout()),this,SLOT(ghostUpdate()));
         ghoster->start(refreshInterval);
     }
 }
@@ -235,7 +231,6 @@ void Ball::bounce(Player* p, int pdiff, int angleWithCenter)
     setAngle(angle-(((double)pdiff)/p->size*720));
     parent->mostRecent = p->playerNum;
     bouncing = true;
-    collisionSound->play();
     QtConcurrent::run(this,&Ball::setBouncingToFalse);
 }
 

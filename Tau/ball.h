@@ -66,9 +66,6 @@ private:
     bool spedUp = false;
     bool warpSpedUp = false;
     double opacity = 1.0;
-    QSoundEffect* sizeUpSound;
-    QSoundEffect* sizeDownSound;
-    QSoundEffect* collisionSound;
     void bounce(Player *p, int pdiff, int angleWithCenter);
     int radius;
     void checkCollision();

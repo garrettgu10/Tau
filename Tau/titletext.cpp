@@ -17,10 +17,9 @@ QRectF titleText::boundingRect() const
 
 void titleText::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->setPen(QColor::fromRgb(255,255,255));
-    painter->setBrush(QBrush(QColor::fromRgb(255,255,255)));
+    painter->setPen(QColor::fromRgb(255,255,255,255));
+    painter->setBrush(QBrush(QColor::fromRgb(255,255,255,255)));
     painter->setFont(*titleFont);
     painter->setOpacity(opacity);
-    painter->translate(titleCenter->x()-titleFontMetrics->width(text)/2,titleCenter->y());
-    painter->drawText(0,0,text);
+    painter->drawText(titleCenter->x()-titleFontMetrics->width(text)/2,titleCenter->y(),text);
 }
