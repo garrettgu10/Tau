@@ -21,8 +21,7 @@ void normalize(int &a)
     while(a > 5760){
         a-=5760;
     }
-    while(a<0)
-    {
+    while(a<0){
         a+=5760;
     }
 }
