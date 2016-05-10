@@ -18,7 +18,7 @@ const QString icos[(int)powerUpType::NUM_POWERUPTYPES] = {":/ico/sizeUp.png",
 const bool powerupExtendable[(int)powerUpType::NUM_POWERUPTYPES] =
         {false, false, false, false, true, false, true, false, true, false};
 
-const int numSongs = 3;
+const int numSongs = 2;
 const QString songs[numSongs] = {"Overriding Concern","Proof_of_Concept"};
 const int BPM[numSongs] = {120,140};
 
