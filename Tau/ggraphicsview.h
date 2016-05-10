@@ -21,10 +21,12 @@ protected:
     GMainMenuScene* MScene;
     GGameScene* GScene;
     void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+    void openCredits();
     void startEndSequence();
     void startBeginSequence();
     QTimer* updateBg;

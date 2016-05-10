@@ -17,6 +17,7 @@ public:
     QTimer* refresher;
     void exitSequence();
     void entrySequence();
+    titleText* creditsButton = new titleText("Georgia",new QPointF(windowWidth/2,windowHeight/2+mainMenuArenaRadius+200),50,"Credits");
 
 signals:
     void doneExiting();

@@ -17,6 +17,8 @@ GMainMenuScene::GMainMenuScene(Arena* box)
 
     this->addItem(title);
     this->addItem(description);
+    creditsButton->opacity=0.7;
+    this->addItem(creditsButton);
     QtConcurrent::run(this,&GMainMenuScene::entrySequence);
 
     QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));

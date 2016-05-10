@@ -6,6 +6,9 @@
 #include <QThread>
 #include <arena.h>
 #include <QGraphicsRectItem>
+#include <titletext.h>
+#include <QDesktopServices>
+#include <QUrl>
 
 GGraphicsView::GGraphicsView()
 {
@@ -32,6 +35,8 @@ GGraphicsView::GGraphicsView()
 
     box->startPulse(BPM[playlist->currentIndex()]);
     QObject::connect(playlist,SIGNAL(currentIndexChanged(int)),box,SLOT(changeBPM(int)));
+
+    this->setMouseTracking(true);
 
     //startGame();
 }
@@ -136,6 +141,11 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+void GGraphicsView::openCredits()
+{
+    QDesktopServices::openUrl(QUrl("https://github.com/garrettgu10/Tau/blob/master/Tau/LICENSE.md", QUrl::TolerantMode));
+}
+
 void GGraphicsView::startEndSequence()
 {
     QtConcurrent::run(GScene,&GGameScene::exitSequence);
@@ -170,8 +180,23 @@ void GGraphicsView::setupTimer(QTimer* t, Player *p, bool cw)
 
 void GGraphicsView::mousePressEvent(QMouseEvent *event)
 {
+    if(startedGame)
+        return;
     double distFromCenter = sqrt(pow(event->x()-windowWidth/2,2)+pow(event->y()-windowHeight/2,2));
-    if(!startedGame && distFromCenter < mainMenuArenaRadius){
+    if(distFromCenter < mainMenuArenaRadius){
         startBeginSequence();
+    }
+
+    if(!startedGame && MScene->creditsButton->contains(event->pos())){
+        openCredits();
+    }
+}
+
+void GGraphicsView::mouseMoveEvent(QMouseEvent *event)
+{
+    if(!startedGame && MScene->creditsButton->contains(event->pos())){
+        MScene->creditsButton->opacity = 1;
+    }else{
+        MScene->creditsButton->opacity = 0.7;
     }
 }

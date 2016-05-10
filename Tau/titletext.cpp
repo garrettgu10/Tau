@@ -8,6 +8,18 @@ titleText::titleText(QString fontName, QPointF* center, int size, QString text)
     this->titleCenter = center;
     this->opacity = 1.0;
     this->setZValue(10);
+    this->rect = realRect();
+}
+
+QRectF titleText::realRect()
+{
+    return QRectF(titleCenter->x()-titleFontMetrics->width(text)/2,titleCenter->y()-titleFontMetrics->height(),
+                  titleFontMetrics->width(text),titleFontMetrics->height());
+}
+
+bool titleText::contains(QPoint p)
+{
+    return this->rect.contains(p.x(),p.y());
 }
 
 QRectF titleText::boundingRect() const

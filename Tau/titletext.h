@@ -17,11 +17,14 @@ public:
     titleText(QString fontName, QPointF *titleCenter, int size, QString text);
     virtual QRectF boundingRect() const;
     double opacity = 1.0;
+    QRectF realRect();
+    bool contains(QPoint p);
 
 protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
+    QRectF rect;
     QString text;
     QFontMetrics* titleFontMetrics;
     QFont* titleFont;

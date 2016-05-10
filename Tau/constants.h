@@ -22,7 +22,7 @@ const int numSongs = 2;
 const QString songs[numSongs] = {"Overriding Concern","Proof_of_Concept"};
 const int BPM[numSongs] = {120,140};
 
-const int refreshInterval = 20; //time between frame refreshes
+const int refreshInterval = 18; //time between frame refreshes
 const int windowWidth = 900; //width of window
 const int windowHeight = 750; //height of window
 const int playerWidth = 15; //width of paddle
