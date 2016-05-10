@@ -1,3 +1,5 @@
+Programmed by Garrett Gu using C++ and Qt libraries
+
 Code is released under Creative Commons: By Attribution 4.0 License  
 	http://creativecommons.org/licenses/by/3.0/
 
