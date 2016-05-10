@@ -44,8 +44,7 @@ FORMS    +=
 RESOURCES += \
     icons.qrc \
     overridingconcern.qrc \
-    proofofconcept.qrc \
-    spectre.qrc
+    proofofconcept.qrc
 
 DISTFILES += \
     LICENSE.md

@@ -19,8 +19,8 @@ const bool powerupExtendable[(int)powerUpType::NUM_POWERUPTYPES] =
         {false, false, false, false, true, false, true, false, true, false};
 
 const int numSongs = 3;
-const QString songs[numSongs] = {"Overriding Concern","Proof_of_Concept","Spectre"};
-const int BPM[numSongs] = {120,140,128};
+const QString songs[numSongs] = {"Overriding Concern","Proof_of_Concept"};
+const int BPM[numSongs] = {120,140};
 
 const int refreshInterval = 20; //time between frame refreshes
 const int windowWidth = 900; //width of window
