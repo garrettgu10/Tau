@@ -77,11 +77,12 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
         return;
     }
     int key = event->key();
-    if(GScene->winner!=-1 && key==Qt::Key_Space){
+    if(startedGame && GScene->winner!=-1 && key==Qt::Key_Space){
         startEndSequence();
     }
     int affectedPlayer = -1;
     bool cw = false; //clockwise
+
     switch(key){
     case Qt::Key_Return: playlist->setCurrentIndex(playlist->currentIndex()==playlist->mediaCount()-1?0:playlist->currentIndex()+1); return;
     case Qt::Key_D:
@@ -170,7 +171,7 @@ void GGraphicsView::setupTimer(QTimer* t, Player *p, bool cw)
 void GGraphicsView::mousePressEvent(QMouseEvent *event)
 {
     double distFromCenter = sqrt(pow(event->x()-windowWidth/2,2)+pow(event->y()-windowHeight/2,2));
-    if(distFromCenter < mainMenuArenaRadius){
+    if(!startedGame && distFromCenter < mainMenuArenaRadius){
         startBeginSequence();
     }
 }

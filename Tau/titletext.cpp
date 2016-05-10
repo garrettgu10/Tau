@@ -12,7 +12,7 @@ titleText::titleText(QString fontName, QPointF* center, int size, QString text)
 
 QRectF titleText::boundingRect() const
 {
-    return QRectF(titleCenter->x()-size,titleCenter->y()-size,size*2,size*2);
+    return QRectF(10,10,10,10);
 }
 
 void titleText::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
