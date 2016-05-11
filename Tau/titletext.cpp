@@ -17,9 +17,14 @@ QRectF titleText::realRect()
                   titleFontMetrics->width(text),titleFontMetrics->height());
 }
 
-bool titleText::contains(QPoint p)
+bool titleText::containsPt(QPoint p)
 {
     return this->rect.contains(p.x(),p.y());
+}
+
+void titleText::setText(QString s)
+{
+    this->text = s;
 }
 
 QRectF titleText::boundingRect() const

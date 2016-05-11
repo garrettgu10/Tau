@@ -26,6 +26,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+    int winningScore = 3;
     void openCredits();
     void startEndSequence();
     void startBeginSequence();

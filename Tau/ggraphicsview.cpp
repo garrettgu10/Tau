@@ -15,7 +15,7 @@ GGraphicsView::GGraphicsView()
     movep0 = new QTimer(this);
     movep1 = new QTimer(this);
     box = new Arena();
-    MScene = new GMainMenuScene(box);
+    MScene = new GMainMenuScene(box,winningScore);
     MScene->setSceneRect(0,0,windowWidth,windowHeight);
     this->setScene(MScene);
 
@@ -50,7 +50,7 @@ void GGraphicsView::setGScene(GGameScene *scene)
 void GGraphicsView::startGame()
 {
     if(!startedGame){
-        GScene = new GGameScene(box);
+        GScene = new GGameScene(box,winningScore);
         setGScene(GScene);
         QTimer::singleShot(1000,Qt::CoarseTimer,MScene,SLOT(deleteLater()));
         QtConcurrent::run(GScene->p[0],&Player::fadeIn);
@@ -67,7 +67,7 @@ void GGraphicsView::startGame()
 void GGraphicsView::startMainMenu()
 {
     if(startedGame){
-        MScene = new GMainMenuScene(box);
+        MScene = new GMainMenuScene(box,winningScore);
         GScene->deleteLater();
         setScene(MScene);
         box->pulseDist = 5;
@@ -84,6 +84,11 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
     int key = event->key();
     if(startedGame && GScene->winner!=-1 && key==Qt::Key_Space){
         startEndSequence();
+    }
+
+    if(!startedGame && key > Qt::Key_0 && key <= Qt::Key_9){
+        MScene->adjustRules(key-Qt::Key_0);
+        winningScore = key-Qt::Key_0;
     }
     int affectedPlayer = -1;
     bool cw = false; //clockwise
@@ -187,14 +192,14 @@ void GGraphicsView::mousePressEvent(QMouseEvent *event)
         startBeginSequence();
     }
 
-    if(!startedGame && MScene->creditsButton->contains(event->pos())){
+    if(!startedGame && MScene->creditsButton->containsPt(event->pos())){
         openCredits();
     }
 }
 
 void GGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
-    if(!startedGame && MScene->creditsButton->contains(event->pos())){
+    if(!startedGame && MScene->creditsButton->containsPt(event->pos())){
         MScene->creditsButton->opacity = 1;
     }else{
         MScene->creditsButton->opacity = 0.7;

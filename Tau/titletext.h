@@ -18,7 +18,8 @@ public:
     virtual QRectF boundingRect() const;
     double opacity = 1.0;
     QRectF realRect();
-    bool contains(QPoint p);
+    bool containsPt(QPoint p);
+    void setText(QString s);
 
 protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);

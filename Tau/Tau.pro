@@ -44,7 +44,8 @@ FORMS    +=
 RESOURCES += \
     icons.qrc \
     overridingconcern.qrc \
-    proofofconcept.qrc
+    proofofconcept.qrc \
+    runningonair.qrc
 
 DISTFILES += \
     LICENSE.md

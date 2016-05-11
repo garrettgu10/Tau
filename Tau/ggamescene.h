@@ -22,7 +22,7 @@ class GGameScene : public QGraphicsScene
     Q_OBJECT
 
 public:
-    GGameScene(Arena *box);
+    GGameScene(Arena *box, int winningScore);
     void drawBoard();
     Player* p[2];
     Ball* ball;
