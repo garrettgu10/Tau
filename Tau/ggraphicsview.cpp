@@ -199,7 +199,9 @@ void GGraphicsView::mousePressEvent(QMouseEvent *event)
 
 void GGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
-    if(!startedGame && MScene->creditsButton->containsPt(event->pos())){
+    if(startedGame)
+        return;
+    if(MScene->creditsButton->containsPt(event->pos())){
         MScene->creditsButton->opacity = 1;
     }else{
         MScene->creditsButton->opacity = 0.7;

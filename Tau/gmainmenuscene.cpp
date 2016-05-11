@@ -35,6 +35,7 @@ void GMainMenuScene::exitSequence()
         title->opacity-=0.1;
         description->opacity-=0.1;
         rules->opacity-=0.1;
+        creditsButton->opacity-=0.1;
         pb->setSize(pb->getSize()-7);
         box->radius+=(arenaRadius-box->radius)/3+3;
         box->setPermRadius(box->radius-box->pulseDist);
@@ -49,11 +50,13 @@ void GMainMenuScene::entrySequence()
     title->opacity = 0;
     description->opacity = 0;
     rules->opacity = 0;
+    creditsButton->opacity=-0.3;
     for(int i = 0; i < 50; i++){
         pb->setSize(pb->getSize()+playButtonSize/50);
         title->opacity+=0.02;
         description->opacity+=0.02;
         rules->opacity+=0.02;
+        creditsButton->opacity+=0.02;
         QThread::msleep(refreshInterval);
     }
     pb->setSize(playButtonSize);
