@@ -72,9 +72,9 @@ void Arena::changeBPM(int i)
 {
     if(updateBg->isActive())
         updateBg->stop();
-    if(BPM[i]!=0)
+    if(BPM[i]!=0){
         updateBg->start(60000/BPM[i]);
-    else{
+    }else{
         grad->setColorAt(0,QColor::fromRgb(150,150,150,255));
         bkg->setBrush(QBrush(*grad));
     }
