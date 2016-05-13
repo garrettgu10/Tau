@@ -5,6 +5,7 @@
 #include <QCloseEvent>
 #include <ggamescene.h>
 #include <gmainmenuscene.h>
+#include <QSettings>
 
 class GGraphicsView : public QGraphicsView
 {
@@ -26,6 +27,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+    QSettings* settings = new QSettings();
     int winningScore = 3;
     void openCredits();
     void startEndSequence();

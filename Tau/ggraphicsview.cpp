@@ -12,6 +12,8 @@
 
 GGraphicsView::GGraphicsView()
 {
+    winningScore = settings->value("winningScore",3).toInt();
+
     movep0 = new QTimer(this);
     movep1 = new QTimer(this);
     box = new Arena();
@@ -89,6 +91,7 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
     if(!startedGame && key > Qt::Key_0 && key <= Qt::Key_9){
         MScene->adjustRules(key-Qt::Key_0);
         winningScore = key-Qt::Key_0;
+        settings->setValue("winningScore",winningScore);
     }
     int affectedPlayer = -1;
     bool cw = false; //clockwise

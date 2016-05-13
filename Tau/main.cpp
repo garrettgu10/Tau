@@ -18,6 +18,11 @@
 int main(int argc, char *argv[])
 {
     seedRandomFunction();
+
+    QCoreApplication::setOrganizationName("GarrettGu");
+    QCoreApplication::setOrganizationDomain("qzvx.org");
+    QCoreApplication::setApplicationName("Tau");
+
     QApplication a(argc, argv);
     GGraphicsView* view = new GGraphicsView();
     a.setKeyboardInputInterval(1600);
