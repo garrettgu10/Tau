@@ -237,7 +237,7 @@ void Ball::bounce(Player* p, int pdiff, int angleWithCenter)
 void Ball::setBouncingToFalse()
 {
     QThread::msleep(200);
-    bouncing = false; //yes, this function serves a purpose.
+    bouncing = false;
 }
 
 QRectF *Ball::rect()
