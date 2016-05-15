@@ -71,7 +71,7 @@ void GGraphicsView::startMainMenu()
 {
     if(startedGame){
         MScene = new GMainMenuScene(box,winningScore);
-        GScene->deleteLater();
+        QTimer::singleShot(1000,Qt::CoarseTimer,GScene,SLOT(deleteLater()));
         setScene(MScene);
         box->pulseDist = 5;
         box->setPermRadius(mainMenuArenaRadius);
