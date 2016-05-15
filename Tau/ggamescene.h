@@ -14,6 +14,7 @@
 #include <arena.h>
 #include <scoredisplay.h>
 #include <titletext.h>
+#include <settings.h>
 
 class GGraphicsView;
 
@@ -22,7 +23,7 @@ class GGameScene : public QGraphicsScene
     Q_OBJECT
 
 public:
-    GGameScene(Arena *box, int winningScore);
+    GGameScene(Arena *box, Settings *settingsmgr);
     void drawBoard();
     Player* p[2];
     Ball* ball;

@@ -53,7 +53,7 @@ void GGraphicsView::setGScene(GGameScene *scene)
 void GGraphicsView::startGame()
 {
     if(!startedGame){
-        GScene = new GGameScene(box,winningScore);
+        GScene = new GGameScene(box,settingsmgr);
         setGScene(GScene);
         QTimer::singleShot(1000,Qt::CoarseTimer,MScene,SLOT(deleteLater()));
         QtConcurrent::run(GScene->p[0],&Player::fadeIn);

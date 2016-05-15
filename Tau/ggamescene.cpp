@@ -14,9 +14,9 @@
 #include <titletext.h>
 #include <QMediaMetaData>
 
-GGameScene::GGameScene(Arena* box, int winningScore)
+GGameScene::GGameScene(Arena* box, Settings* settingsmgr)
 {
-    this->winningScore = winningScore;
+    this->winningScore = settingsmgr->getWinningScore();
     for(int i = 0; i < (int)powerUpType::NUM_POWERUPTYPES; i++){
         overlappingPups[i] = 0;
     }
