@@ -6,12 +6,13 @@
 #include <ggamescene.h>
 #include <gmainmenuscene.h>
 #include <QSettings>
+#include <settings.h>
 
 class GGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    GGraphicsView();
+    GGraphicsView(Settings *settingsmgr);
     void setGScene(GGameScene* scene);
 
 public slots:
@@ -27,7 +28,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
-    QSettings* settings = new QSettings();
+    Settings* settingsmgr;
     int winningScore = 3;
     void openCredits();
     void startEndSequence();

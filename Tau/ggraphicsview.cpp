@@ -10,9 +10,10 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-GGraphicsView::GGraphicsView()
+GGraphicsView::GGraphicsView(Settings* settingsmgr)
 {
-    winningScore = settings->value("winningScore",3).toInt();
+    this->settingsmgr = settingsmgr;
+    winningScore = settingsmgr->getWinningScore();
 
     movep0 = new QTimer(this);
     movep1 = new QTimer(this);
@@ -91,7 +92,8 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
     if(!startedGame && key > Qt::Key_0 && key <= Qt::Key_9){
         MScene->adjustRules(key-Qt::Key_0);
         winningScore = key-Qt::Key_0;
-        settings->setValue("winningScore",winningScore);
+        settingsmgr->setWinningScore(winningScore);
+        settingsmgr->save();
     }
     int affectedPlayer = -1;
     bool cw = false; //clockwise

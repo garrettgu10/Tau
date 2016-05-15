@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     scoredisplay.cpp \
     gmainmenuscene.cpp \
     playbutton.cpp \
-    titletext.cpp
+    titletext.cpp \
+    settings.cpp
 
 HEADERS  += \
     ggraphicsview.h \
@@ -37,7 +38,8 @@ HEADERS  += \
     scoredisplay.h \
     gmainmenuscene.h \
     playbutton.h \
-    titletext.h
+    titletext.h \
+    settings.h
 
 FORMS    +=
 

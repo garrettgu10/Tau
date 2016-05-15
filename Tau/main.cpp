@@ -14,6 +14,7 @@
 #include <QMediaPlayer>
 #include <QThread>
 #include <QDebug>
+#include <settings.h>
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +25,11 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Tau");
 
     QApplication a(argc, argv);
-    GGraphicsView* view = new GGraphicsView();
+
+    Settings* settingsmgr = new Settings();
+    settingsmgr->load();
+
+    GGraphicsView* view = new GGraphicsView(settingsmgr);
     a.setKeyboardInputInterval(1600);
     view->setWindowTitle("\u03C4");
     view->setRenderHint(QPainter::Antialiasing);
