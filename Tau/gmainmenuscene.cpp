@@ -1,9 +1,9 @@
 #include "gmainmenuscene.h"
 #include <QtConcurrent>
 
-GMainMenuScene::GMainMenuScene(Arena* box,int winningScore)
+GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
 {
-    this->adjustRules(winningScore);
+    this->adjustRules(settingsmgr->getWinningScore());
     this->box = box;
     this->box->setPermRadius(mainMenuArenaRadius);
     this->box->setPen(*arenaPen);

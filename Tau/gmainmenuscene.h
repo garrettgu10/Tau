@@ -8,12 +8,13 @@
 #include <titletext.h>
 #include <QTextItem>
 #include <QThread>
+#include <settings.h>
 
 class GMainMenuScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    GMainMenuScene(Arena* box, int winningScore);
+    GMainMenuScene(Arena* box, Settings *settingsmgr);
     QTimer* refresher;
     void exitSequence();
     void entrySequence();

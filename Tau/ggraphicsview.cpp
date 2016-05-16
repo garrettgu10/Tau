@@ -18,7 +18,7 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     movep0 = new QTimer(this);
     movep1 = new QTimer(this);
     box = new Arena();
-    MScene = new GMainMenuScene(box,winningScore);
+    MScene = new GMainMenuScene(box,settingsmgr);
     MScene->setSceneRect(0,0,windowWidth,windowHeight);
     this->setScene(MScene);
 
@@ -70,7 +70,7 @@ void GGraphicsView::startGame()
 void GGraphicsView::startMainMenu()
 {
     if(startedGame){
-        MScene = new GMainMenuScene(box,winningScore);
+        MScene = new GMainMenuScene(box,settingsmgr);
         QTimer::singleShot(1000,Qt::CoarseTimer,GScene,SLOT(deleteLater()));
         setScene(MScene);
         box->pulseDist = 5;
