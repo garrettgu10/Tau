@@ -41,6 +41,7 @@ void GMainMenuScene::exitSequence()
         box->setPermRadius(box->radius-box->pulseDist);
         QThread::msleep(refreshInterval);
     }
+    QTimer::singleShot(0,Qt::CoarseTimer,refresher,SLOT(stop()));
     doneExiting();
 }
 
