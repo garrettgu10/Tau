@@ -22,7 +22,14 @@ const int numSongs = 3;
 const QString songs[numSongs] = {"Overriding Concern","Proof_of_Concept","Running_On_Air"};
 const int BPM[numSongs] = {120,140,120};
 
+#ifdef __MINGW32__
 const int refreshInterval = 18; //time between frame refreshes
+#elif __APPLE__
+const int refreshInterval = 20; //time between frame refreshes
+#else
+const int refreshInterval = 18; //time between frame refreshes
+#endif
+
 const int windowWidth = 900; //width of window
 const int windowHeight = 750; //height of window
 const int playerWidth = 15; //width of paddle

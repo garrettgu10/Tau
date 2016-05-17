@@ -18,6 +18,7 @@ public:
 public slots:
     void startGame();
     void startMainMenu();
+    void refresh();
 
 protected:
     GMainMenuScene* MScene;
@@ -29,6 +30,7 @@ protected:
 
 private:
     Settings* settingsmgr;
+    QTimer* refresher;
     int winningScore = 3;
     void openCredits();
     void startEndSequence();

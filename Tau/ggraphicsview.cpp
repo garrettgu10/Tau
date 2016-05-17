@@ -41,6 +41,11 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
 
     this->setMouseTracking(true);
 
+    refresher = new QTimer();
+    refresher->setTimerType(Qt::PreciseTimer);
+    QObject::connect(refresher,SIGNAL(timeout()),this,SLOT(refresh()));
+    refresher->start(refreshInterval);
+
     //startGame();
 }
 
@@ -76,6 +81,15 @@ void GGraphicsView::startMainMenu()
         box->pulseDist = 5;
         box->setPermRadius(mainMenuArenaRadius);
         startedGame = false;
+    }
+}
+
+void GGraphicsView::refresh()
+{
+    if(startedGame){
+        GScene->refresh();
+    }else{
+        MScene->refresh();
     }
 }
 

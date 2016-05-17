@@ -15,6 +15,7 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
     pb->setBrush(brush);
     pb->setPen(arenaPen);
     this->addItem(pb);
+    QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
 
     this->addItem(title);
     this->addItem(description);
@@ -22,11 +23,6 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
     creditsButton->opacity=0.7;
     this->addItem(creditsButton);
     QtConcurrent::run(this,&GMainMenuScene::entrySequence);
-
-    QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
-    refresher = new QTimer();
-    QObject::connect(refresher,SIGNAL(timeout()),this,SLOT(refresh()));
-    refresher->start(refreshInterval);
 }
 
 void GMainMenuScene::exitSequence()

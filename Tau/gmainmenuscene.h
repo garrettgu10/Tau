@@ -15,7 +15,6 @@ class GMainMenuScene : public QGraphicsScene
     Q_OBJECT
 public:
     GMainMenuScene(Arena* box, Settings *settingsmgr);
-    QTimer* refresher;
     void exitSequence();
     void entrySequence();
     titleText* creditsButton = new titleText("Georgia",new QPointF(windowWidth/2,windowHeight/2+mainMenuArenaRadius+200),50,"Credits");
@@ -29,7 +28,7 @@ public slots:
 
 private:
     titleText* title = new titleText("Times New Roman",new QPointF(windowWidth/2,windowHeight/4),200,"\u03C4");
-    titleText* description = new titleText("Georgia",new QPointF(windowWidth/2,windowHeight/2+mainMenuArenaRadius+70),20,"\u03C4 (Tau) -- torque (physics), 2\u03C0 \u2248 6.28 (math, c. 2001)");
+    titleText* description = new titleText("Georgia",new QPointF(windowWidth/2,windowHeight/2+mainMenuArenaRadius+70),20,"\u03C4 (tau) -- torque (physics), 2\u03C0 \u2248 6.28 (math, c. 2001)");
     titleText* rules = new titleText("Georgia", new QPointF(windowWidth/2,windowHeight/2+mainMenuArenaRadius+100),20,"First to 3 wins");
     playButton* pb;
     QBrush* brush = new QBrush(QColor::fromRgb(255,255,255));

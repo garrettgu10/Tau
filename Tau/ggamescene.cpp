@@ -30,9 +30,6 @@ GGameScene::GGameScene(Arena* box, Settings* settingsmgr)
     addPowerUps = new QTimer();
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
     addPowerUps->setTimerType(Qt::PreciseTimer);
-    refresher = new QTimer();
-    QObject::connect(refresher,SIGNAL(timeout()), this,SLOT(refresh()));
-    refresher->setTimerType(Qt::PreciseTimer);
 
     sizeUp = new QSoundEffect();
     //sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));
@@ -66,7 +63,6 @@ void GGameScene::drawBoard()
     scores->setPen(*arenaPen);
     scores->setBrush(*brush);
     this->addItem(scores);
-    refresher->start(refreshInterval);
     addPowerUps->start(powerUpInterval);
     addPowerUp();
 }

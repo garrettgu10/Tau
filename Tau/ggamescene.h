@@ -52,7 +52,6 @@ private:
     titleText* winnerText;
     QTimer* addPowerUps;
     Arena* box;
-    QTimer* refresher;
     QRadialGradient* grad;
     QGraphicsRectItem* BgRect = new QGraphicsRectItem();
     QBrush* brush = new QBrush(QColor::fromRgb(255,255,255));
