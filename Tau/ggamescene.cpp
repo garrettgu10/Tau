@@ -134,6 +134,8 @@ void GGameScene::exitSequence()
         box->setPermRadius(box->radius-box->pulseDist);
         QThread::msleep(refreshInterval);
     }
+    QTimer::singleShot(0,Qt::CoarseTimer,refresher,SLOT(stop()));
+    QTimer::singleShot(0,Qt::CoarseTimer,addPowerUps,SLOT(stop()));
 
     doneExiting();
 }
