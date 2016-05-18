@@ -34,7 +34,6 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     music->setVolume(100);
     music->play();
     playlist->setCurrentIndex(randomInBound(0,numSongs-1));
-    qDebug() << playlist->currentIndex();
 
     box->startPulse(BPM[playlist->currentIndex()]);
     QObject::connect(playlist,SIGNAL(currentIndexChanged(int)),box,SLOT(changeBPM(int)));

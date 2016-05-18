@@ -15,7 +15,6 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
     pb->setBrush(brush);
     pb->setPen(arenaPen);
     this->addItem(pb);
-    QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
 
     this->addItem(title);
     this->addItem(description);
@@ -37,7 +36,6 @@ void GMainMenuScene::exitSequence()
         box->setPermRadius(box->radius-box->pulseDist);
         QThread::msleep(refreshInterval);
     }
-    QTimer::singleShot(0,Qt::CoarseTimer,refresher,SLOT(stop()));
     doneExiting();
 }
 
@@ -49,13 +47,15 @@ void GMainMenuScene::entrySequence()
     rules->opacity = 0;
     creditsButton->opacity=-0.3;
     for(int i = 0; i < 50; i++){
-        pb->setSize(pb->getSize()+playButtonSize/50);
+        if(pb->getSize() < playButtonSize)
+            pb->setSize(pb->getSize()+2);
         title->opacity+=0.02;
         description->opacity+=0.02;
         rules->opacity+=0.02;
         creditsButton->opacity+=0.02;
         QThread::msleep(refreshInterval);
     }
+    QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
     pb->setSize(playButtonSize);
 }
 
