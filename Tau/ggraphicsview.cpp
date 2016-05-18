@@ -12,6 +12,8 @@
 
 GGraphicsView::GGraphicsView(Settings* settingsmgr)
 {
+    movement[0] = NONE;
+    movement[1] = NONE;
     this->settingsmgr = settingsmgr;
     winningScore = settingsmgr->getWinningScore();
 
@@ -87,6 +89,15 @@ void GGraphicsView::refresh()
 {
     if(startedGame){
         GScene->refresh();
+        for(int i = 0; i <=1; i++){
+            if(movement[i]!=NONE){
+                if(movement[i]==CLOCKWISE){
+                    GScene->p[i]->moveClockwise();
+                }else{
+                    GScene->p[i]->moveCClockwise();
+                }
+            }
+        }
     }else{
         MScene->refresh();
     }
@@ -127,12 +138,7 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
         return;
 
     if(affectedPlayer!=-1){
-        clockWise[affectedPlayer] = cw;
-    }
-    if(affectedPlayer == 0){
-        setupTimer(movep0, this->GScene->p[0],cw);
-    }else if(affectedPlayer == 1){
-        setupTimer(movep1, this->GScene->p[1],cw);
+        movement[affectedPlayer] = (paddleMove)(ANTICLOCKWISE+cw);
     }
 }
 
@@ -154,12 +160,8 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
         case Qt::Key_Right:
         case Qt::Key_Down: affectedPlayer=1;cw = true; break;
         }
-        if(clockWise[affectedPlayer] == cw){
-            if(affectedPlayer == 0){
-                movep0->stop();
-            }else if(affectedPlayer==1){
-                movep1->stop();
-            }
+        if(movement[affectedPlayer]-ANTICLOCKWISE == cw){
+            movement[affectedPlayer] = NONE;
         }
     }
 }

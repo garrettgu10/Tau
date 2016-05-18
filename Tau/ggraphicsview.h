@@ -8,6 +8,8 @@
 #include <QSettings>
 #include <settings.h>
 
+enum paddleMove {NONE = 0, ANTICLOCKWISE, CLOCKWISE};
+
 class GGraphicsView : public QGraphicsView
 {
     Q_OBJECT
@@ -40,7 +42,7 @@ private:
     QMediaPlaylist* playlist;
     bool startedGame = false;
     Arena* box;
-    bool clockWise[2];
+    paddleMove movement[2];
     void closeEvent(QCloseEvent*);
     QTimer* movep1;
     QTimer* movep0;
