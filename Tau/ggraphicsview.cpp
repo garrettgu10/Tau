@@ -17,8 +17,6 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     this->settingsmgr = settingsmgr;
     winningScore = settingsmgr->getWinningScore();
 
-    movep0 = new QTimer(this);
-    movep1 = new QTimer(this);
     box = new Arena();
     MScene = new GMainMenuScene(box,settingsmgr);
     MScene->setSceneRect(0,0,windowWidth,windowHeight);
@@ -189,18 +187,6 @@ void GGraphicsView::closeEvent(QCloseEvent * /*unused*/)
     if(startedGame){
         GScene->ongoing = false;
     }
-}
-
-void GGraphicsView::setupTimer(QTimer* t, Player *p, bool cw)
-{
-    t->disconnect();
-    t->stop();
-    if(cw){
-        QObject::connect(t,SIGNAL(timeout()),p,SLOT(moveClockwise()));
-    }else{
-        QObject::connect(t,SIGNAL(timeout()),p,SLOT(moveCClockwise()));
-    }
-    t->start(refreshInterval);
 }
 
 void GGraphicsView::mousePressEvent(QMouseEvent *event)

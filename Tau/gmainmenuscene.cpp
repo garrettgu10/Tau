@@ -32,8 +32,9 @@ void GMainMenuScene::exitSequence()
         rules->opacity-=0.1;
         creditsButton->opacity-=0.1;
         pb->setSize(pb->getSize()-7);
-        box->radius+=(arenaRadius-box->radius)/3+3;
         box->setPermRadius(box->radius-box->pulseDist);
+        box->radius+=(arenaRadius-box->radius)/4+3;
+
         QThread::msleep(refreshInterval);
     }
     doneExiting();
@@ -46,16 +47,20 @@ void GMainMenuScene::entrySequence()
     description->opacity = 0;
     rules->opacity = 0;
     creditsButton->opacity=-0.3;
+    bool pulsing = false;
     for(int i = 0; i < 50; i++){
         if(pb->getSize() < playButtonSize)
             pb->setSize(pb->getSize()+2);
+        else if(!pulsing){
+            QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
+            pulsing = true;
+        }
         title->opacity+=0.02;
         description->opacity+=0.02;
         rules->opacity+=0.02;
         creditsButton->opacity+=0.02;
         QThread::msleep(refreshInterval);
     }
-    QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
     pb->setSize(playButtonSize);
 }
 
@@ -68,8 +73,9 @@ void GMainMenuScene::refresh()
 {
     if(box->radius > box->permRadius)
         box->setRadius(box->radius-1);
-    pb->incrementAngle();
     if(pb->getSize() > pb->permSize)
         pb->setSize(pb->getSize()-1);
+
+    pb->incrementAngle();
     this->update();
 }

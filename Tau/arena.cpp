@@ -1,4 +1,5 @@
 #include "arena.h"
+#include <QDebug>
 
 Arena::Arena()
 {

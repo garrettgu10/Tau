@@ -130,7 +130,7 @@ void GGameScene::exitSequence()
 
     while(box->radius>mainMenuArenaRadius){
         box->radius-=30;
-        box->radius+=(mainMenuArenaRadius-box->radius)/3-3;
+        box->radius+=(mainMenuArenaRadius-box->radius)/4-3;
         box->setPermRadius(box->radius-box->pulseDist);
         QThread::msleep(refreshInterval);
     }

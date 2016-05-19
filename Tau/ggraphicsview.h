@@ -44,9 +44,6 @@ private:
     Arena* box;
     paddleMove movement[2];
     void closeEvent(QCloseEvent*);
-    QTimer* movep1;
-    QTimer* movep0;
-    void setupTimer(QTimer* t, Player* p, bool cw);
 };
 
 #endif // GGRAPHICSVIEW_H
