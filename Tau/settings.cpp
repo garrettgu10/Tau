@@ -24,3 +24,13 @@ void Settings::setWinningScore(int value)
 {
     winningScore = value;
 }
+
+int Settings::getRefreshInterval() const
+{
+    return refreshInterval;
+}
+
+void Settings::setRefreshInterval(int value)
+{
+    refreshInterval = value;
+}
