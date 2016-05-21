@@ -125,14 +125,14 @@ void GGameScene::exitSequence()
         p[1]->opacity-=0.05;
         winnerText->opacity-=0.05;
         scores->opacity-=0.05;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
 
     while(box->radius>mainMenuArenaRadius){
         box->radius-=30;
         box->radius+=(mainMenuArenaRadius-box->radius)/4-3;
         box->setPermRadius(box->radius-box->pulseDist);
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
     QTimer::singleShot(0,Qt::CoarseTimer,addPowerUps,SLOT(stop()));
 

@@ -7,6 +7,7 @@ Settings::Settings()
 
 void Settings::load()
 {
+
     winningScore = saver->value("winningScore",3).toInt();
 }
 

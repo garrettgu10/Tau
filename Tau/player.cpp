@@ -54,7 +54,7 @@ void Player::sizeUp()
 {
     for(int i = 0; i < 4; i++){
         this->size+=11;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
     if(this->pos+this->size > 4320-2880*playerNum){
         this->moveCClockwise();
@@ -68,7 +68,7 @@ void Player::sizeDown()
 {
     for(int i = 0; i < 4; i++){
         this->size-=11;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
 }
 
@@ -76,7 +76,7 @@ void Player::fadeIn()
 {
     for(int i = 0; i < 10; i++){
         opacity+=0.10;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
 }
 
@@ -84,7 +84,7 @@ void Player::fadeOut()
 {
     for(int i = 0; i < 10; i++){
         opacity-=0.10;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
 }
 

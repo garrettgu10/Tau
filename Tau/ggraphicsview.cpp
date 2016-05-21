@@ -43,7 +43,7 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     refresher = new QTimer();
     refresher->setTimerType(Qt::PreciseTimer);
     QObject::connect(refresher,SIGNAL(timeout()),this,SLOT(refresh()));
-    refresher->start(refreshInterval);
+    refresher->start(defaultRefreshInterval);
 
     //startGame();
 }

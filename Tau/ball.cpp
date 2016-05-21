@@ -59,7 +59,7 @@ void Ball::explode()
     for(int i = 0; i < 10; i++){
         opacity-=0.1;
         radius+=5;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
 }
 
@@ -68,7 +68,7 @@ void Ball::startGhost()
     if(!ghoster->isActive()){
         opacity = 1.0;
         goingBrighter = false;
-        ghoster->start(refreshInterval);
+        ghoster->start(defaultRefreshInterval);
     }
 }
 
@@ -212,15 +212,15 @@ void Ball::initSpin()
         opacity+=0.1;
         radius-=5;
         arrowLength+=7;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
     int framesRotating = randomInBound(50,150);
     for(int i = 0; i < framesRotating; i++){
         setAngle(angle+96);
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
     setSpeed(ballInitSpeed);
-    QThread::msleep((100/speed-3)*refreshInterval);
+    QThread::msleep((100/speed-3)*defaultRefreshInterval);
     drawArrow = false;
 }
 
@@ -265,7 +265,7 @@ void Ball::sizeUp()
 {
     for(int i = 0; i < 5; i++){
         radius+=2;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
 }
 
@@ -273,7 +273,7 @@ void Ball::sizeDown()
 {
     for(int i = 0; i < 5; i++){
         radius-=2;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
 }
 

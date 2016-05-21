@@ -19,7 +19,7 @@ powerup::powerup(int id, GGameScene *parent)
     QtConcurrent::run(this,&powerup::fadeIn);
     QTimer* rotator = new QTimer();
     QObject::connect(rotator,SIGNAL(timeout()),this,SLOT(rotate()));
-    rotator->start(refreshInterval);
+    rotator->start(defaultRefreshInterval);
 }
 
 void powerup::enable()
@@ -134,6 +134,6 @@ void powerup::fadeIn()
 {
     while(opacity < 1){
         opacity+=0.1;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
 }

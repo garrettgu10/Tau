@@ -38,5 +38,8 @@ int main(int argc, char *argv[])
     view->setFixedSize(windowWidth,windowHeight);
     view->setVisible(true);
 
+    view->setBackgroundBrush(QBrush(QColor::fromRgb(0,0,0)));
+    view->scale(0.75,0.75);
+
     return a.exec();
 }

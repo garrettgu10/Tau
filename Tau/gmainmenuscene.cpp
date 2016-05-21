@@ -35,7 +35,7 @@ void GMainMenuScene::exitSequence()
         box->setPermRadius(box->radius-box->pulseDist);
         box->radius+=(arenaRadius-box->radius)/4+3;
 
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
     doneExiting();
 }
@@ -59,7 +59,7 @@ void GMainMenuScene::entrySequence()
         description->opacity+=0.02;
         rules->opacity+=0.02;
         creditsButton->opacity+=0.02;
-        QThread::msleep(refreshInterval);
+        QThread::msleep(defaultRefreshInterval);
     }
     pb->setSize(playButtonSize);
 }
