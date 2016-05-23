@@ -26,6 +26,7 @@ public:
     int rad();
     int id;
     bool enabled = false;
+    virtual QRectF boundingRect()const;
 
 public slots:
     void enable();
@@ -34,7 +35,6 @@ public slots:
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*);
-    virtual QRectF boundingRect()const;
 
 private:
     bool disabled = false;

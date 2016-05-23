@@ -163,7 +163,7 @@ void Ball::checkCollision()
     }
     for(powerup* p: *parent->powerUps){
         if(!p->enabled){
-            if(distance(this->pos,p->pos()) < this->radius+p->rad()){
+            if(p->boundingRect().intersects(this->boundingRect()) && distance(this->pos,p->pos()) < this->radius+p->rad()){
                 parent->collectedPowerup(p);
             }
         }
@@ -247,8 +247,8 @@ QRectF *Ball::rect()
 
 void Ball::updateRect()
 {
-    rekt->setLeft(this->x()-radius);
-    rekt->setTop(this->y()-radius);
+    rekt->setLeft(this->pos->x()-radius);
+    rekt->setTop(this->pos->y()-radius);
     rekt->setWidth(radius*2);
     rekt->setHeight(radius*2);
 }
@@ -257,7 +257,7 @@ void Ball::updatePos()
 {
     pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
     pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
-    //updateRect();
+    updateRect();
     checkCollision();
 }
 
@@ -267,6 +267,7 @@ void Ball::sizeUp()
         radius+=2;
         QThread::msleep(defaultRefreshInterval);
     }
+    updateRect();
 }
 
 void Ball::sizeDown()
@@ -275,6 +276,7 @@ void Ball::sizeDown()
         radius-=2;
         QThread::msleep(defaultRefreshInterval);
     }
+    updateRect();
 }
 
 void Ball::setPen(QPen pen)
