@@ -23,11 +23,11 @@ const QString songs[numSongs] = {"Overriding Concern","Proof_of_Concept","Runnin
 const int BPM[numSongs] = {120,140,120};
 
 #ifdef __MINGW32__
-const int refreshInterval = 18; //time between frame refreshes
+const int defaultRefreshInterval = 18; //time between frame refreshes
 #elif __APPLE__
-const int refreshInterval = 20; //time between frame refreshes
+const int defaultRefreshInterval = 20; //time between frame refreshes
 #else
-const int refreshInterval = 18; //time between frame refreshes
+const int defaultRefreshInterval = 18; //time between frame refreshes
 #endif
 
 const int windowWidth = 900; //width of window
