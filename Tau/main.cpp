@@ -35,11 +35,11 @@ int main(int argc, char *argv[])
     view->setRenderHint(QPainter::Antialiasing);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setFixedSize(windowWidth,windowHeight);
+    view->setFixedSize(windowWidth*1.5,windowHeight*1.5);
     view->setVisible(true);
 
     view->setBackgroundBrush(QBrush(QColor::fromRgb(0,0,0)));
-    view->scale(0.75,0.75);
+    view->scale(1.5,1.5);
 
     return a.exec();
 }

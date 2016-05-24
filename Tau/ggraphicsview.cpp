@@ -77,6 +77,8 @@ void GGraphicsView::startMainMenu()
 {
     if(startedGame){
         MScene = new GMainMenuScene(box,settingsmgr);
+        QObject::connect(MScene,SIGNAL(playButtonPressed()),this,SLOT(startBeginSequence()));
+        QObject::connect(MScene,SIGNAL(creditsButtonPressed()),this,SLOT(openCredits()));
         QTimer::singleShot(1000,Qt::CoarseTimer,GScene,SLOT(deleteLater()));
         setScene(MScene);
         box->pulseDist = 5;
