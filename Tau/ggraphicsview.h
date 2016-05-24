@@ -29,6 +29,7 @@ protected:
     GGameScene* GScene;
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+    void resizeEvent(QResizeEvent *);
 
 private:
     Settings* settingsmgr;

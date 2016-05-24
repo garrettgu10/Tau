@@ -168,6 +168,16 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+void GGraphicsView::resizeEvent(QResizeEvent *)
+{
+    this->resetTransform();
+    if((double)this->width()/windowWidth > (double)this->height()/windowHeight){
+        this->scale((double)this->height()/windowHeight,(double)this->height()/windowHeight);
+    }else{
+        this->scale((double)this->width()/windowWidth,(double)this->width()/windowWidth);
+    }
+}
+
 void GGraphicsView::openCredits()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/garrettgu10/Tau/blob/master/Tau/LICENSE.md", QUrl::TolerantMode));
