@@ -21,12 +21,12 @@ public slots:
     void startGame();
     void startMainMenu();
     void refresh();
+    void startBeginSequence();
+    void openCredits();
 
 protected:
     GMainMenuScene* MScene;
     GGameScene* GScene;
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
@@ -34,9 +34,7 @@ private:
     Settings* settingsmgr;
     QTimer* refresher;
     int winningScore = 3;
-    void openCredits();
     void startEndSequence();
-    void startBeginSequence();
     QTimer* updateBg;
     QMediaPlayer* music;
     QMediaPlaylist* playlist;

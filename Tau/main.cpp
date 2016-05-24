@@ -32,14 +32,14 @@ int main(int argc, char *argv[])
     GGraphicsView* view = new GGraphicsView(settingsmgr);
     a.setKeyboardInputInterval(1600);
     view->setWindowTitle("\u03C4");
-    //view->setRenderHint(QPainter::Antialiasing);
+    view->setRenderHint(QPainter::Antialiasing);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setFixedSize(windowWidth,windowHeight);
     view->setVisible(true);
 
     view->setBackgroundBrush(QBrush(QColor::fromRgb(0,0,0)));
-    //view->scale(0.75,0.75);
+    view->scale(0.75,0.75);
 
     return a.exec();
 }

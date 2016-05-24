@@ -1,5 +1,6 @@
 #include "gmainmenuscene.h"
 #include <QtConcurrent>
+#include <QGraphicsSceneMouseEvent>
 
 GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
 {
@@ -67,6 +68,25 @@ void GMainMenuScene::entrySequence()
 void GMainMenuScene::adjustRules(int wins)
 {
     rules->setText(QString("First to ")+QString::number(wins)+QString(" wins"));
+}
+
+void GMainMenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    double distFromCenter = sqrt(pow(event->scenePos().x()-windowWidth/2,2)+pow(event->scenePos().y()-windowHeight/2,2));
+    if(distFromCenter < mainMenuArenaRadius){
+        playButtonPressed();
+    }else if(this->creditsButton->containsPt(event->scenePos().toPoint())){
+        creditsButtonPressed();
+    }
+}
+
+void GMainMenuScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(this->creditsButton->containsPt(event->scenePos().toPoint())){
+        this->creditsButton->opacity = 1;
+    }else{
+        this->creditsButton->opacity = 0.7;
+    }
 }
 
 void GMainMenuScene::refresh()

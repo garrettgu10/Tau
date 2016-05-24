@@ -21,6 +21,8 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     MScene = new GMainMenuScene(box,settingsmgr);
     MScene->setSceneRect(0,0,windowWidth,windowHeight);
     this->setScene(MScene);
+    QObject::connect(MScene,SIGNAL(playButtonPressed()),this,SLOT(startBeginSequence()));
+    QObject::connect(MScene,SIGNAL(creditsButtonPressed()),this,SLOT(openCredits()));
 
     music = new QMediaPlayer();
     playlist = new QMediaPlaylist();
@@ -186,30 +188,5 @@ void GGraphicsView::closeEvent(QCloseEvent * /*unused*/)
     this->music->stop();
     if(startedGame){
         GScene->ongoing = false;
-    }
-}
-
-void GGraphicsView::mousePressEvent(QMouseEvent *event)
-{
-    if(startedGame)
-        return;
-    double distFromCenter = sqrt(pow(event->x()-windowWidth/2,2)+pow(event->y()-windowHeight/2,2));
-    if(distFromCenter < mainMenuArenaRadius){
-        startBeginSequence();
-    }
-
-    if(!startedGame && MScene->creditsButton->containsPt(event->pos())){
-        openCredits();
-    }
-}
-
-void GGraphicsView::mouseMoveEvent(QMouseEvent *event)
-{
-    if(startedGame)
-        return;
-    if(MScene->creditsButton->containsPt(event->pos())){
-        MScene->creditsButton->opacity = 1;
-    }else{
-        MScene->creditsButton->opacity = 0.7;
     }
 }

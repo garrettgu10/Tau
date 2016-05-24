@@ -19,8 +19,12 @@ public:
     void entrySequence();
     titleText* creditsButton = new titleText("Georgia",new QPointF(windowWidth/2,windowHeight/2+mainMenuArenaRadius+200),50,"Credits");
     void adjustRules(int wins);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
+    void playButtonPressed();
+    void creditsButtonPressed();
     void doneExiting();
 
 public slots:
