@@ -23,6 +23,7 @@ public slots:
     void refresh();
     void startBeginSequence();
     void openCredits();
+    void changeRules(int wins);
 
 protected:
     GMainMenuScene* MScene;

@@ -21,11 +21,13 @@ public:
     void adjustRules(int wins);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void keyPressEvent(QKeyEvent *event);
 
 signals:
     void playButtonPressed();
     void creditsButtonPressed();
     void doneExiting();
+    void rulesChanged(int wins);
 
 public slots:
     void refresh();

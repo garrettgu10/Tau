@@ -1,6 +1,7 @@
 #include "gmainmenuscene.h"
 #include <QtConcurrent>
 #include <QGraphicsSceneMouseEvent>
+#include <QKeyEvent>
 
 GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
 {
@@ -68,6 +69,7 @@ void GMainMenuScene::entrySequence()
 void GMainMenuScene::adjustRules(int wins)
 {
     rules->setText(QString("First to ")+QString::number(wins)+QString(" wins"));
+    rulesChanged(wins);
 }
 
 void GMainMenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -86,6 +88,16 @@ void GMainMenuScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         this->creditsButton->opacity = 1;
     }else{
         this->creditsButton->opacity = 0.7;
+    }
+}
+
+void GMainMenuScene::keyPressEvent(QKeyEvent *event)
+{
+    int key = event->key();
+    if(key > Qt::Key_0 && key <= Qt::Key_9){
+        this->adjustRules(key-Qt::Key_0);
+    }else if(event->key() == Qt::Key_Space){
+        playButtonPressed();
     }
 }
 

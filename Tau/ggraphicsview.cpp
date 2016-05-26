@@ -14,6 +14,7 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
 {
     movement[0] = NONE;
     movement[1] = NONE;
+
     this->settingsmgr = settingsmgr;
     winningScore = settingsmgr->getWinningScore();
 
@@ -23,6 +24,8 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     this->setScene(MScene);
     QObject::connect(MScene,SIGNAL(playButtonPressed()),this,SLOT(startBeginSequence()));
     QObject::connect(MScene,SIGNAL(creditsButtonPressed()),this,SLOT(openCredits()));
+    QObject::connect(MScene,SIGNAL(rulesChanged(int)),this,SLOT(changeRules(int)));
+    this->setMinimumSize(windowWidth/2,windowHeight/2);
 
     music = new QMediaPlayer();
     playlist = new QMediaPlaylist();
@@ -46,8 +49,6 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     refresher->setTimerType(Qt::PreciseTimer);
     QObject::connect(refresher,SIGNAL(timeout()),this,SLOT(refresh()));
     refresher->start(defaultRefreshInterval);
-
-    //startGame();
 }
 
 void GGraphicsView::setGScene(GGameScene *scene)
@@ -79,6 +80,7 @@ void GGraphicsView::startMainMenu()
         MScene = new GMainMenuScene(box,settingsmgr);
         QObject::connect(MScene,SIGNAL(playButtonPressed()),this,SLOT(startBeginSequence()));
         QObject::connect(MScene,SIGNAL(creditsButtonPressed()),this,SLOT(openCredits()));
+        QObject::connect(MScene,SIGNAL(rulesChanged(int)),this,SLOT(changeRules(int)));
         QTimer::singleShot(1000,Qt::CoarseTimer,GScene,SLOT(deleteLater()));
         setScene(MScene);
         box->pulseDist = 5;
@@ -92,12 +94,10 @@ void GGraphicsView::refresh()
     if(startedGame){
         GScene->refresh();
         for(int i = 0; i <=1; i++){
-            if(movement[i]!=NONE){
-                if(movement[i]==CLOCKWISE){
-                    GScene->p[i]->moveClockwise();
-                }else{
-                    GScene->p[i]->moveCClockwise();
-                }
+            switch(movement[i]){
+            case NONE: break;
+            case CLOCKWISE: GScene->p[i]->moveClockwise(); break;
+            case ANTICLOCKWISE: GScene->p[i]->moveCClockwise(); break;
             }
         }
     }else{
@@ -115,12 +115,10 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
         startEndSequence();
     }
 
-    if(!startedGame && key > Qt::Key_0 && key <= Qt::Key_9){
-        MScene->adjustRules(key-Qt::Key_0);
-        winningScore = key-Qt::Key_0;
-        settingsmgr->setWinningScore(winningScore);
-        settingsmgr->save();
+    if(!startedGame){
+        MScene->keyPressEvent(event);
     }
+
     int affectedPlayer = -1;
     bool cw = false; //clockwise
 
@@ -181,6 +179,13 @@ void GGraphicsView::resizeEvent(QResizeEvent *)
 void GGraphicsView::openCredits()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/garrettgu10/Tau/blob/master/Tau/LICENSE.md", QUrl::TolerantMode));
+}
+
+void GGraphicsView::changeRules(int wins)
+{
+    winningScore = wins;
+    settingsmgr->setWinningScore(winningScore);
+    settingsmgr->save();
 }
 
 void GGraphicsView::startEndSequence()
