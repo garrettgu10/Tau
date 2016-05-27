@@ -70,6 +70,7 @@ void GGraphicsView::startGame()
         GScene->ball->setup();
         GScene->setSceneRect(0,0,windowWidth,windowHeight);
         GScene->drawBoard();
+        settingsmgr->incrementNumGames();
         startedGame = true;
     }
 }
@@ -185,7 +186,6 @@ void GGraphicsView::changeRules(int wins)
 {
     winningScore = wins;
     settingsmgr->setWinningScore(winningScore);
-    settingsmgr->save();
 }
 
 void GGraphicsView::startEndSequence()

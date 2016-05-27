@@ -8,7 +8,6 @@ class Settings
 public:
     Settings();
     void load();
-    void save();
 
     int getWinningScore() const;
     void setWinningScore(int value);
@@ -16,9 +15,15 @@ public:
     int getRefreshInterval() const;
     void setRefreshInterval(int value);
 
+    int getNumGames() const;
+    void setNumGames(int value);
+
+    void incrementNumGames();
+
 private:
     int refreshInterval;
     int winningScore;
+    int numGames;
     QSettings* saver;
 };
 
