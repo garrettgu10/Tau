@@ -1,5 +1,8 @@
 #include "settings.h"
 #include <constants.h>
+#include <QUrl>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
 
 Settings::Settings()
 {
@@ -50,4 +53,7 @@ void Settings::incrementNumGames()
 {
     numGames = saver->value("numGames",0).toInt()+1;
     saver->setValue("numGames",numGames);
+
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    manager->get(QNetworkRequest(QUrl("http://garrett.comze.com/Tau_counter/update.php")));
 }

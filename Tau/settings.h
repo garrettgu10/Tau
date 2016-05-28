@@ -1,10 +1,11 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 #include <QSettings>
+#include <QNetworkReply>
 
-
-class Settings
+class Settings: public QObject
 {
+    Q_OBJECT
 public:
     Settings();
     void load();
