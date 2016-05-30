@@ -52,7 +52,8 @@ void Ball::setAngle(int angle)
     normalize(angle);
     this->angle = angle;
     this->permAngle = angle;
-    updateImpactAngle();
+    if(speed!=0)
+        updateImpactAngle();
 }
 
 void Ball::explode()
@@ -87,6 +88,9 @@ double Ball::getSpeed()
 
 bool Ball::setSpeed(double newSpeed)
 {
+    if(speed==0 && newSpeed!=0){
+        updateImpactAngle();
+    }
     if(newSpeed>=0){
         speed = newSpeed;
         return true;
@@ -113,7 +117,7 @@ void Ball::startWobble(){
 void Ball::wobble()
 {
     angle = permAngle+randomInBound(-720,720);
-    updateImpactPoint();
+    updateImpactAngle();
 }
 
 void Ball::warpToggleSpeeds()
@@ -179,7 +183,6 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/,
     painter->setBrush(this->brush);
     painter->setOpacity(opacity);
     painter->drawEllipse(pos->x()-radius,pos->y()-radius, radius*2,radius*2);
-    painter->drawEllipse(this->impactPoint,5,5);
     if(drawArrow){
         double doubleAngle = (double)angle/2880*M_PI;
         QPointF endPt(windowWidth/2+arrowLength*cos(doubleAngle),windowHeight/2+arrowLength*sin(doubleAngle));
@@ -192,6 +195,7 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/,
 void Ball::updateImpactAngle()
 {
     updateImpactPoint();
+    impactAngle = arcTan(impactPoint.x()-windowWidth/2,impactPoint.y()-windowHeight/2);
 }
 
 void Ball::updateImpactPoint()
@@ -201,11 +205,11 @@ void Ball::updateImpactPoint()
     double yint = (this->pos->y()-center.y())-(this->pos->x()-center.x())*slope;
 
     //calculate two intersections of line with circle
-    double x1 = (-2*slope*yint+sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(playerRadius-playerWidth-this->radius,2))))/2/(1+slope*slope)+center.x();
+    double x1 = (-2*slope*yint+sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(arenaRadius,2))))/2/(1+slope*slope)+center.x();
     // works on paper
     double y1 = this->pos->y()-(this->pos->x()-x1)*slope;
 
-    double x2 = (-2*slope*yint-sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(playerRadius-playerWidth-this->radius,2))))/2/(1+slope*slope)+center.x();
+    double x2 = (-2*slope*yint-sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(arenaRadius,2))))/2/(1+slope*slope)+center.x();
     double y2 = this->pos->y()-(this->pos->x()-x2)*slope;
 
     if(permAngle >1440 && permAngle < 4320){
@@ -226,6 +230,11 @@ void Ball::updateImpactPoint()
             this->impactPoint.setY(y2);
         }
     }
+}
+
+int Ball::getImpactAngle() const
+{
+    return impactAngle;
 }
 
 void Ball::ghostUpdate()

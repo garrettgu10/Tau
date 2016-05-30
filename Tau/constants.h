@@ -45,5 +45,6 @@ const int powerUpInterval = 3000; //in ms; amount of time between powerups added
 const int powerUpEnabledTime = 10000; //how long a powerup lasts
 const int powerUpAvailableTime = 15000; //how long a powerup is available for pickup
 const int playButtonSize = mainMenuArenaRadius*0.6; //main menu playbutton size (dist from center to any point)
+const int paddleStepSize = 88; //how much the paddle moves every frame
 
 #endif // CONSTANTS_H

@@ -70,7 +70,7 @@ void powerup::disable()
     case powerUpType::arrow: /*do nothing*/ break;
     case powerUpType::warp: parent->ball->warper->stop(); break;
     case powerUpType::lightning: parent->ball->setSpeed(parent->ball->getSpeed()-3); break;
-    case powerUpType::wobble: parent->ball->wobbler->stop(); break;
+    case powerUpType::wobble: parent->ball->wobbler->stop(); parent->ball->updateImpactAngle(); break;
     case powerUpType::ghost: parent->ball->stopGhost(); break;
     case powerUpType::snail: parent->ball->setSpeed(parent->ball->getSpeed()+3); break;
     default: break;

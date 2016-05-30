@@ -40,6 +40,9 @@ public:
     bool setSpeed(double newSpeed);
     void startWobble();
 
+    void updateImpactAngle();
+    int getImpactAngle() const;
+
 public slots:
     void setup();
     void wobble();
@@ -56,7 +59,6 @@ protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
-    void updateImpactAngle();
     void updateImpactPoint();
     QPointF impactPoint;
     int impactAngle = 0; // angle at which ball will collide with arena (16ths of degrees)

@@ -90,12 +90,12 @@ void Player::fadeOut()
 
 void Player::moveClockwise()
 {
-    move(88);
+    move(paddleStepSize);
 }
 
 void Player::moveCClockwise()
 {
-    move(-88);
+    move(-paddleStepSize);
 }
 
 void Player::setPen(QPen pen){

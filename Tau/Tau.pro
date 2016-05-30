@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     gmainmenuscene.cpp \
     playbutton.cpp \
     titletext.cpp \
-    settings.cpp
+    settings.cpp \
+    skynet.cpp
 
 HEADERS  += \
     ggraphicsview.h \
@@ -40,7 +41,8 @@ HEADERS  += \
     gmainmenuscene.h \
     playbutton.h \
     titletext.h \
-    settings.h
+    settings.h \
+    skynet.h
 
 FORMS    +=
 

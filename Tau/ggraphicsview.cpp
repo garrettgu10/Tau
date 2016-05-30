@@ -9,6 +9,7 @@
 #include <titletext.h>
 #include <QDesktopServices>
 #include <QUrl>
+#include <skynet.h>
 
 GGraphicsView::GGraphicsView(Settings* settingsmgr)
 {
@@ -71,6 +72,11 @@ void GGraphicsView::startGame()
         GScene->setSceneRect(0,0,windowWidth,windowHeight);
         GScene->drawBoard();
         settingsmgr->incrementNumGames();
+
+        if(settingsmgr->getAIModeEnabled()){
+            skynet* ai = new skynet(GScene->ball,GScene->p[0],0);
+            QObject::connect(refresher,SIGNAL(timeout()),ai,SLOT(act()));
+        }
         startedGame = true;
     }
 }
