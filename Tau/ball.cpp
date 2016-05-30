@@ -49,8 +49,10 @@ void Ball::setrad(int r)
 
 void Ball::setAngle(int angle)
 {
+    normalize(angle);
     this->angle = angle;
-    this->wobbleTargetAngle = angle;
+    this->permAngle = angle;
+    updateImpactAngle();
 }
 
 void Ball::explode()
@@ -110,7 +112,8 @@ void Ball::startWobble(){
 
 void Ball::wobble()
 {
-    angle = wobbleTargetAngle+randomInBound(-720,720);
+    angle = permAngle+randomInBound(-720,720);
+    updateImpactPoint();
 }
 
 void Ball::warpToggleSpeeds()
@@ -176,12 +179,52 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/,
     painter->setBrush(this->brush);
     painter->setOpacity(opacity);
     painter->drawEllipse(pos->x()-radius,pos->y()-radius, radius*2,radius*2);
+    painter->drawEllipse(this->impactPoint,5,5);
     if(drawArrow){
         double doubleAngle = (double)angle/2880*M_PI;
         QPointF endPt(windowWidth/2+arrowLength*cos(doubleAngle),windowHeight/2+arrowLength*sin(doubleAngle));
         painter->drawLine(*this->pos,endPt);
         painter->drawLine(endPt,QPointF(endPt.x()+10*cos(doubleAngle+3*M_PI/4),endPt.y()+10*sin(doubleAngle+3*M_PI/4)));
         painter->drawLine(endPt,QPointF(endPt.x()+10*cos(doubleAngle-3*M_PI/4),endPt.y()+10*sin(doubleAngle-3*M_PI/4)));
+    }
+}
+
+void Ball::updateImpactAngle()
+{
+    updateImpactPoint();
+}
+
+void Ball::updateImpactPoint()
+{
+    double slope = tan((double)this->permAngle/2880*M_PI);
+    QPointF center(windowWidth/2,windowHeight/2);
+    double yint = (this->pos->y()-center.y())-(this->pos->x()-center.x())*slope;
+
+    //calculate two intersections of line with circle
+    double x1 = (-2*slope*yint+sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(playerRadius-playerWidth-this->radius,2))))/2/(1+slope*slope)+center.x();
+    // works on paper
+    double y1 = this->pos->y()-(this->pos->x()-x1)*slope;
+
+    double x2 = (-2*slope*yint-sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(playerRadius-playerWidth-this->radius,2))))/2/(1+slope*slope)+center.x();
+    double y2 = this->pos->y()-(this->pos->x()-x2)*slope;
+
+    if(permAngle >1440 && permAngle < 4320){
+        // ball is going left
+        if(x1 < x2){
+            this->impactPoint.setX(x1);
+            this->impactPoint.setY(y1);
+        }else{
+            this->impactPoint.setX(x2);
+            this->impactPoint.setY(y2);
+        }
+    }else{
+        if(x1 > x2){
+            this->impactPoint.setX(x1);
+            this->impactPoint.setY(y1);
+        }else{
+            this->impactPoint.setX(x2);
+            this->impactPoint.setY(y2);
+        }
     }
 }
 
@@ -226,7 +269,7 @@ void Ball::initSpin()
 
 void Ball::bounce(Player* p, int pdiff, int angleWithCenter)
 {
-    setAngle(angleWithCenter+2880);
+    angle = angleWithCenter+2880;
     normalize(angle);
     setAngle(angle-(((double)pdiff)/p->size*720));
     parent->mostRecent = p->playerNum;

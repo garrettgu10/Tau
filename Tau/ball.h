@@ -56,7 +56,11 @@ protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
-    int wobbleTargetAngle;
+    void updateImpactAngle();
+    void updateImpactPoint();
+    QPointF impactPoint;
+    int impactAngle = 0; // angle at which ball will collide with arena (16ths of degrees)
+    int permAngle;
     double speed;
     bool goingBrighter = false;
     QTimer* ghoster;
