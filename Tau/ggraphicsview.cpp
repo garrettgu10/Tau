@@ -26,7 +26,7 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     QObject::connect(MScene,SIGNAL(playButtonPressed()),this,SLOT(startBeginSequence()));
     QObject::connect(MScene,SIGNAL(creditsButtonPressed()),this,SLOT(openCredits()));
     QObject::connect(MScene,SIGNAL(rulesChanged(int)),this,SLOT(changeRules(int)));
-    this->setMinimumSize(windowWidth/2,windowHeight/2);
+    //this->setMinimumSize(windowWidth/2,windowHeight/2);
 
     music = new QMediaPlayer();
     playlist = new QMediaPlaylist();
@@ -74,8 +74,10 @@ void GGraphicsView::startGame()
         settingsmgr->incrementNumGames();
 
         if(settingsmgr->getAIModeEnabled()){
-            skynet* ai = new skynet(GScene->ball,GScene->p[0],0);
+            skynet* ai = new skynet(GScene->ball,GScene->p[0]);
+            skynet* ai2 = new skynet(GScene->ball,GScene->p[1]);
             QObject::connect(refresher,SIGNAL(timeout()),ai,SLOT(act()));
+            QObject::connect(refresher,SIGNAL(timeout()),ai2,SLOT(act()));
         }
         startedGame = true;
     }

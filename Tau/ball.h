@@ -43,6 +43,8 @@ public:
     void updateImpactAngle();
     int getImpactAngle() const;
 
+    int getAngle() const;
+
 public slots:
     void setup();
     void wobble();

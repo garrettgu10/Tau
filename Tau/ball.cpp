@@ -205,11 +205,11 @@ void Ball::updateImpactPoint()
     double yint = (this->pos->y()-center.y())-(this->pos->x()-center.x())*slope;
 
     //calculate two intersections of line with circle
-    double x1 = (-2*slope*yint+sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(arenaRadius,2))))/2/(1+slope*slope)+center.x();
+    double x1 = (-2*slope*yint+sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(arenaRadius-this->radius,2))))/2/(1+slope*slope)+center.x();
     // works on paper
     double y1 = this->pos->y()-(this->pos->x()-x1)*slope;
 
-    double x2 = (-2*slope*yint-sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(arenaRadius,2))))/2/(1+slope*slope)+center.x();
+    double x2 = (-2*slope*yint-sqrt(pow(2*slope*yint,2)-4*(1+slope*slope)*(yint*yint-pow(arenaRadius-this->radius,2))))/2/(1+slope*slope)+center.x();
     double y2 = this->pos->y()-(this->pos->x()-x2)*slope;
 
     if(permAngle >1440 && permAngle < 4320){
@@ -249,6 +249,11 @@ void Ball::ghostUpdate()
     }else if(opacity <= -0.10){
         goingBrighter = true;
     }
+}
+
+int Ball::getAngle() const
+{
+    return angle;
 }
 
 void Ball::initSpin()

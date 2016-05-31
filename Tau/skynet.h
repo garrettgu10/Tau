@@ -10,7 +10,7 @@ class skynet : public QObject
 {
     Q_OBJECT
 public:
-    skynet(Ball *b, Player *p, int playerNum);
+    skynet(Ball *b, Player *p);
 
 signals:
 
@@ -18,7 +18,6 @@ public slots:
     void act();
 
 private:
-    int playerNum = 0;
     Ball* ball;
     Player* player;
 };
