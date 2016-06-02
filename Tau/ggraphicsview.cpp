@@ -72,13 +72,14 @@ void GGraphicsView::startGame()
         GScene->setSceneRect(0,0,windowWidth,windowHeight);
         GScene->drawBoard();
         settingsmgr->incrementNumGames();
-
+        /*
         if(settingsmgr->getAIModeEnabled()){
             skynet* ai = new skynet(GScene->ball,GScene->p[0]);
             skynet* ai2 = new skynet(GScene->ball,GScene->p[1]);
             QObject::connect(refresher,SIGNAL(timeout()),ai,SLOT(act()));
             QObject::connect(refresher,SIGNAL(timeout()),ai2,SLOT(act()));
         }
+        */
         startedGame = true;
     }
 }
@@ -131,17 +132,11 @@ void GGraphicsView::keyPressEvent(QKeyEvent *event)
     int affectedPlayer = -1;
     bool cw = false; //clockwise
 
-    switch(key){
-    case Qt::Key_Return: playlist->setCurrentIndex(playlist->currentIndex()==playlist->mediaCount()-1?0:playlist->currentIndex()+1); return;
-    case Qt::Key_D:
-    case Qt::Key_W: affectedPlayer = 0; cw = true;  break;
-    case Qt::Key_A:
-    case Qt::Key_S: affectedPlayer = 0; cw = false; break;
-    case Qt::Key_Left:
-    case Qt::Key_Up: affectedPlayer= 1; cw = false; break;
-    case Qt::Key_Right:
-    case Qt::Key_Down: affectedPlayer=1;cw = true;  break;
+    if(key == Qt::Key_Return){
+        playlist->setCurrentIndex(playlist->currentIndex()==playlist->mediaCount()-1?0:playlist->currentIndex()+1);
     }
+
+    getMovementRules(key,affectedPlayer,cw);
 
     if(!startedGame)
         return;
@@ -159,16 +154,9 @@ void GGraphicsView::keyReleaseEvent(QKeyEvent *event)
         int key = event->key();
         int affectedPlayer = -1;
         bool cw = false;
-        switch(key){
-        case Qt::Key_D:
-        case Qt::Key_W: affectedPlayer = 0; cw = true; break;
-        case Qt::Key_A:
-        case Qt::Key_S: affectedPlayer = 0; cw = false; break;
-        case Qt::Key_Left:
-        case Qt::Key_Up: affectedPlayer= 1; cw = false; break;
-        case Qt::Key_Right:
-        case Qt::Key_Down: affectedPlayer=1;cw = true; break;
-        }
+
+        getMovementRules(key,affectedPlayer,cw);
+
         if(movement[affectedPlayer]-ANTICLOCKWISE == cw){
             movement[affectedPlayer] = NONE;
         }
@@ -182,6 +170,60 @@ void GGraphicsView::resizeEvent(QResizeEvent *)
         this->scale((double)this->height()/windowHeight,(double)this->height()/windowHeight);
     }else{
         this->scale((double)this->width()/windowWidth,(double)this->width()/windowWidth);
+    }
+}
+
+void GGraphicsView::mousePressEvent(QMouseEvent *event)
+{
+    if(startedGame){
+        if(event->x()>this->width()/2){
+            if(event->y()>this->height()/2){
+                keyPressEvent(new QKeyEvent(QEvent::KeyPress,Qt::Key_Down,Qt::KeyboardModifierMask));
+            }else{
+                keyPressEvent(new QKeyEvent(QEvent::KeyPress,Qt::Key_Up,Qt::KeyboardModifierMask));
+            }
+        }else{
+            if(event->y()>this->height()/2){
+                keyPressEvent(new QKeyEvent(QEvent::KeyPress,Qt::Key_S,Qt::KeyboardModifierMask));
+            }else{
+                keyPressEvent(new QKeyEvent(QEvent::KeyPress,Qt::Key_W,Qt::KeyboardModifierMask));
+            }
+        }
+    }
+    QGraphicsView::mousePressEvent(event);
+}
+
+void GGraphicsView::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(startedGame){
+        if(event->x()>this->width()/2){
+            if(event->y()>this->height()/2){
+                keyReleaseEvent(new QKeyEvent(QEvent::KeyPress,Qt::Key_Down,Qt::KeyboardModifierMask));
+            }else{
+                keyReleaseEvent(new QKeyEvent(QEvent::KeyPress,Qt::Key_Up,Qt::KeyboardModifierMask));
+            }
+        }else{
+            if(event->y()>this->height()/2){
+                keyReleaseEvent(new QKeyEvent(QEvent::KeyPress,Qt::Key_S,Qt::KeyboardModifierMask));
+            }else{
+                keyReleaseEvent(new QKeyEvent(QEvent::KeyPress,Qt::Key_W,Qt::KeyboardModifierMask));
+            }
+        }
+    }
+    QGraphicsView::mousePressEvent(event);
+}
+
+void GGraphicsView::getMovementRules(int key, int &affectedPlayer, bool &cw)
+{
+    switch(key){
+    case Qt::Key_D:
+    case Qt::Key_W: affectedPlayer = 0; cw = true;  break;
+    case Qt::Key_A:
+    case Qt::Key_S: affectedPlayer = 0; cw = false; break;
+    case Qt::Key_Left:
+    case Qt::Key_Up: affectedPlayer= 1; cw = false; break;
+    case Qt::Key_Right:
+    case Qt::Key_Down: affectedPlayer=1;cw = true;  break;
     }
 }
 

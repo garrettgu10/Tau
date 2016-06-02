@@ -31,8 +31,11 @@ protected:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
     void resizeEvent(QResizeEvent *);
+    void mousePressEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
 private:
+    void getMovementRules(int key, int &affectedPlayer, bool &cw);
     Settings* settingsmgr;
     QTimer* refresher;
     int winningScore = 3;
