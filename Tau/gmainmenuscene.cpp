@@ -39,6 +39,8 @@ void GMainMenuScene::exitSequence()
 
         QThread::msleep(defaultRefreshInterval);
     }
+    box->radius = arenaRadius;
+    box->setPermRadius(box->radius);
     doneExiting();
 }
 

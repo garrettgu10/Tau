@@ -82,6 +82,7 @@ private:
     QPen pen;
     QBrush brush;
     bool bouncing = false;
+    QPen clearPen;
 };
 
 #endif // BALL_H

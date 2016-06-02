@@ -23,6 +23,8 @@ Ball::Ball(GGameScene *parent)
     rekt = new QRectF();
     updateRect();
 
+    clearPen = QPen(QColor::fromRgb(0,0,0,0));
+
     warper = new QTimer();
     QObject::connect(warper,SIGNAL(timeout()),this,SLOT(warpToggleSpeeds()));
     wobbler = new QTimer();
@@ -59,9 +61,11 @@ void Ball::setAngle(int angle)
 void Ball::explode()
 {
     speed = 0;
+    opacity = 1.0;
     for(int i = 0; i < 10; i++){
         opacity-=0.1;
         radius+=5;
+        updateRect();
         QThread::msleep(defaultRefreshInterval);
     }
 }
@@ -179,10 +183,11 @@ void Ball::checkCollision()
 
 void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/, QWidget * /*unused*/)
 {
-    painter->setPen(this->pen);
     painter->setBrush(this->brush);
     painter->setOpacity(opacity);
+    painter->setPen(clearPen);
     painter->drawEllipse(pos->x()-radius,pos->y()-radius, radius*2,radius*2);
+    painter->setPen(this->pen);
     if(drawArrow){
         double doubleAngle = (double)angle/2880*M_PI;
         QPointF endPt(windowWidth/2+arrowLength*cos(doubleAngle),windowHeight/2+arrowLength*sin(doubleAngle));
@@ -246,7 +251,7 @@ void Ball::ghostUpdate()
     }
     if(opacity>=1.0){
         goingBrighter = false;
-    }else if(opacity <= -0.10){
+    }else if(opacity <= -0.15){
         goingBrighter = true;
     }
 }
