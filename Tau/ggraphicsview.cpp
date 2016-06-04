@@ -69,6 +69,8 @@ void GGraphicsView::startGame()
         box->pulseDist = 10;
         box->setPermRadius(arenaRadius);
         GScene->ball->setup();
+        movement[0] = NONE;
+        movement[1] = NONE;
         GScene->setSceneRect(0,0,windowWidth,windowHeight);
         GScene->drawBoard();
         settingsmgr->incrementNumGames();
