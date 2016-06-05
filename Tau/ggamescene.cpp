@@ -41,7 +41,7 @@ void GGameScene::drawBoard()
 {
     box->setPen(*arenaPen);
     box->setRect(windowWidth/2-arenaRadius,windowHeight/2-arenaRadius,arenaRadius*2,arenaRadius*2);
-    this->addItem(box);
+    //this->addItem(box);
     this->addItem(box->bkg);
     //draw players
 

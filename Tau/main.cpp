@@ -38,6 +38,8 @@ int main(int argc, char *argv[])
     view->resize(windowWidth,windowHeight);
     view->setVisible(true);
 
+    //view->setWindowState(Qt::WindowFullScreen);
+
     view->setBackgroundBrush(QBrush(QColor::fromRgb(0,0,0)));
 
     return a.exec();

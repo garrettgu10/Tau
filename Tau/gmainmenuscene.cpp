@@ -10,7 +10,7 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
     this->box->setPermRadius(mainMenuArenaRadius);
     this->box->setPen(*arenaPen);
     this->box->setRadius(mainMenuArenaRadius);
-    this->addItem(this->box);
+    //this->addItem(this->box);
     this->addItem(this->box->bkg);
     this->box->pulseDist = 5;
     pb = new playButton(playButtonSize);

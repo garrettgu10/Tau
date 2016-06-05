@@ -111,6 +111,12 @@ void Ball::setup()
     this->radius = ballInitRadius;
     this->disabled = false;
     this->warpSpedUp = false;
+
+    this->rekt->setX(pos->x()-100);
+    this->rekt->setY(pos->y()-100);
+    this->rekt->setWidth(200);
+    this->rekt->setHeight(200);
+
     QtConcurrent::run(this,&Ball::initSpin);
 }
 
@@ -183,6 +189,7 @@ void Ball::checkCollision()
 
 void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/, QWidget * /*unused*/)
 {
+    painter->setClipRect(boundingRect());
     painter->setBrush(this->brush);
     painter->setOpacity(opacity);
     painter->setPen(clearPen);
@@ -319,7 +326,8 @@ void Ball::updatePos()
 {
     pos->setX(pos->x()+speed*cos(angle*M_PI/2880));
     pos->setY(pos->y()+speed*sin(angle*M_PI/2880));
-    updateRect();
+    if(speed!=0)
+        updateRect();
     checkCollision();
 }
 
