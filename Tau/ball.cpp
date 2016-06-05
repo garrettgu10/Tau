@@ -189,7 +189,6 @@ void Ball::checkCollision()
 
 void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused*/, QWidget * /*unused*/)
 {
-    painter->setClipRect(boundingRect());
     painter->setBrush(this->brush);
     painter->setOpacity(opacity);
     painter->setPen(clearPen);

@@ -14,7 +14,7 @@
 
 class GGameScene;
 
-class Ball : public QObject, public QGraphicsItem
+class Ball : public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)

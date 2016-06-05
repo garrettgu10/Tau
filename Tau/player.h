@@ -3,7 +3,7 @@
 #include <QGraphicsItem>
 #include <QPen>
 
-class Player : public QObject, public QGraphicsItem
+class Player : public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)

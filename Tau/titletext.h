@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QString>
 
-class titleText : public QObject, public QGraphicsItem
+class titleText : public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)

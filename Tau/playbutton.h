@@ -7,7 +7,7 @@
 #include <math.h>
 #include <constants.h>
 
-class playButton : public QObject, public QGraphicsItem
+class playButton : public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)

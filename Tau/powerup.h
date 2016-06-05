@@ -12,7 +12,7 @@
 class GGameScene;
 class Ball;
 
-class powerup : public QObject, public QGraphicsItem
+class powerup : public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)

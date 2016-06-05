@@ -5,7 +5,7 @@
 #include <QPen>
 #include <QBrush>
 
-class ScoreDisplay: public QObject, public QGraphicsItem
+class ScoreDisplay: public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
