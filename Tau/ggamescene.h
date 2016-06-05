@@ -48,6 +48,7 @@ public slots:
     void addPowerUp();
 
 private:
+    Settings* settingsmgr;
     void win(int winner);
     titleText* winnerText;
     QTimer* addPowerUps;

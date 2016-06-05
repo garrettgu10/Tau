@@ -38,7 +38,6 @@ private:
     void getMovementRules(int key, int &affectedPlayer, bool &cw);
     Settings* settingsmgr;
     QTimer* refresher;
-    int winningScore = 3;
     void startEndSequence();
     QTimer* updateBg;
     QMediaPlayer* music;

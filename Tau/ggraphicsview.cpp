@@ -17,7 +17,6 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     movement[1] = NONE;
 
     this->settingsmgr = settingsmgr;
-    winningScore = settingsmgr->getWinningScore();
 
     box = new Arena();
     MScene = new GMainMenuScene(box,settingsmgr);
@@ -74,14 +73,14 @@ void GGraphicsView::startGame()
         GScene->setSceneRect(0,0,windowWidth,windowHeight);
         GScene->drawBoard();
         settingsmgr->incrementNumGames();
-        /*
+
         if(settingsmgr->getAIModeEnabled()){
             skynet* ai = new skynet(GScene->ball,GScene->p[0]);
-            skynet* ai2 = new skynet(GScene->ball,GScene->p[1]);
+            //skynet* ai2 = new skynet(GScene->ball,GScene->p[1]);
             QObject::connect(refresher,SIGNAL(timeout()),ai,SLOT(act()));
-            QObject::connect(refresher,SIGNAL(timeout()),ai2,SLOT(act()));
+            //QObject::connect(refresher,SIGNAL(timeout()),ai2,SLOT(act()));
         }
-        */
+
         startedGame = true;
     }
 }
@@ -236,8 +235,7 @@ void GGraphicsView::openCredits()
 
 void GGraphicsView::changeRules(int wins)
 {
-    winningScore = wins;
-    settingsmgr->setWinningScore(winningScore);
+    settingsmgr->setWinningScore(wins);
 }
 
 void GGraphicsView::startEndSequence()

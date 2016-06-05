@@ -16,7 +16,7 @@
 
 GGameScene::GGameScene(Arena* box, Settings* settingsmgr)
 {
-    this->winningScore = settingsmgr->getWinningScore();
+    this->settingsmgr=settingsmgr;
     for(int i = 0; i < (int)powerUpType::NUM_POWERUPTYPES; i++){
         overlappingPups[i] = 0;
     }
@@ -109,9 +109,9 @@ void GGameScene::gameOver()
         scores->score(1);
     }
     QtConcurrent::run(ball,&Ball::explode);
-    if(scores->getScore(0)>=winningScore){
+    if(scores->getScore(0)>=settingsmgr->getWinningScore()){
         win(0);
-    }else if(scores->getScore(1)>=winningScore){
+    }else if(scores->getScore(1)>=settingsmgr->getWinningScore()){
         win(1);
     }else{
         QTimer::singleShot(350,Qt::PreciseTimer,ball,SLOT(setup()));
