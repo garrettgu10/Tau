@@ -12,6 +12,9 @@ Arena::Arena()
     bkg->setPen(*clear);
     bkg->setBrush(QBrush(*grad));
     bkg->setZValue(-1);
+    bkg->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
+
+    //this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
 }
 
 void Arena::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -42,6 +45,7 @@ void Arena::startPulse(int bpm)
     updateBg = new QTimer();
     updateBg->setTimerType(Qt::PreciseTimer);
     QObject::connect(updateBg,SIGNAL(timeout()),this,SLOT(pulse()));
+
     if(bpm == 0){
         grad->setColorAt(0,QColor::fromRgb(150,150,150,255));
         bkg->setBrush(QBrush(*grad));

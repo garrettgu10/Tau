@@ -10,7 +10,7 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
     this->box->setPermRadius(mainMenuArenaRadius);
     this->box->setPen(*arenaPen);
     this->box->setRadius(mainMenuArenaRadius);
-    //this->addItem(this->box);
+    this->addItem(this->box);
     this->addItem(this->box->bkg);
     this->box->pulseDist = 5;
     pb = new playButton(playButtonSize);
@@ -51,18 +51,19 @@ void GMainMenuScene::entrySequence()
     description->opacity = 0;
     rules->opacity = 0;
     creditsButton->opacity=-0.3;
-    bool pulsing = false;
+    pb->pulsing = false;
     for(int i = 0; i < 50; i++){
-        if(pb->getSize() < playButtonSize)
+        if(pb->getSize() < playButtonSize){
             pb->setSize(pb->getSize()+2);
-        else if(!pulsing){
+        }else if(!pb->pulsing){
             QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
-            pulsing = true;
+            pb->pulsing = true;
         }
         title->opacity+=0.02;
         description->opacity+=0.02;
         rules->opacity+=0.02;
         creditsButton->opacity+=0.02;
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
     pb->setSize(playButtonSize);
@@ -110,6 +111,7 @@ void GMainMenuScene::refresh()
     if(pb->getSize() > pb->permSize)
         pb->setSize(pb->getSize()-1);
 
-    pb->incrementAngle();
+    if(pb->pulsing)
+        pb->incrementAngle();
     this->update();
 }

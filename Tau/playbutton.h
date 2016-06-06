@@ -21,6 +21,7 @@ public:
     int getSize();
     int permSize;
     double opacity=1.0;
+    bool pulsing;
 
 public slots:
     void pulse();

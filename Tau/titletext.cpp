@@ -7,7 +7,6 @@ titleText::titleText(QString fontName, QPointF* center, int size, QString text)
     titleFontMetrics = new QFontMetrics(QFont(*titleFont));
     this->titleCenter = center;
     this->opacity = 1.0;
-    this->setZValue(10);
     this->rect = realRect();
 }
 

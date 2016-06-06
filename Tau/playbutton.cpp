@@ -2,10 +2,13 @@
 
 playButton::playButton(int size)
 {
+    this->setTransformOriginPoint(windowWidth/2,windowHeight/2);
     angle = 0;
     this->size = size;
     this->permSize = size;
     this->setPoints(size);
+
+    this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
 }
 
 QRectF playButton::boundingRect() const
@@ -26,12 +29,18 @@ void playButton::setPen(QPen *pen)
 void playButton::incrementAngle()
 {
     angle+=2;
+    this->setRotation(angle);
 }
 
 void playButton::setSize(int size)
 {
     this->size = size;
-    this->setPoints(size);
+    if(pulsing){
+        this->setScale((double)size/playButtonSize);
+    }else{
+        setPoints(size);
+    }
+
 }
 
 int playButton::getSize()
@@ -50,7 +59,6 @@ void playButton::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWid
     painter->setBrush(*brush);
     painter->setPen(*pen);
     painter->translate(windowWidth/2,windowHeight/2);
-    painter->rotate(angle);
     painter->drawPolygon(points,3);
 }
 
