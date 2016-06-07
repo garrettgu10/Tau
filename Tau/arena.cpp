@@ -17,14 +17,14 @@ Arena::Arena()
     bkg->setZValue(-1);
     bkg->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 
-    //this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
+    this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
     this->setTransformOriginPoint(windowWidth/2,windowHeight/2);
 }
 
 void Arena::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->setPen(*redPen);
-    //painter->setBrush(this->brush);
+    painter->setBrush(this->brush);
     painter->drawArc(rectangle, -1440, 2880);
     painter->setPen(*bluePen);
     painter->drawArc(rectangle,1440,2880);
@@ -33,8 +33,10 @@ void Arena::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *
 void Arena::setPen(const QPen &pen)
 {
     bluePen = new QPen(pen);
+    bluePen->setCapStyle(Qt::SquareCap);
     bluePen->setColor(QColor::fromRgb(165,165,255));
     redPen = new QPen(pen);
+    redPen->setCapStyle(Qt::SquareCap);
     redPen->setColor(QColor::fromRgb(255,165,165));
 }
 
