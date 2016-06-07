@@ -21,7 +21,7 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
     this->addItem(title);
     this->addItem(description);
     this->addItem(rules);
-    creditsButton->opacity=0.7;
+    creditsButton->setOpacity(0.7);
     this->addItem(creditsButton);
     QtConcurrent::run(this,&GMainMenuScene::entrySequence);
 }
@@ -31,10 +31,10 @@ void GMainMenuScene::exitSequence()
     pb->pulsing = false;
     box->pulsing = false;
     while(box->permRadius<arenaRadius){
-        title->opacity-=0.1;
-        description->opacity-=0.1;
-        rules->opacity-=0.1;
-        creditsButton->opacity-=0.1;
+        title->setOpacity(title->getOpacity()-0.1);
+        description->setOpacity(description->getOpacity()-0.1);
+        rules->setOpacity(rules->getOpacity()-0.1);
+        creditsButton->setOpacity(creditsButton->getOpacity()-0.1);
         pb->setSize(pb->getSize()-7);
         box->setPermRadius(box->permRadius+(arenaRadius-box->permRadius)/4+3);
 
@@ -49,10 +49,10 @@ void GMainMenuScene::exitSequence()
 void GMainMenuScene::entrySequence()
 {
     pb->setSize(0);
-    title->opacity = 0;
-    description->opacity = 0;
-    rules->opacity = 0;
-    creditsButton->opacity=-0.3;
+    title->setOpacity(0);
+    description->setOpacity(0);
+    rules->setOpacity(0);
+    creditsButton->setOpacity(-0.3);
     pb->pulsing = false;
     for(int i = 0; i < 50; i++){
         if(pb->getSize() < playButtonSize){
@@ -62,10 +62,10 @@ void GMainMenuScene::entrySequence()
             //pb->setSize(playButtonSize);
             QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
         }
-        title->opacity+=0.02;
-        description->opacity+=0.02;
-        rules->opacity+=0.02;
-        creditsButton->opacity+=0.02;
+        title->setOpacity(title->getOpacity()+0.02);
+        description->setOpacity(description->getOpacity()+0.02);
+        rules->setOpacity(rules->getOpacity()+0.02);
+        creditsButton->setOpacity(creditsButton->getOpacity()+0.02);
         this->update();
         QThread::msleep(defaultRefreshInterval);
     }
@@ -90,9 +90,9 @@ void GMainMenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void GMainMenuScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     if(this->creditsButton->containsPt(event->scenePos().toPoint())){
-        this->creditsButton->opacity = 1;
+        this->creditsButton->setOpacity(1);
     }else{
-        this->creditsButton->opacity = 0.7;
+        this->creditsButton->setOpacity(0.7);
     }
 }
 

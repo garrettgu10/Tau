@@ -16,15 +16,18 @@ class titleText : public QGraphicsObject
 public:
     titleText(QString fontName, QPointF *titleCenter, int size, QString text);
     virtual QRectF boundingRect() const;
-    double opacity = 1.0;
-    QRectF realRect();
+    QRectF realRect() const;
     bool containsPt(QPoint p);
     void setText(QString s);
+
+    double getOpacity() const;
+    void setOpacity(double value);
 
 protected:
     void paint (QPainter * painter, const QStyleOptionGraphicsItem*, QWidget*);
 
 private:
+    double opacity = 1.0;
     QRectF rect;
     QString text;
     QFontMetrics* titleFontMetrics;

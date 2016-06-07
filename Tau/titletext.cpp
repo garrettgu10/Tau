@@ -8,12 +8,14 @@ titleText::titleText(QString fontName, QPointF* center, int size, QString text)
     this->titleCenter = center;
     this->opacity = 1.0;
     this->rect = realRect();
+
+    this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
 }
 
-QRectF titleText::realRect()
+QRectF titleText::realRect() const
 {
     return QRectF(titleCenter->x()-titleFontMetrics->width(text)/2,titleCenter->y()-titleFontMetrics->height(),
-                  titleFontMetrics->width(text),titleFontMetrics->height());
+                  titleFontMetrics->width(text),titleFontMetrics->height()+10);
 }
 
 bool titleText::containsPt(QPoint p)
@@ -24,11 +26,12 @@ bool titleText::containsPt(QPoint p)
 void titleText::setText(QString s)
 {
     this->text = s;
+    this->update();
 }
 
 QRectF titleText::boundingRect() const
 {
-    return QRectF(10,10,10,10);
+    return realRect();
 }
 
 void titleText::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -38,4 +41,15 @@ void titleText::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidg
     painter->setFont(*titleFont);
     painter->setOpacity(opacity);
     painter->drawText(titleCenter->x()-titleFontMetrics->width(text)/2,titleCenter->y(),text);
+}
+
+double titleText::getOpacity() const
+{
+    return opacity;
+}
+
+void titleText::setOpacity(double value)
+{
+    opacity = value;
+    this->update();
 }

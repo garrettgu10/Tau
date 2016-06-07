@@ -51,6 +51,7 @@ void Player::move(int dtheta)
     }else{
         this->pos+=dtheta;
     }
+    this->update();
 }
 
 void Player::sizeUp()
@@ -79,6 +80,7 @@ void Player::fadeIn()
 {
     for(int i = 0; i < 10; i++){
         opacity+=0.10;
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
 }
@@ -87,6 +89,7 @@ void Player::fadeOut()
 {
     for(int i = 0; i < 10; i++){
         opacity-=0.10;
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
 }

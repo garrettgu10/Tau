@@ -20,6 +20,9 @@ powerup::powerup(int id, GGameScene *parent)
     QTimer* rotator = new QTimer();
     QObject::connect(rotator,SIGNAL(timeout()),this,SLOT(rotate()));
     rotator->start(defaultRefreshInterval);
+
+    this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
+    this->setTransformOriginPoint(QPointF(*position));
 }
 
 void powerup::enable()
@@ -110,7 +113,6 @@ void powerup::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*unused
         painter->setBrush(this->brush);
         painter->setOpacity(opacity);
         painter->translate(position->x(),position->y());
-        painter->rotate(angle);
         painter->drawImage(QRectF(-radius,-radius,radius*2,radius*2), QImage(icos[(int)pupType]));
     }
 }
@@ -128,12 +130,14 @@ QRectF powerup::boundingRect() const
 void powerup::rotate()
 {
     angle+=3;
+    this->setRotation(angle);
 }
 
 void powerup::fadeIn()
 {
     while(opacity < 1){
         opacity+=0.1;
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
 }

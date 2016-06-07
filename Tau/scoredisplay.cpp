@@ -5,6 +5,7 @@ ScoreDisplay::ScoreDisplay()
 {
     scores[0] = 0;
     scores[1] = 0;
+    this->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 }
 
 int ScoreDisplay::getScore(int playerNum)
@@ -31,6 +32,7 @@ void ScoreDisplay::setBrush(QBrush brush)
 void ScoreDisplay::score(int playerNum)
 {
     scores[playerNum]++;
+    this->update();
 }
 
 void ScoreDisplay::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)

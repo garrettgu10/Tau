@@ -50,7 +50,7 @@ int playButton::getSize()
 
 void playButton::pulse()
 {
-    setSize(size+10);
+    setSize(playButtonSize+10);
 }
 
 void playButton::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
