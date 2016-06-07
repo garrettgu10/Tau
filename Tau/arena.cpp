@@ -7,6 +7,9 @@ Arena::Arena()
 
     bkg = new QGraphicsRectItem(0,0,windowWidth,windowHeight);
 
+    rectangle = QRectF();
+    setRect(0,0,0,0);
+
     grad->setColorAt(0,QColor(0,0,0,0));
     grad->setColorAt(1,QColor::fromRgb(0,0,0,255));
     bkg->setPen(*clear);
@@ -15,15 +18,16 @@ Arena::Arena()
     bkg->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 
     //this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
+    this->setTransformOriginPoint(windowWidth/2,windowHeight/2);
 }
 
 void Arena::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->setPen(*redPen);
-    painter->setBrush(this->brush());
-    painter->drawArc(rect(), -1440, 2880);
+    //painter->setBrush(this->brush);
+    painter->drawArc(rectangle, -1440, 2880);
     painter->setPen(*bluePen);
-    painter->drawArc(rect(),1440,2880);
+    painter->drawArc(rectangle,1440,2880);
 }
 
 void Arena::setPen(const QPen &pen)
@@ -36,8 +40,8 @@ void Arena::setPen(const QPen &pen)
 
 void Arena::setRadius(int rad)
 {
+    this->setScale((double)rad/permRadius);
     this->radius = rad;
-    this->setRect(windowWidth/2-rad,windowHeight/2-rad,rad*2,rad*2);
 }
 
 void Arena::startPulse(int bpm)
@@ -60,10 +64,27 @@ void Arena::setPermRadius(int prad)
     this->permRadius = prad;
     grad->setRadius(permRadius/0.9);
     bkg->setBrush(QBrush(*grad));
+    this->setRect(windowWidth/2-prad,windowHeight/2-prad,prad*2,prad*2);
+    this->update();
+}
+
+QRectF Arena::boundingRect() const
+{
+    return rectangle;
+}
+
+void Arena::setRect(qreal left,qreal top, qreal width, qreal height)
+{
+    this->rectangle.setLeft(left);
+    this->rectangle.setTop(top);
+    this->rectangle.setWidth(width);
+    this->rectangle.setHeight(height);
 }
 
 void Arena::pulse()
 {
+    if(!pulsing)
+        return;
     pulsed();
 
     grad->setColorAt(0,QColor::fromRgb(randomInBound(50,150),randomInBound(50,150),randomInBound(50,150),255));

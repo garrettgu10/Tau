@@ -45,6 +45,8 @@ public:
 
     int getAngle() const;
 
+    double getOpacity() const;
+
 public slots:
     void setup();
     void wobble();

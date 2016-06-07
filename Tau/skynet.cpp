@@ -14,6 +14,9 @@ skynet::skynet(Ball* b, Player* p)
 
 void skynet::act()
 {
+    if(ball->getOpacity() < 0.15)
+        return;
+
     int impactAngle = ball->getImpactAngle();
     int playerPos = player->pos;
 

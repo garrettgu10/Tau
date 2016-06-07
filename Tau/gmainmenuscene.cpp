@@ -28,17 +28,19 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
 
 void GMainMenuScene::exitSequence()
 {
-    while(box->radius<arenaRadius){
+    pb->pulsing = false;
+    box->pulsing = false;
+    while(box->permRadius<arenaRadius){
         title->opacity-=0.1;
         description->opacity-=0.1;
         rules->opacity-=0.1;
         creditsButton->opacity-=0.1;
         pb->setSize(pb->getSize()-7);
-        box->setPermRadius(box->radius-box->pulseDist);
-        box->radius+=(arenaRadius-box->radius)/4+3;
+        box->setPermRadius(box->permRadius+(arenaRadius-box->permRadius)/4+3);
 
         QThread::msleep(defaultRefreshInterval);
     }
+    box->pulsing = true;
     box->radius = arenaRadius;
     box->setPermRadius(box->radius);
     doneExiting();
@@ -56,8 +58,9 @@ void GMainMenuScene::entrySequence()
         if(pb->getSize() < playButtonSize){
             pb->setSize(pb->getSize()+2);
         }else if(!pb->pulsing){
-            QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
             pb->pulsing = true;
+            //pb->setSize(playButtonSize);
+            QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
         }
         title->opacity+=0.02;
         description->opacity+=0.02;
@@ -66,7 +69,6 @@ void GMainMenuScene::entrySequence()
         this->update();
         QThread::msleep(defaultRefreshInterval);
     }
-    pb->setSize(playButtonSize);
 }
 
 void GMainMenuScene::adjustRules(int wins)
@@ -106,12 +108,11 @@ void GMainMenuScene::keyPressEvent(QKeyEvent *event)
 
 void GMainMenuScene::refresh()
 {
-    if(box->radius > box->permRadius)
+    if(box->radius > box->permRadius && box->pulsing)
         box->setRadius(box->radius-1);
     if(pb->getSize() > pb->permSize)
         pb->setSize(pb->getSize()-1);
 
-    if(pb->pulsing)
-        pb->incrementAngle();
+    pb->incrementAngle();
     this->update();
 }

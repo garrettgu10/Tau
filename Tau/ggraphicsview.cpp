@@ -49,6 +49,8 @@ GGraphicsView::GGraphicsView(Settings* settingsmgr)
     refresher->setTimerType(Qt::PreciseTimer);
     QObject::connect(refresher,SIGNAL(timeout()),this,SLOT(refresh()));
     refresher->start(defaultRefreshInterval);
+
+    this->setCacheMode(QGraphicsView::CacheBackground);
 }
 
 void GGraphicsView::setGScene(GGameScene *scene)

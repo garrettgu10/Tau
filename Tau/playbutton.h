@@ -22,6 +22,7 @@ public:
     int permSize;
     double opacity=1.0;
     bool pulsing;
+    void setPoints(int size);
 
 public slots:
     void pulse();
@@ -34,7 +35,6 @@ private:
     QBrush* brush;
     QPen* pen;
     QPointF points[3];
-    void setPoints(int size);
     int angle = 0; //in degrees
 };
 

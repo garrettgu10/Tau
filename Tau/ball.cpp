@@ -292,6 +292,11 @@ void Ball::initSpin()
     drawArrow = false;
 }
 
+double Ball::getOpacity() const
+{
+    return opacity;
+}
+
 void Ball::bounce(Player* p, int pdiff, int angleWithCenter)
 {
     angle = angleWithCenter+2880;

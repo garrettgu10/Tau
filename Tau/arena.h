@@ -8,9 +8,10 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 
-class Arena : public QObject, public QGraphicsEllipseItem
+class Arena : public QGraphicsObject
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     Arena();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*);
@@ -24,6 +25,9 @@ public:
     int pulseDist = 10;
     QTimer* updateBg;
     QGraphicsRectItem* bkg;
+    bool pulsing = true;
+    virtual QRectF boundingRect() const;
+    void setRect(qreal left, qreal top, qreal width, qreal height);
 
 signals:
     void pulsed();
@@ -33,7 +37,9 @@ public slots:
     void changeBPM(int i);
 
 private:
+    QRectF rectangle;
     QPen* clear = new QPen(QColor(0,0,0,0));
+    QBrush brush = QBrush(QColor::fromRgb(0,0,0,0));
     QPen* bluePen;
     QPen* redPen;
 };
