@@ -124,7 +124,7 @@ void GGameScene::exitSequence()
         p[0]->opacity-=0.05;
         p[1]->opacity-=0.05;
         winnerText->setOpacity(winnerText->getOpacity()-0.05);
-        scores->opacity-=0.05;
+        scores->setOpacity(scores->getOpacity()-0.05);
         p[0]->update();
         p[1]->update();
         QThread::msleep(defaultRefreshInterval);

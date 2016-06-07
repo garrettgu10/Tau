@@ -54,3 +54,14 @@ void ScoreDisplay::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QW
                              ballInitRadius,ballInitRadius);
     }
 }
+
+double ScoreDisplay::getOpacity() const
+{
+    return opacity;
+}
+
+void ScoreDisplay::setOpacity(double value)
+{
+    opacity = value;
+    this->update();
+}
