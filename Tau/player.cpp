@@ -44,9 +44,12 @@ QRectF Player::boundingRect() const
 void Player::move(int dtheta)
 {
     int newPos = this->pos+dtheta;
-    if(newPos+size <=4320-2880*playerNum && newPos-size >=1440-2880*playerNum){
+    if(newPos+size+28 > 4320-2880*playerNum){
+        pos+=pos+size+28-4320+2880*playerNum;
+    }else if(newPos-size-28 < 1440-2880*playerNum){
+        pos+=(pos-size-28-(1440-2880*playerNum));
+    }else{
         this->pos+=dtheta;
-        //this->scene()->update();
     }
 }
 
