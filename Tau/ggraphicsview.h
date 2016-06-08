@@ -35,6 +35,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event);
 
 private:
+    QTime* time;
     void getMovementRules(int key, int &affectedPlayer, bool &cw);
     Settings* settingsmgr;
     QTimer* refresher;

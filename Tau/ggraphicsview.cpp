@@ -13,6 +13,9 @@
 
 GGraphicsView::GGraphicsView(Settings* settingsmgr)
 {
+    time = new QTime();
+    time->start();
+
     movement[0] = NONE;
     movement[1] = NONE;
 
@@ -116,6 +119,8 @@ void GGraphicsView::refresh()
     }else{
         MScene->refresh();
     }
+    qDebug() << time->elapsed();
+    time->restart();
 }
 
 void GGraphicsView::keyPressEvent(QKeyEvent *event)
