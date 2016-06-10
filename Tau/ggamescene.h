@@ -39,6 +39,7 @@ public:
     int winningScore = 3;
     int winner = -1;
     void exitSequence();
+    Arena* box;
 
 signals:
     void doneExiting();
@@ -52,7 +53,6 @@ private:
     void win(int winner);
     titleText* winnerText;
     QTimer* addPowerUps;
-    Arena* box;
     QRadialGradient* grad;
     QGraphicsRectItem* BgRect = new QGraphicsRectItem();
     QBrush* brush = new QBrush(QColor::fromRgb(255,255,255));

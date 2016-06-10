@@ -92,6 +92,7 @@ void GGraphicsView::startGame()
 void GGraphicsView::startMainMenu()
 {
     if(startedGame){
+        box = GScene->box;
         MScene = new GMainMenuScene(box,settingsmgr);
         QObject::connect(MScene,SIGNAL(playButtonPressed()),this,SLOT(startBeginSequence()));
         QObject::connect(MScene,SIGNAL(creditsButtonPressed()),this,SLOT(openCredits()));

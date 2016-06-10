@@ -7,7 +7,6 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
 {
     this->adjustRules(settingsmgr->getWinningScore());
     this->box = box;
-    qDebug() << this->box->radius;
     this->box->setPen(arenaPen);
     this->box->setRadius(mainMenuArenaRadius);
     this->addItem(this->box);
