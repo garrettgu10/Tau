@@ -7,6 +7,7 @@
 #include <gmainmenuscene.h>
 #include <QSettings>
 #include <settings.h>
+#include <skynet.h>
 
 enum paddleMove {NONE = 0, ANTICLOCKWISE, CLOCKWISE};
 
@@ -35,6 +36,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event);
 
 private:
+    skynet* ai;
     QTime* time;
     void getMovementRules(int key, int &affectedPlayer, bool &cw);
     Settings* settingsmgr;

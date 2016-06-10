@@ -64,6 +64,7 @@ void GGraphicsView::setGScene(GGameScene *scene)
 void GGraphicsView::startGame()
 {
     if(!startedGame){
+        startedGame = true;
         GScene = new GGameScene(box,settingsmgr);
         setGScene(GScene);
         QTimer::singleShot(1000,Qt::CoarseTimer,MScene,SLOT(deleteLater()));
@@ -79,19 +80,18 @@ void GGraphicsView::startGame()
         settingsmgr->incrementNumGames();
 
         if(settingsmgr->getAIModeEnabled()){
-            skynet* ai = new skynet(GScene->ball,GScene->p[0]);
+            ai = new skynet(GScene->ball,GScene->p[0]);
             //skynet* ai2 = new skynet(GScene->ball,GScene->p[1]);
             QObject::connect(refresher,SIGNAL(timeout()),ai,SLOT(act()));
             //QObject::connect(refresher,SIGNAL(timeout()),ai2,SLOT(act()));
         }
-
-        startedGame = true;
     }
 }
 
 void GGraphicsView::startMainMenu()
 {
     if(startedGame){
+        startedGame = false;
         box = GScene->box;
         MScene = new GMainMenuScene(box,settingsmgr);
         QObject::connect(MScene,SIGNAL(playButtonPressed()),this,SLOT(startBeginSequence()));
@@ -101,7 +101,6 @@ void GGraphicsView::startMainMenu()
         setScene(MScene);
         box->pulseDist = 5;
         box->setPermRadius(mainMenuArenaRadius);
-        startedGame = false;
     }
 }
 
@@ -246,6 +245,7 @@ void GGraphicsView::changeRules(int wins)
 void GGraphicsView::startEndSequence()
 {
     QtConcurrent::run(GScene,&GGameScene::exitSequence);
+    ai->deleteLater();
     QObject::connect(GScene,SIGNAL(doneExiting()),this,SLOT(startMainMenu()));
 }
 
