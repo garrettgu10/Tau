@@ -38,7 +38,7 @@ private:
     titleText* rules = new titleText("Georgia", new QPointF(windowWidth/2,windowHeight/2+mainMenuArenaRadius+100),20,"First to 3 wins");
     playButton* pb;
     QBrush* brush = new QBrush(QColor::fromRgb(255,255,255));
-    QPen* arenaPen = new QPen(*brush,arenaWidth,Qt::SolidLine,Qt::SquareCap);
+    QPen arenaPen = QPen(*brush,arenaWidth,Qt::SolidLine,Qt::SquareCap);
     Arena* box;
 };
 

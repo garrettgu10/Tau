@@ -13,15 +13,14 @@
 
 GGraphicsView::GGraphicsView(Settings* settingsmgr)
 {
-    time = new QTime();
-    time->start();
-
     movement[0] = NONE;
     movement[1] = NONE;
 
     this->settingsmgr = settingsmgr;
 
     box = new Arena();
+    box->setParent(this);
+    box->setPermRadius(mainMenuArenaRadius);
     MScene = new GMainMenuScene(box,settingsmgr);
     MScene->setSceneRect(0,0,windowWidth,windowHeight);
     this->setScene(MScene);
@@ -119,8 +118,6 @@ void GGraphicsView::refresh()
     }else{
         MScene->refresh();
     }
-    qDebug() << time->elapsed();
-    time->restart();
 }
 
 void GGraphicsView::keyPressEvent(QKeyEvent *event)

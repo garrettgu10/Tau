@@ -7,15 +7,15 @@ GMainMenuScene::GMainMenuScene(Arena* box,Settings* settingsmgr)
 {
     this->adjustRules(settingsmgr->getWinningScore());
     this->box = box;
-    this->box->setPermRadius(mainMenuArenaRadius);
-    this->box->setPen(*arenaPen);
+    qDebug() << this->box->radius;
+    this->box->setPen(arenaPen);
     this->box->setRadius(mainMenuArenaRadius);
     this->addItem(this->box);
     this->addItem(this->box->bkg);
     this->box->pulseDist = 5;
     pb = new playButton(playButtonSize);
     pb->setBrush(brush);
-    pb->setPen(arenaPen);
+    pb->setPen(new QPen(arenaPen));
     this->addItem(pb);
 
     this->addItem(title);

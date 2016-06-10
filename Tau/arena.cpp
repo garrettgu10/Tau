@@ -17,7 +17,7 @@ Arena::Arena()
     bkg->setZValue(-1);
     bkg->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 
-    this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
+    //this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
     this->setTransformOriginPoint(windowWidth/2,windowHeight/2);
 }
 
@@ -63,10 +63,10 @@ void Arena::startPulse(int bpm)
 
 void Arena::setPermRadius(int prad)
 {
-    this->permRadius = prad;
-    grad->setRadius(permRadius/0.9);
+    grad->setRadius(prad/0.9);
     bkg->setBrush(QBrush(*grad));
     this->setRect(windowWidth/2-prad,windowHeight/2-prad,prad*2,prad*2);
+    this->permRadius = prad;
     this->update();
 }
 

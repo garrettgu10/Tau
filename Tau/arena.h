@@ -8,7 +8,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 
-class Arena : public QGraphicsObject
+class Arena : public QObject,public QGraphicsItem
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
