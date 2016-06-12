@@ -31,6 +31,7 @@ public:
     void setAngle(int angle);
     void explode();
     bool disabled = false;
+    bool wobbling = false;
 
     QTimer* warper;
     QTimer* wobbler;

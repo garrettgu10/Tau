@@ -25,10 +25,10 @@ void skynet::act()
     }
 
     if(player->playerNum==0){
-        if(impactAngle < 1440 || impactAngle > 4320)
+        if((impactAngle < 1440 || impactAngle > 4320) && !ball->wobbling)
             return;
     }else{
-        if(impactAngle <-1440 || impactAngle > 1440)
+        if((impactAngle <-1440 || impactAngle > 1440) && !ball->wobbling)
             return;
     }
 

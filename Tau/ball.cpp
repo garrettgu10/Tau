@@ -122,6 +122,7 @@ void Ball::setup()
 
 void Ball::startWobble(){
     wobbler->start(100);
+    wobbling = true;
 }
 
 void Ball::wobble()
