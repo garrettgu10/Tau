@@ -53,12 +53,14 @@ void GMainMenuScene::entrySequence()
     rules->setOpacity(0);
     creditsButton->setOpacity(-0.3);
     pb->pulsing = false;
+    pb->setCacheMode(QGraphicsItem::NoCache);
     for(int i = 0; i < 50; i++){
         if(pb->getSize() < playButtonSize){
             pb->setSize(pb->getSize()+2);
         }else if(!pb->pulsing){
             pb->pulsing = true;
             //pb->setSize(playButtonSize);
+            pb->setCacheMode(QGraphicsItem::ItemCoordinateCache);
             QObject::connect(box,SIGNAL(pulsed()),pb,SLOT(pulse()));
         }
         title->setOpacity(title->getOpacity()+0.02);

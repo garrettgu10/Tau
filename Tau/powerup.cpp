@@ -136,7 +136,7 @@ void powerup::rotate()
 void powerup::fadeIn()
 {
     while(opacity < 1){
-        opacity+=0.1;
+        opacity+=0.2;
         this->update();
         QThread::msleep(defaultRefreshInterval);
     }
