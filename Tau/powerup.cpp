@@ -21,7 +21,6 @@ powerup::powerup(int id, GGameScene *parent)
     QObject::connect(rotator,SIGNAL(timeout()),this,SLOT(rotate()));
     rotator->start(defaultRefreshInterval);
 
-    this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
     this->setTransformOriginPoint(QPointF(*position));
 }
 
@@ -136,8 +135,8 @@ void powerup::rotate()
 void powerup::fadeIn()
 {
     while(opacity < 1){
-        opacity+=0.2;
-        this->update();
+        opacity+=0.1;
         QThread::msleep(defaultRefreshInterval);
     }
+    this->setCacheMode(QGraphicsItem::ItemCoordinateCache);
 }
