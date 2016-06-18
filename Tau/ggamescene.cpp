@@ -13,6 +13,8 @@
 #include <helper.h>
 #include <titletext.h>
 #include <QMediaMetaData>
+#include <QKeyEvent>
+#include <QGraphicsSceneMouseEvent>
 
 GGameScene::GGameScene(Arena* box, Settings* settingsmgr)
 {
@@ -115,6 +117,14 @@ void GGameScene::gameOver()
         win(1);
     }else{
         QTimer::singleShot(350,Qt::PreciseTimer,ball,SLOT(setup()));
+    }
+}
+
+void GGameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(this->winner != -1 && distance(event->scenePos(),QPointF(windowWidth/2,windowHeight/2)) < arenaRadius && !endingTrigger){
+        endingTrigger = true;
+        endingTriggered();
     }
 }
 

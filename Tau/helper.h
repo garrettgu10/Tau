@@ -6,4 +6,5 @@ void normalize (int &a);
 int randomInBound(int min, int max);
 void seedRandomFunction();
 double distance(QPointF* a, QPointF* b);
+double distance(QPointF a, QPointF b);
 #endif // HELPER_H

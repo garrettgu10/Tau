@@ -35,13 +35,15 @@ protected:
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent *event);
 
+private slots:
+    void startEndSequence();
+
 private:
     skynet* ai;
     QTime* time;
     void getMovementRules(int key, int &affectedPlayer, bool &cw);
     Settings* settingsmgr;
     QTimer* refresher;
-    void startEndSequence();
     QTimer* updateBg;
     QMediaPlayer* music;
     QMediaPlaylist* playlist;

@@ -59,6 +59,7 @@ void GGraphicsView::setGScene(GGameScene *scene)
 {
     this->setScene(scene);
     this->GScene = scene;
+    QObject::connect(scene,SIGNAL(endingTriggered()),this,SLOT(startEndSequence()));
 }
 
 void GGraphicsView::startGame()

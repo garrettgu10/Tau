@@ -38,17 +38,20 @@ public:
     int overlappingPups[(int)powerUpType::NUM_POWERUPTYPES];
     int winningScore = 3;
     int winner = -1;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void exitSequence();
     Arena* box;
 
 signals:
     void doneExiting();
+    void endingTriggered();
 
 public slots:
     void refresh();
     void addPowerUp();
 
 private:
+    bool endingTrigger = false;
     Settings* settingsmgr;
     void win(int winner);
     titleText* winnerText;
