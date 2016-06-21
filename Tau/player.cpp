@@ -13,7 +13,11 @@ Player::Player(double pos, double size,int playerNum)
     this->playerNum = playerNum;
     this->pos = pos;
     this->size = size;
-    this->rekt = new QRectF(QPointF(windowWidth/2-playerRadius,windowHeight/2-playerRadius),QSizeF((playerRadius)*2,(playerRadius)*2));
+    this->rekt = new QRectF(QPointF(windowWidth/2-playerRadius,
+                                    windowHeight/2-playerRadius),
+                            QSizeF((playerRadius)*2,
+                                   (playerRadius)*2));
+    bound.setRect(rekt->x()-playerWidth,rekt->y()-playerWidth,rekt->width()+2*playerWidth, rekt->height()+2*playerWidth);
 }
 
 int Player::startAngle()
@@ -38,7 +42,7 @@ void Player::setBrush(QBrush brush)
 
 QRectF Player::boundingRect() const
 {
-    return *rekt;
+    return bound;
 }
 
 void Player::move(int dtheta)
@@ -58,13 +62,16 @@ void Player::sizeUp()
 {
     for(int i = 0; i < 4; i++){
         this->size+=11;
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
     if(this->pos+this->size > 4320-2880*playerNum){
         this->moveCClockwise();
+        this->update();
     }
     if(this->pos-this->size < 1440-2880*playerNum){
         this->moveClockwise();
+        this->update();
     }
 }
 
@@ -72,6 +79,7 @@ void Player::sizeDown()
 {
     for(int i = 0; i < 4; i++){
         this->size-=11;
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
 }

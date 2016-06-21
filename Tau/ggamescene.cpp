@@ -32,11 +32,6 @@ GGameScene::GGameScene(Arena* box, Settings* settingsmgr)
     addPowerUps = new QTimer();
     QObject::connect(addPowerUps,SIGNAL(timeout()),this,SLOT(addPowerUp()));
     addPowerUps->setTimerType(Qt::PreciseTimer);
-
-    sizeUp = new QSoundEffect();
-    //sizeUp->setSource(QUrl::fromLocalFile(":/sound/sizeUp.wav"));
-    sizeDown = new QSoundEffect();
-    //sizeDown->setSource(QUrl::fromLocalFile(":/sound/sizeDown.wav"));
 }
 
 void GGameScene::drawBoard()
@@ -137,12 +132,14 @@ void GGameScene::exitSequence()
         scores->setOpacity(scores->getOpacity()-0.05);
         p[0]->update();
         p[1]->update();
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
 
     while(box->radius>mainMenuArenaRadius){
         box->radius+=(mainMenuArenaRadius-box->radius)/4-3;
         box->setPermRadius(box->radius-box->pulseDist);
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
     QTimer::singleShot(0,Qt::CoarseTimer,addPowerUps,SLOT(stop()));
@@ -153,8 +150,8 @@ void GGameScene::exitSequence()
 void GGameScene::refresh()
 {
     ball->updatePos();
-    this->update();
+    //this->update();
     if(box->radius>box->permRadius){
-        box->setRadius(box->radius-1);
+        box->setRadius(box->radius-0.5);
     }
 }

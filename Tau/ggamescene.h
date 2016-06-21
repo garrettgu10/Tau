@@ -31,8 +31,6 @@ public:
     bool ongoing = true;
     QList<powerup*>* powerUps;
     void collectedPowerup(powerup* p);
-    QSoundEffect* sizeUp;
-    QSoundEffect* sizeDown;
     void gameOver();
     ScoreDisplay* scores;
     int overlappingPups[(int)powerUpType::NUM_POWERUPTYPES];

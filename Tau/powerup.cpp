@@ -36,9 +36,9 @@ void powerup::enable()
     }
     affectedPlayer = parent->p[parent->mostRecent];
     switch(this->puptype()){
-    case powerUpType::ballSizeUp: QtConcurrent::run((parent->ball),&Ball::sizeUp); parent->sizeUp->play(); break;
-    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
-    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
+    case powerUpType::ballSizeUp: QtConcurrent::run((parent->ball),&Ball::sizeUp); break;
+    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeUp); break;
+    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeDown); break;
     case powerUpType::arrow: parent->ball->setAngle((int)(this->angle*16)); break;
     case powerUpType::warp: parent->ball->warper->start(500); break;
     case powerUpType::lightning: parent->ball->setSpeed(parent->ball->getSpeed()+3); break;
@@ -66,9 +66,9 @@ void powerup::disable()
         return;
     }
     switch(this->puptype()){
-    case powerUpType::ballSizeUp: QtConcurrent::run(parent->ball,&Ball::sizeDown); parent->sizeDown->play(); break;
-    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeDown); parent->sizeDown->play(); break;
-    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeUp); parent->sizeUp->play(); break;
+    case powerUpType::ballSizeUp: QtConcurrent::run(parent->ball,&Ball::sizeDown); break;
+    case powerUpType::paddleSizeUp: QtConcurrent::run(affectedPlayer,&Player::sizeDown); break;
+    case powerUpType::paddleSizeDown: QtConcurrent::run(affectedPlayer,&Player::sizeUp); break;
     case powerUpType::arrow: /*do nothing*/ break;
     case powerUpType::warp: parent->ball->warper->stop(); break;
     case powerUpType::lightning: parent->ball->setSpeed(parent->ball->getSpeed()-3); break;

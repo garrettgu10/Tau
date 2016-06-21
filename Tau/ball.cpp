@@ -40,7 +40,7 @@ int Ball::getRadius()
 
 QRectF Ball::boundingRect() const
 {
-    return *rekt;
+    return bound;
 }
 
 void Ball::setrad(int r)
@@ -116,6 +116,7 @@ void Ball::setup()
     this->rekt->setY(pos->y()-100);
     this->rekt->setWidth(200);
     this->rekt->setHeight(200);
+    bound.setRect(rekt->x()-50,rekt->y()-50,rekt->width()+100,rekt->height()+100);
 
     QtConcurrent::run(this,&Ball::initSpin);
 }
@@ -325,6 +326,7 @@ void Ball::updateRect()
     rekt->setTop(this->pos->y()-radius);
     rekt->setWidth(radius*2);
     rekt->setHeight(radius*2);
+    bound.setRect(rekt->x()-50,rekt->y()-50,rekt->width()+100,rekt->height()+100);
 }
 
 void Ball::updatePos()
@@ -334,6 +336,7 @@ void Ball::updatePos()
     if(speed!=0)
         updateRect();
     checkCollision();
+    this->update();
 }
 
 void Ball::sizeUp()

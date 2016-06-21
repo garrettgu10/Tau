@@ -40,10 +40,11 @@ void Arena::setPen(const QPen &pen)
     redPen->setColor(QColor::fromRgb(255,165,165));
 }
 
-void Arena::setRadius(int rad)
+void Arena::setRadius(double rad)
 {
-    this->setScale((double)rad/permRadius);
+    this->setScale(rad/permRadius);
     this->radius = rad;
+    this->setRect(windowWidth/2-rad,windowHeight/2-rad,rad*2,rad*2);
 }
 
 void Arena::startPulse(int bpm)

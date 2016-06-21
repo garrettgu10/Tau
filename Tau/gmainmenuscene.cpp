@@ -36,7 +36,7 @@ void GMainMenuScene::exitSequence()
         creditsButton->setOpacity(creditsButton->getOpacity()-0.1);
         pb->setSize(pb->getSize()-7);
         box->setPermRadius(box->permRadius+(arenaRadius-box->permRadius)/4+3);
-
+        this->update();
         QThread::msleep(defaultRefreshInterval);
     }
     box->pulsing = true;
@@ -110,10 +110,10 @@ void GMainMenuScene::keyPressEvent(QKeyEvent *event)
 void GMainMenuScene::refresh()
 {
     if(box->radius > box->permRadius && box->pulsing)
-        box->setRadius(box->radius-1);
+        box->setRadius(box->radius-0.5);
     if(pb->getSize() > pb->permSize)
         pb->setSize(pb->getSize()-1);
 
     pb->incrementAngle();
-    this->update();
+    //this->update();
 }

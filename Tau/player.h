@@ -30,6 +30,7 @@ public slots:
     void moveCClockwise();
 
 protected:
+    QRectF bound;
     QPen pen;
     QBrush brush;
     QRectF* rekt;

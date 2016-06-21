@@ -71,7 +71,7 @@ void GGraphicsView::startGame()
         QTimer::singleShot(1000,Qt::CoarseTimer,MScene,SLOT(deleteLater()));
         QtConcurrent::run(GScene->p[0],&Player::fadeIn);
         QtConcurrent::run(GScene->p[1],&Player::fadeIn);
-        box->pulseDist = 10;
+        box->pulseDist = 5;
         box->setPermRadius(arenaRadius);
         GScene->ball->setup();
         movement[0] = NONE;
@@ -100,7 +100,7 @@ void GGraphicsView::startMainMenu()
         QObject::connect(MScene,SIGNAL(rulesChanged(int)),this,SLOT(changeRules(int)));
         QTimer::singleShot(1000,Qt::CoarseTimer,GScene,SLOT(deleteLater()));
         setScene(MScene);
-        box->pulseDist = 5;
+        box->pulseDist = 3;
         box->setPermRadius(mainMenuArenaRadius);
     }
 }

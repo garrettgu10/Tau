@@ -16,9 +16,9 @@ public:
     Arena();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*);
     void setPen(const QPen &pen);
-    void setRadius(int rad);
-    int permRadius = arenaRadius;
-    int radius = permRadius;
+    void setRadius(double rad);
+    double permRadius = arenaRadius;
+    double radius = permRadius;
     void startPulse(int bpm);
     void setPermRadius(int prad);
     QRadialGradient* grad = new QRadialGradient(windowWidth/2,windowHeight/2, arenaRadius/0.9);
