@@ -81,10 +81,12 @@ void GGraphicsView::startGame()
         settingsmgr->incrementNumGames();
 
         if(settingsmgr->getAIModeEnabled()){
+
             ai = new skynet(GScene->ball,GScene->p[0]);
             //skynet* ai2 = new skynet(GScene->ball,GScene->p[1]);
             QObject::connect(refresher,SIGNAL(timeout()),ai,SLOT(act()));
             //QObject::connect(refresher,SIGNAL(timeout()),ai2,SLOT(act()));
+
         }
     }
 }

@@ -54,3 +54,5 @@ RESOURCES += \
 
 DISTFILES += \
     LICENSE.md
+
+QMAKE_MAC_SDK = macosx10.12

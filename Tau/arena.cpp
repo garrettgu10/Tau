@@ -42,7 +42,7 @@ void Arena::setPen(const QPen &pen)
 
 void Arena::setRadius(double rad)
 {
-    this->setScale(rad/permRadius);
+    this->update();
     this->radius = rad;
     this->setRect(windowWidth/2-rad,windowHeight/2-rad,rad*2,rad*2);
 }
@@ -73,7 +73,7 @@ void Arena::setPermRadius(int prad)
 
 QRectF Arena::boundingRect() const
 {
-    return rectangle;
+    return QRectF(rectangle.x()-10,rectangle.y()-10,rectangle.width()+20,rectangle.height()+20);
 }
 
 void Arena::setRect(qreal left,qreal top, qreal width, qreal height)

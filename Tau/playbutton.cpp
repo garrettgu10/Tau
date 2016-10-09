@@ -40,6 +40,7 @@ void playButton::setSize(int size)
     }else{
         setPoints(size);
     }
+    this->update();
 
 }
 
