@@ -1,8 +1,6 @@
 # Tau
-C++ game for computer science class based on Qt
+Tau is a very stylish, fast-paced Pong game with a large number of unique power-ups, one- and two-player mode, and several control schemes.
 # Video Clip
 https://vimeo.com/164789769
 # How to get it
-Currently, no executables have been made, so you'll have to download Qt Creator and open the project file.
-# Presentation
-https://docs.google.com/presentation/d/1T_6CH2PTEYLivLvJtSmmrremt9GpUDBskVway0VCvRY/edit#slide=id.p
+Tau is compilable to any major operating system. Just open the project in Qt Creator and you should be good to go!
